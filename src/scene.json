@@ -1,0 +1,41 @@
+{
+    "keyBindings":{
+        "player1":{
+            "87":["moveUp"],
+            "83":["moveDown"],
+            "65":["moveLeft"],
+            "68":["moveRight"],
+            "32":["fire"],
+            "88":["debugger"]
+        }
+    },
+    "elements":[
+        {
+            "name": "player",
+            "behaviours":["player1", "move"],
+            "hitGroup":["player"],
+            "speed":[0, 0],
+            "colides":{
+                "hWall":["stop"],
+                "vWall":["stop"],
+                "enemy":["explode"],
+                "enemyBullet":["break"],
+                "obstacle":["explode"]
+            },
+            "dimensions": [50, 50, 60, 60]
+        }
+    ],
+    "assets" : [
+        ["pacmanSheet", "pacmanSheet.png"]
+    ],
+    "level1": [
+        {
+            "id":12,
+            "position": {"x": 1, "y" :1},
+            "edges":{
+                 "left": 19
+            }
+        }
+        
+    ]
+}
