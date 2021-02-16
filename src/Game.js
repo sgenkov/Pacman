@@ -6,6 +6,7 @@ import DC from './debugConfig.json'; // ^FLOW
 import scene from './scene.json';
 import * as PIXI from 'pixi.js';
 import { assetsLoader } from './index';
+import { colideWithCircle } from './utils';
 export default class Game {
   constructor(delegate) {
     this.name = "play";
@@ -48,19 +49,28 @@ export default class Game {
       });
     });
 
+    model.vertices.forEach(vertex => {
+      if(colideWithCircle(vertex, model.player)) {
+        // console.log('========COLLIDE========');
+      }
+    })
+
     this.delegate.render(model.gameElements);
   };
 
   verticesPreview = () => {
-    const output = scene.map.map((el) => {
+    scene.map.forEach((el) => {
       let graphic = new PIXI.Graphics();
       graphic.beginFill(0x346123);
-      graphic.drawCircle(el.position.x, el.position.y, 5);
+      graphic.drawCircle(el.position.x, el.position.y, 10);
       graphic.endFill(); //? What is this used for in PIXI.js ?
       graphic.interactive = true;
       graphic.buttonMode = true;
+      graphic.ID = el.id;
+      graphic.EDGES = el.edges;
       // graphic.anchor.set(0.5); //* WHY THIS DOESN'T WORK?
       graphic.on('click', () => console.log(el));
+      model.vertices.push(graphic);
       app.stage.addChild(graphic);
     });
   };

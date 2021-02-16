@@ -5,6 +5,7 @@ export default class Model extends EventTarget {
         super();
         this.gameElements = [];
         this.freeGameElements = [];
+        this.vertices = [];
         this.player = null;
         const vertex = this.calculatePositions(); //* To avoid recalculations. Think about this later!
         this.defaultLocations = {

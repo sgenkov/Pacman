@@ -9,7 +9,8 @@ export default class Pacman {
         this.name = 'pacman';
         this.currentVertex = model.defaultLocations.pacman.vertex;
         this.previousVertex = null;
-        console.log('Pacman.js - this.currentVertex ', this.currentVertex);
+        this.radius = 7; //TODO: replace with rect.width || rect.height ?
+        // console.log('Pacman.js - this.currentVertex ', this.currentVertex);
         this.allowedDirections = Object.keys(this.currentVertex.edges);
         // this.allowedVertices = this.currentVertex.edges;
         // console.log(this.allowedVertices);
@@ -18,15 +19,7 @@ export default class Pacman {
         this.prevSpeed = this.speed;
         this.behaviours = ["player1", "move", "updateInfo"];
         this.rect = new Rectangle(this.currentVertex.position.x, this.currentVertex.position.y, 15, 15);
-
-        this.info = new PIXI.Text(`X: ${this.rect.x}, Y: ${this.rect.y}`, { //^ For coordinates tracking
-            fontSize: 30,
-            fill: 0xffffff,
-            align: "center",
-            stroke: "#cccccc",
-            strokeThickness: 0,
-        });
-        app2.stage.addChild(this.info);
+        this.createInfo(); //^ For coordinates tracking
     };
 
     set allowedDirections(directions) {
@@ -36,6 +29,16 @@ export default class Pacman {
         return this._allowedDirections;
     }
 
+    createInfo = () => {
+        this.info = new PIXI.Text(`X: ${this.rect.x}, Y: ${this.rect.y}`, { //^ For coordinates tracking
+            fontSize: 30,
+            fill: 0xffffff,
+            align: "center",
+            stroke: "#cccccc",
+            strokeThickness: 0,
+        });
+        app2.stage.addChild(this.info);
+    }
     updateInfo = () => {
         this.info.text = `X: ${this.rect.x}, Y: ${this.rect.y}`;
     };

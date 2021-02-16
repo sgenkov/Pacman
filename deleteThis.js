@@ -158,3 +158,7 @@
 // }
 // let lion = new Lion('King')
 // lion.speak();
+
+
+const a = "1" - 2 + 3 + 1 + 1 + 1 + 1
+console.log(a);

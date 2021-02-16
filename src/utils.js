@@ -1,3 +1,4 @@
+import { model } from '.';
 import Vector from './Vector';
 export const colide = (rect1, rect2) => {
     // console.log(rect1, rect2);
@@ -5,6 +6,17 @@ export const colide = (rect1, rect2) => {
         && rect1.x + rect1.width > rect2.x
         && rect1.y < rect2.y + rect2.height
         && rect1.y + rect1.height > rect2.y)
+};
+
+export const colideWithCircle = (vertex, unit) => {
+    if (vertex.vertexData === null) return;
+    const dx = vertex.vertexData[0] - unit.rect.x;
+    const dy = vertex.vertexData[1] - unit.rect.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+    if (distance < vertex.width / 2 + unit.radius) {
+        return true;
+    };
+    return false;
 };
 
 export const binaryReprezentation = [
