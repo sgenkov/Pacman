@@ -14,6 +14,12 @@ export const colideWithCircle = (vertex, unit) => {
     const dy = vertex.vertexData[1] - unit.rect.y;
     const distance = Math.sqrt(dx * dx + dy * dy);
     if (distance < vertex.width / 2 + unit.radius) {
+        let vertexEdges = '';
+        for (let edge in vertex.EDGES) {
+            vertexEdges += edge + ' : ' + vertex.EDGES[edge] + '\n';
+        };
+        unit.currentVertex = vertex; //? Incompatible types ? 
+        unit.updateInfo(`vertex Id: ${vertex.ID}` + '\n' + vertexEdges);
         return true;
     };
     return false;

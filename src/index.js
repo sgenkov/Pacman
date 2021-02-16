@@ -18,7 +18,7 @@ export const app = new Application({
 });
 export const app2 = new Application({ //^ For coordinates tracking
   width: 200,
-  height: 30,
+  height: 200,
   backgroundColor: 0x000000,
 });
 export const model = new Model();
