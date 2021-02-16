@@ -1,7 +1,8 @@
 {
     "mainFlow": false,
-    "GameElementsPooling": false,
-    "PixiDelegatePooling": false,
-    "GlobalStateFlow": false,
-    "GameElementInnerState": false
+    "objectsCreation": false,
+    "traceBehaviours": false,
+    "assetsLoading": false,
+    "verticesPreview": true
+    
 }

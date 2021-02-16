@@ -1,6 +1,7 @@
 import { Text } from 'pixi.js';
 import { app } from './index';
 import gameStateModel from './GameStateModel';
+import DC from './debugConfig.json'; // ^FLOW
 
 export default class Menu {
     constructor() {
@@ -8,12 +9,12 @@ export default class Menu {
     };
 
     init = () => {
-        // console.log('Menu.js : MENU INIT'); //^ FLOW
+        DC.mainFlow && console.log('Menu.js : MENU INIT'); //^ FLOW
         this.render();
     };
 
     deInit = () => {
-        // console.log("Menu.js : MENU DEINIT"); //^ FLOW
+        DC.mainFlow && console.log("Menu.js : MENU DEINIT"); //^ FLOW
         app.stage.removeChild(this.text);
         this.text.removeListener("pointerdown", this.onClick);
         this.text = null;

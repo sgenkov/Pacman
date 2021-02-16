@@ -1,6 +1,6 @@
-import Model from './Model';
-import { app } from './index';
+import { app, Model } from './index';
 import Pacman from './GameUnits/Pacman';
+import Ghost from './GameUnits/Ghost';
 
 
 export default class GameElementFactory {
@@ -10,7 +10,7 @@ export default class GameElementFactory {
 
     init = () => {
         this.unitMap = new Map([
-            ["ghost", this.createEnemy],
+            ["ghost", this.createGhost],
             ["player", this.createPlayer],
             // ["bullet", this.createBullet],
             // ["obstacle", this.createObstacle]
@@ -35,30 +35,11 @@ export default class GameElementFactory {
         return newPlayer;
     };
 
-    createEnemy = () => {
-        const newEnemy = new Enemy();
-        console.log('new enemy', newEnemy);
-        return newEnemy;
+    createGhost = () => {
+        const newGhost = new Ghost();
+        return newGhost;
     };
 
-    createBullet = ({ rect: { x, y, width }, name }) => {
-        const bulletParams = this.getBulletParams(name, x);
-
-        const newBullet = new Bullet({
-            "name": "bullet",
-            "owner": name,
-            "behaviours": ["move"],
-            "hitGroup": ["bullet"],
-            "speed": [bulletParams.speed, 0],
-            "colides": {
-                "enemy": ["explode"],
-                "player": ["explode"]
-            },
-            "dimensions": [bulletParams.X, y + 29, 30, 10] //TODO: Make the dimensions scalable
-        });
-
-        return newBullet;
-    };
 
 };
 

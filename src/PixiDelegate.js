@@ -1,28 +1,28 @@
 import { colide } from "./utils";
-
+import GraphicElement from './GraphicElement';
 export default class PixiDelegate {
     constructor(app, size) {
         this.app = app;
         this.size = size;
-
-        this.freeGraphics = [];
-    }
+        this.isInRangeBypass = false; //* Delete this later
+        this.graphics = [];
+    };
 
     createElement = (el) => {
-        // const color = 0x1FF455;
-        // let graphic = new Graphics();
-        // graphic.beginFill(color);
-        // graphic.drawRect(0, 0, 10, 10)
-        // graphic.endFill();
-        //TODO: new Graphics() for the walls???
-        // let graphic = new GraphicElement(el);
-        // console.log('graphic element', graphic.rect);
-        return graphic.sprite;
+        let graphic = new GraphicElement(el);
+        graphic.sheet.scale.x = 2; //todo: Modify this to be scalable
+        graphic.sheet.scale.y = 2; //todo: Modify this to be scalable
+        graphic.sheet.PREV_SPEED = el.prevSpeed;
+        graphic.sheet.SPEED = el.speed;
+        this.graphics.push(graphic);
+        // console.log(graphic);
+        // graphic.sheet.play();
+        return graphic.sheet;
     }
 
     getGraphic = (el) => {
         let {
-            freeGraphics,
+            graphics,
             createElement,
             app: {
                 stage,
@@ -30,28 +30,37 @@ export default class PixiDelegate {
         } = this;
 
         let graphic;
+        const foundIndex = graphics.findIndex(g => {
+            return (g.name === el.name);
+        });
 
-        let foundIndex; 
-        if (el.hasOwnProperty("owner")) { //^ Bullet direction handle
-            foundIndex = freeGraphics.findIndex(g => (g.NAME === el.name) && (g.OWNER === el.owner));
-        } else {
-            foundIndex = freeGraphics.findIndex(g => {
-                if (el.state !== 'stateless') {
-                    return (g.NAME === el.name) && (el.state === g.STATE);
-                } else {
-                    return (g.NAME === el.name); 
-                };
-            });
-        };
-
-        if (freeGraphics.length == 0 || foundIndex === -1) {
+        if (graphics.length == 0 || foundIndex === -1) {
             graphic = createElement(el);
         } else {
-            graphic = freeGraphics[foundIndex];                                 //? SLOWDOWN CODE HERE ??
-            freeGraphics.splice(foundIndex, 1);                                 //? SLOWDOWN CODE HERE ??
+            graphic = graphics[foundIndex].sheet;
+            // console.log('GraphicElement founded'); //^ flow
+            // freeGraphics.splice(foundIndex, 1);
         };
+        // console.log(graphic);
+        // graphic.angle = graphic.PREV_SPEED.x < 0? 90 : 0;
+        if (graphic.PREV_SPEED.x > 0) {
+            graphic.angle = 0;
+        };
+        if (graphic.PREV_SPEED.x < 0) {
+            graphic.angle = 180;
+        };
+        if (graphic.PREV_SPEED.y > 0) {
+            graphic.angle = 90;
+        };
+        if (graphic.PREV_SPEED.y < 0) {
+            graphic.angle = -90;
+        };
+        // console.log(graphic.SPEED);
+        if (graphic.SPEED.x === 0 && graphic.SPEED.y ===0) {
+            //TODO: stop the animation here
+        };
+
         graphic.geId = el.id;
-        // graphic.hasOwnProperty("SPEED") && (graphic.rotation = -Math.atan(graphic.SPEED.y / graphic.SPEED.x));
         stage.addChild(graphic);
 
         return graphic;
@@ -103,11 +112,11 @@ export default class PixiDelegate {
             getGraphic
         } = this;
 
-        children.forEach(child => { //TODO: Move this loop somewhere ?
-            if (!gameElements.some(gameElement => gameElement.id === child.id)) {
-                freeUpGraphic(child);
-            };
-        });
+        // children.forEach(child => { //TODO: Move this loop somewhere ?
+        //     if (!gameElements.some(gameElement => gameElement.id === child.id)) {
+        //         freeUpGraphic(child);
+        //     };
+        // });
 
         let map = children.reduce((acc, el) => {
             if (el.geId == null) {
@@ -119,9 +128,7 @@ export default class PixiDelegate {
                 }
             }
         }, {});
-
         gameElements.forEach(el => {
-            // console.log('el from pixiDelegate : ', el);
             if (colide(el.rect, size || screen)) {
                 let graphic;
 
@@ -129,6 +136,7 @@ export default class PixiDelegate {
                     graphic = map[el.id];
                 } else {
                     graphic = getGraphic(el);
+                    graphic.play();
                 };
                 applySize(el, graphic);
             } else {

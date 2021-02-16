@@ -2,6 +2,7 @@ import { app } from './index';
 import * as PIXI from 'pixi.js';
 import sheetSource from './pacmanSheet.json';
 import { assets } from './scene.json';
+import DC from './debugConfig.json';
 
 class GameAssetsLoader {
 
@@ -22,14 +23,14 @@ class GameAssetsLoader {
     };
 
     showProgress = (e) => {
-        console.log(e.progress);
+        DC.assetsLoading && console.log(e.progress);
     };
     reportError = (e) => {
         console.log('ERROR : ' + e.message);
     };
 
     doneLoading = () => {
-        console.log('DONE LOADING!!!');
+        DC.assetsLoading && console.log('DONE LOADING!!!');
         this.createSheets();
     };
 
@@ -39,8 +40,8 @@ class GameAssetsLoader {
           const { x, y, w, h } = sheetSource.frames[key].frame;
           this.SHEETS[key.split('.')[0]] = new PIXI.Texture(baseSheet, new PIXI.Rectangle(x, y, w, h));
         };
-        console.log(this.SHEETS);
       };
+
 };
 
 export default new GameAssetsLoader();

@@ -1,5 +1,6 @@
 
 export const colide = (rect1, rect2) => {
+    // console.log(rect1, rect2);
     return (rect1.x < rect2.x + rect2.width
         && rect1.x + rect1.width > rect2.x
         && rect1.y < rect2.y + rect2.height
@@ -8,12 +9,7 @@ export const colide = (rect1, rect2) => {
 
 export const binaryReprezentation = [
     "player",
-    "enemy",
-    "vWall",
-    "hWall",
-    "enemyBullet",
-    "playerBullet",
-    "obstacle",
+    "ghost",
 ].reduce((map, key, index) => {
     return {
         ...map,

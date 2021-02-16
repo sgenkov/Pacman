@@ -12,7 +12,6 @@ export default class StateMachine {
         } = this;
 
         let selected = states[currentState];
-        
         if (
             currentState == null
             || selected.allowedStates.some(s => s == state)
@@ -22,15 +21,6 @@ export default class StateMachine {
             newState.init();
             this.currentState = state;
         };
-    };
-
-    setNextState = () => {
-        let {
-            states,
-            currentState,
-        } = this;
-        let selected = states[currentState].allowedStates[0];
-        this.setState(selected);
     };
 
 };

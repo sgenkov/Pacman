@@ -6,15 +6,26 @@ import gameStateModel from "./GameStateModel";
 import Game from "./Game";
 import PixiDelegate from './PixiDelegate';
 import GameAssetsLoader from "./GameAssetsLoader";
+import DC from './debugConfig.json'; // ^FLOW
+import Model from './Model';
 
 export const app = new Application({
-  width: window.innerWidth - 15,
-  height: window.innerHeight - 25,
-  backgroundColor: 0xdddddd,
+  // width: window.innerWidth - 15,
+  // height: window.innerHeight - 25,
+  width: 620,
+  height: 680,
+  backgroundColor: 0x000000,
 });
+export const app2 = new Application({ //^ For coordinates tracking
+  width: 200,
+  height: 30,
+  backgroundColor: 0x000000,
+});
+export const model = new Model();
 
 document.body.appendChild(app.view);
-GameAssetsLoader.loadAssets(); //TODO: Remove the SINGLETON form GameAssetsLoader
+document.body.appendChild(app2.view); //^ For coordinates tracking
+GameAssetsLoader.loadAssets();  //TODO: Remove the SINGLETON form GameAssetsLoader
 
 let screen;
 const stateMachine = new StateMachine(
@@ -22,12 +33,12 @@ const stateMachine = new StateMachine(
     menu: {
       allowedStates: ["play"],
       init: () => {
-        // console.log("State machine MENU init"); //^ FLOW
+        DC.mainFlow && console.log("State machine MENU init"); //^ FLOW
         screen = new Menu();
         screen.init();
       },
       deInit: () => {
-        // console.log("State machine MENU deinit"); //^ FLOW
+        DC.mainFlow && console.log("State machine MENU deinit"); //^ FLOW
         screen.deInit();
         screen = null;
       },
@@ -35,12 +46,12 @@ const stateMachine = new StateMachine(
     play: {
       allowedStates: ["menu"],
       init: () => {
-        // console.log("State machine GAME init"); //^ FLOW
+        DC.mainFlow && console.log("State machine GAME init"); //^ FLOW
         screen = new Game(new PixiDelegate(app));
         screen.init();
       },
       deInit: () => {
-        // console.log("State machine GAME deinit"); //^ FLOW
+        DC.mainFlow && console.log("State machine GAME deinit"); //^ FLOW
         screen.deInit();
         screen = null;
       },
@@ -51,6 +62,7 @@ const stateMachine = new StateMachine(
 
 gameStateModel.addEventListener("stateUpdated", (event) => {
   if (event.target.lastChangedProps.some((e) => e == "currentScreen")) {
+    DC.mainFlow && console.log(`MainStateMachine switched to : ${gameStateModel.currentScreen}`); //^ FLOW
     stateMachine.setState(gameStateModel.currentScreen);
   };
 });
