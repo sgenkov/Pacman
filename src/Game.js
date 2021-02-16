@@ -5,8 +5,7 @@ import GameElementFactory from './GameElementFactory';
 import DC from './debugConfig.json'; // ^FLOW
 import scene from './scene.json';
 import * as PIXI from 'pixi.js';
-import GameAssetsLoader from './GameAssetsLoader';
-import { deleteThis } from './scene.json';
+import { assetsLoader } from './index';
 export default class Game {
   constructor(delegate) {
     this.name = "play";
@@ -68,7 +67,7 @@ export default class Game {
 
   addBackground = () => {
     let { backGround } = this;
-    backGround = PIXI.Sprite.from(GameAssetsLoader.SHEETS.background);
+    backGround = PIXI.Sprite.from(assetsLoader.SHEETS.background);
     backGround.anchor.set(0.5);
     backGround.position.x = app.view.width / 2;
     backGround.position.y = app.view.height / 2;

@@ -4,7 +4,7 @@ import sheetSource from './pacmanSheet.json';
 import { assets } from './scene.json';
 import DC from './debugConfig.json';
 
-class GameAssetsLoader {
+export default class GameAssetsLoader {
 
     constructor() {
         this.SHEETS = {};
@@ -43,5 +43,3 @@ class GameAssetsLoader {
       };
 
 };
-
-export default new GameAssetsLoader();

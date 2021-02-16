@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
-import GameAssetsLoader from "./GameAssetsLoader";
-import DC from './debugConfig.json';
+import { assetsLoader } from "./index";
+import DC from './debugConfig.json';  
 
 export default class GraphicElement {
   constructor(el) {
@@ -13,12 +13,10 @@ export default class GraphicElement {
   createSprite = (el) => {
     if (this.name === "pacman") {
       DC.objectsCreation && console.log('New GraphicElement created'); //^ FLOW
-      // this.sheet = new PIXI.Sprite.from(GameAssetsLoader.SHEETS["player"]);
-      // console.log(GameAssetsLoader.SHEETS);
       this.sheet = new PIXI.AnimatedSprite([
-        GameAssetsLoader.SHEETS.pacmanR1,
-        GameAssetsLoader.SHEETS.pacmanR2,
-        GameAssetsLoader.SHEETS.pacman3,
+        assetsLoader.SHEETS.pacmanR1,
+        assetsLoader.SHEETS.pacmanR2,
+        assetsLoader.SHEETS.pacman3,
       ]);
       // this.sheet.scale.x = -1; //* this works well
       // this.sheet.angle = -90;
@@ -26,7 +24,6 @@ export default class GraphicElement {
       this.sheet.anchor.set(0.5);
       this.sheet.animationSpeed = 0.2;
       this.sheet.loop = true;
-      // this.sheet.play();
       this.sheet.NAME = this.name; //* future use   
       // this.sprite.STATE = el.state; //* future use
 

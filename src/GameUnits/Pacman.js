@@ -5,10 +5,11 @@ import {app2} from '../index';
 import * as PIXI from 'pixi.js'
 export default class Pacman {
     constructor() { //TODO: Refactor this constructor
+        DC.objectsCreation && console.log("Pacman created"); //^ FLOW
         this.name = 'pacman';
         this.currentVertex = model.defaultLocations.pacman.vertex;
+        this.previousVertex = null;
         console.log('Pacman.js - this.currentVertex ', this.currentVertex);
-        DC.objectsCreation && console.log("Pacman created"); //^ FLOW
         this.allowedDirections = Object.keys(this.currentVertex.edges);
         // this.allowedVertices = this.currentVertex.edges;
         // console.log(this.allowedVertices);

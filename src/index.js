@@ -22,10 +22,12 @@ export const app2 = new Application({ //^ For coordinates tracking
   backgroundColor: 0x000000,
 });
 export const model = new Model();
+export const assetsLoader = new GameAssetsLoader();
 
 document.body.appendChild(app.view);
 document.body.appendChild(app2.view); //^ For coordinates tracking
-GameAssetsLoader.loadAssets();  //TODO: Remove the SINGLETON form GameAssetsLoader
+
+assetsLoader.loadAssets();
 
 let screen;
 const stateMachine = new StateMachine(
