@@ -28,10 +28,4 @@ yarn-error.log*
 .vscode
 
 yarn.lock
-deleteThis.js
-deleteThis.md
-TODO.md
-sceneMaker.js
-NOTES.md
-src/sceneBackup.json
-src/transformStolenGraph.js
+
