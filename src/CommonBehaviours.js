@@ -1,12 +1,10 @@
-import { model } from "./index";
 import DC from './debugConfig.json'; //^ FLOW
-import scene from './scene.json';
 
 
 export default class CommonBehaviours {
   constructor(factory) {
     const complexSpeed = (el) => {
-      const commonSpeed = 0;
+      const commonSpeed = 1;
       const resultSpeed = commonSpeed + el.baseSpeed;
       return resultSpeed;
     };
@@ -22,13 +20,6 @@ export default class CommonBehaviours {
         if (!el.allowedDirections.some(direction => direction === "up" || direction === "all")) {
           console.log('Forbidden direction');
           return;
-        };
-        // console.log(el.allowedDirections);
-        if (el.currentVertex.edges.hasOwnProperty("up") && el.rect.y === scene.map.find(Vertex => Vertex.id === el.currentVertex.id).position.y) {
-          console.log('TRUE');
-          console.log('el.currentVertex.edges', el.currentVertex.edges);
-          console.log('el.rect.y : ', el.rect.y );
-          console.log('Found in scene');
         };
         el.speed.y = -complexSpeed(el);
         el.prevSpeed.y = -complexSpeed(el);
