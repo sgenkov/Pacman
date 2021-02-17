@@ -15,8 +15,6 @@ export default class PixiDelegate {
         graphic.sheet.PREV_SPEED = el.prevSpeed;
         graphic.sheet.SPEED = el.speed;
         this.graphics.push(graphic);
-        // console.log(graphic);
-        // graphic.sheet.play();
         return graphic.sheet;
     }
 
@@ -55,9 +53,8 @@ export default class PixiDelegate {
         if (graphic.PREV_SPEED.y < 0) {
             graphic.angle = -90;
         };
-        // console.log(graphic.SPEED);
-        if (graphic.SPEED.x === 0 && graphic.SPEED.y ===0) {
-            //TODO: stop the animation here
+        if (graphic.SPEED.x === 0 && graphic.SPEED.y === 0) {
+            //TODO: how to stop the animation here
         };
 
         graphic.geId = el.id;
@@ -112,12 +109,6 @@ export default class PixiDelegate {
             getGraphic
         } = this;
 
-        // children.forEach(child => { //TODO: Move this loop somewhere ?
-        //     if (!gameElements.some(gameElement => gameElement.id === child.id)) {
-        //         freeUpGraphic(child);
-        //     };
-        // });
-
         let map = children.reduce((acc, el) => {
             if (el.geId == null) {
                 return acc;
@@ -136,7 +127,11 @@ export default class PixiDelegate {
                     graphic = map[el.id];
                 } else {
                     graphic = getGraphic(el);
-                    graphic.play();
+                    if (graphic.SPEED.x === 0 && graphic.SPEED.y === 0) {
+                        graphic.stop();
+                    } else {
+                        graphic.play();
+                    };
                 };
                 applySize(el, graphic);
             } else {

@@ -19,8 +19,6 @@ export default class GraphicElement {
         assetsLoader.SHEETS.pacman3,
       ]);
       // this.sheet.scale.x = -1; //* this works well
-      // this.sheet.angle = -90;
-      // console.log('sheet', this.sheet);
       this.sheet.anchor.set(0.5);
       this.sheet.animationSpeed = 0.2;
       this.sheet.loop = true;

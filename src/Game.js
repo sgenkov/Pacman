@@ -18,7 +18,7 @@ export default class Game {
   init = () => {
     DC.mainFlow && console.log('Game.js : Game init'); //^ FLOW
     this.factory = new GameElementFactory();
-    this.behaviours = new CommonBehaviours(this.factory).commonBehaviours;
+    this.behaviours = new CommonBehaviours().commonBehaviours;
     model.assignPlayer(this.factory.getUnit("player"));
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));

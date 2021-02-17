@@ -2,7 +2,7 @@ import DC from './debugConfig.json'; //^ FLOW
 
 
 export default class CommonBehaviours {
-  constructor(factory) {
+  constructor() {
     const complexSpeed = (el) => {
       const commonSpeed = 1;
       const resultSpeed = commonSpeed + el.baseSpeed;

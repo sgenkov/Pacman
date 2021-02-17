@@ -11,15 +11,6 @@
     "assets" : [
         ["pacmanSheet", "pacmanSheet.png"]
     ],
-    "level1": [
-        {
-            "id":12,
-            "position": {"x": 1, "y" :1},
-            "edges":{
-                 "left": 19
-            }
-        }
-    ],
     "startingVertices": {
         "pacman": 22,
         "blueGhost": null,
