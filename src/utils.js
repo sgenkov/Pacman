@@ -1,4 +1,3 @@
-import { model } from '.';
 import Vector from './Vector';
 export const colide = (rect1, rect2) => {
     // console.log(rect1, rect2);
@@ -52,6 +51,5 @@ export const getSpeed = (el, target) => {
 };
 
 export const possibleMove = (edges, direction) => {
-    console.log(edges);
     return !Object.keys(edges).includes(direction);
 };

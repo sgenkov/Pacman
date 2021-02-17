@@ -2,7 +2,5 @@
     "mainFlow": false,
     "objectsCreation": false,
     "traceBehaviours": false,
-    "assetsLoading": false,
-    "verticesPreview": true
-    
+    "assetsLoading": false
 }

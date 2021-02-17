@@ -19,6 +19,8 @@ export default class CommonBehaviours {
       "moveUp": (el) => {
         DC.traceBehaviours && console.log('moveUp behaviour'); //^ FLOW
         if (possibleMove(el.currentVertex.EDGES, "up")) return;
+        // el.rect.x = el.currentVertex.vertexData[0];
+        // el.rect.y = el.currentVertex.vertexData[1];
         el.speed.y = -complexSpeed(el);
         el.prevSpeed.y = -complexSpeed(el);
       },

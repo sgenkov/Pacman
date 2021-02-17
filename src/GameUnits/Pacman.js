@@ -1,4 +1,4 @@
-import { app, model } from '../index';
+import { model } from '../index';
 import DC from '../debugConfig.json'; //^ debug
 import Rectangle from '../Rectangle';
 import { app2 } from '../index';
@@ -8,6 +8,7 @@ export default class Pacman {
         DC.objectsCreation && console.log("Pacman created"); //^ FLOW
         this.name = 'pacman';
         this.currentVertex = model.defaultLocations.pacman.vertex;
+        console.log(this.currentVertex);
         this.previousVertex = null;
         this.radius = 15; //TODO: replace with rect.width || rect.height ?
         // console.log('Pacman.js - this.currentVertex ', this.currentVertex);

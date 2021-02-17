@@ -23,7 +23,7 @@ export default class Game {
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));
     this.addBackground();
-    DC.verticesPreview && this.verticesPreview();
+    this.verticesCreate();
     app.ticker.add(this.gameTicker);
   };
 
@@ -58,13 +58,15 @@ export default class Game {
         };
         model.player.currentVertex = vertex;
         model.player.updateInfo(`vertex Id: ${vertex.ID}` + '\n' + vertexEdges);
+      } else {
+        // model.player.currentVertex = null;
       };
     });
 
     delegate.render(model.gameElements);
   };
 
-  verticesPreview = () => {
+  verticesCreate = () => {
     scene.map.forEach((el) => {
       let graphic = new PIXI.Graphics();
       graphic.beginFill(0x346123);

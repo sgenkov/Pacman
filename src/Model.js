@@ -1,4 +1,3 @@
-import { app } from './index';
 import scene from './scene.json';
 export default class Model extends EventTarget {
     constructor() {
