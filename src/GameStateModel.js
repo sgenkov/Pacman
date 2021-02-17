@@ -7,12 +7,10 @@ class GameStateModel extends EventTarget {
   setState = (newState) => {
 
     let changed = Object.entries(newState).reduce((changed, [key, value]) => {
-      // Върху кой масив извършваме 'reduce' ?
       if (changed) {
         return true;
       } else {
         if (this.hasOwnProperty(key)) {
-          // Where 'this' points to?
           if (this[key] != value) {
             return true;
           }

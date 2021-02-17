@@ -51,7 +51,6 @@ export default class Game {
 
     model.vertices.forEach(vertex => {
       if (colideWithCircle(vertex, model.player)) {
-        //? What next?
         let vertexEdges = '';
         for (let edge in vertex.EDGES) {
             vertexEdges += edge + ' : ' + vertex.EDGES[edge] + '\n';
@@ -63,6 +62,7 @@ export default class Game {
       };
     });
 
+    // console.log(model.player.behaviours);
     delegate.render(model.gameElements);
   };
 

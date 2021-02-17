@@ -34,7 +34,7 @@ export const onKeyUp = ({ keyCode }) => {
   let { keyBindings } = scene;
   player.behaviours.forEach(b => {
       if (keyBindings[b] && keyBindings[b][keyCode]) { 
-        player.behaviours.push("stop");
+        // player.behaviours.push("stop");
       };
     });
 };
