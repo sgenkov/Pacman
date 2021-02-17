@@ -50,12 +50,18 @@ export default class Game {
     });
 
     model.vertices.forEach(vertex => {
-      if(colideWithCircle(vertex, model.player)) {
-        // console.log('========COLLIDE========');
-      }
-    })
+      if (colideWithCircle(vertex, model.player)) {
+        //? What next?
+        let vertexEdges = '';
+        for (let edge in vertex.EDGES) {
+            vertexEdges += edge + ' : ' + vertex.EDGES[edge] + '\n';
+        };
+        model.player.currentVertex = vertex; //? Incompatible types ? 
+        model.player.updateInfo(`vertex Id: ${vertex.ID}` + '\n' + vertexEdges);
+      };
+    });
 
-    this.delegate.render(model.gameElements);
+    delegate.render(model.gameElements);
   };
 
   verticesPreview = () => {
@@ -83,7 +89,7 @@ export default class Game {
     backGround.position.y = app.view.height / 2;
     backGround.scale.x = 2.75;
     backGround.scale.y = 2.75;
-    this.backGround = backGround;
+    // this.backGround = backGround; 
     app.stage.addChild(backGround);
   };
 
