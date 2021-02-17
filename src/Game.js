@@ -56,7 +56,7 @@ export default class Game {
         for (let edge in vertex.EDGES) {
             vertexEdges += edge + ' : ' + vertex.EDGES[edge] + '\n';
         };
-        model.player.currentVertex = vertex; //? Incompatible types ? 
+        model.player.currentVertex = vertex;
         model.player.updateInfo(`vertex Id: ${vertex.ID}` + '\n' + vertexEdges);
       };
     });

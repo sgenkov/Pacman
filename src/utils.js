@@ -42,13 +42,16 @@ export const getSpeed = (el, target) => {
     let c = Math.sqrt(
         Math.pow(dx, 2)
         + Math.pow(dy, 2)
-    )
+    );
 
     let speed = new Vector(
         dx / c * el.velocity,
         dy / c * el.velocity
-    )
-
+    );
     return speed;
+};
 
+export const possibleMove = (edges, direction) => {
+    console.log(edges);
+    return !Object.keys(edges).includes(direction);
 };
