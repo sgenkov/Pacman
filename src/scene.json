@@ -24,8 +24,8 @@
       "pacmanSheet.png"
     ]
   ],
-  "startingVertices": {
-    "pacman": 24,
+  "startingNodes": {
+    "pacman": 22,
     "blueGhost": null,
     "orangeGhost": null,
     "pinkGhost": null,

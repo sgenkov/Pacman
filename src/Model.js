@@ -4,12 +4,12 @@ export default class Model extends EventTarget {
         super();
         this.gameElements = [];
         this.freeGameElements = [];
-        this.vertices = [];
+        this.nodes = [];
         this.player = null;
-        const vertex = this.calculatePositions(); //* To avoid recalculations. Think about this later!
+        const node = this.calculatePositions(); //* To avoid recalculations. Think about this later!
         this.defaultLocations = {
             pacman: {
-                vertex
+                node: node
             },
             blueGhost: {},
             orangeGhost: {},
@@ -23,7 +23,7 @@ export default class Model extends EventTarget {
     };
 
     calculatePositions = () => { //* To avoid recalculations. Think about this later!
-        return scene.map.find(vertex => vertex.id == scene.startingVertices.pacman);
+        return scene.map.find(node => node.id === scene.startingNodes.pacman);
     };
 };
 // export default new Model();

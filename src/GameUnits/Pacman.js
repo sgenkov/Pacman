@@ -7,15 +7,15 @@ export default class Pacman {
     constructor() { //TODO: Refactor this constructor
         DC.objectsCreation && console.log("Pacman created"); //^ FLOW
         this.name = 'pacman';
-        this.currentVertex = model.defaultLocations.pacman.vertex;
-        this.previousVertex = null;
-        this.radius = 0; //TODO: replace with rect.width || rect.height ?
+        this.currentNode = model.defaultLocations.pacman.node;
+        this.previousNode = null;
+        // this.radius = 0; //TODO: replace with rect.width || rect.height ?
         this.lastMovementDirection = null;
         this.baseSpeed = 0;
         this.speed = { x: 0, y: 0 };
         this.prevSpeed = this.speed;
         this.behaviours = ["player1", "move", "updateInfo"]; //* Remove "updateInfo" from behaviours
-        this.rect = new Rectangle(this.currentVertex.position.x, this.currentVertex.position.y, 15, 15);
+        this.rect = new Rectangle(this.currentNode.position.x, this.currentNode.position.y, 12, 12);
         this.createInfo(); //^ For coordinates tracking
     };
 
@@ -29,8 +29,8 @@ export default class Pacman {
         });
         app2.stage.addChild(this.info);
     }
-    updateInfo = (additionText = '') => {
-        this.info.text = `X: ${this.rect.x}, Y: ${this.rect.y}` + '\n' + additionText;
+    updateInfo = (XX, YY, additionText = '') => {
+        this.info.text = `X: ${XX}, Y: ${YY}` + '\n' + additionText;
     };
 
 

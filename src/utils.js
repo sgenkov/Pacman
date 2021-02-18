@@ -7,12 +7,12 @@ export const colide = (rect1, rect2) => {
         && rect1.y + rect1.height > rect2.y)
 };
 
-export const colideWithCircle = (vertex, unit) => {
-    if (vertex.vertexData === null) return;
-    const dx = vertex.vertexData[0] - unit.rect.x;
-    const dy = vertex.vertexData[1] - unit.rect.y;
+export const colideWithCircle = (node, unit) => {
+    if (node.vertexData === null) return;
+    const dx = node.vertexData[0] - unit.rect.x;
+    const dy = node.vertexData[1] - unit.rect.y;
     const distance = Math.sqrt(dx * dx + dy * dy);
-    return (distance < vertex.width / 2 + unit.radius);
+    return (distance < node.width / 2 + unit.radius);
 };
 
 export const binaryReprezentation = [
@@ -51,5 +51,5 @@ export const getSpeed = (el, target) => {
 };
 
 export const possibleMove = (edges, direction) => {
-    return !Object.keys(edges).includes(direction);
+    return Object.keys(edges).includes(direction);
 };
