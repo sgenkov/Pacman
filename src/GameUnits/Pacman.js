@@ -9,11 +9,8 @@ export default class Pacman {
         this.name = 'pacman';
         this.currentVertex = model.defaultLocations.pacman.vertex;
         this.previousVertex = null;
-        this.radius = 15; //TODO: replace with rect.width || rect.height ?
-        // console.log('Pacman.js - this.currentVertex ', this.currentVertex);
-        this.allowedDirections = Object.keys(this.currentVertex.edges);
-        // this.allowedVertices = this.currentVertex.edges;
-        // console.log(this.allowedVertices);
+        this.radius = 0; //TODO: replace with rect.width || rect.height ?
+        this.lastMovementDirection = null;
         this.baseSpeed = 0;
         this.speed = { x: 0, y: 0 };
         this.prevSpeed = this.speed;
@@ -21,13 +18,6 @@ export default class Pacman {
         this.rect = new Rectangle(this.currentVertex.position.x, this.currentVertex.position.y, 15, 15);
         this.createInfo(); //^ For coordinates tracking
     };
-
-    set allowedDirections(directions) {
-        this._allowedDirections = [...directions];
-    };
-    get allowedDirections() {
-        return this._allowedDirections;
-    }
 
     createInfo = () => {
         this.info = new PIXI.Text(`X: ${this.rect.x}, Y: ${this.rect.y}`, { //^ For coordinates tracking

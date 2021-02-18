@@ -18,8 +18,11 @@ export default class Game {
   init = () => {
     DC.mainFlow && console.log('Game.js : Game init'); //^ FLOW
     this.factory = new GameElementFactory();
-    this.behaviours = new CommonBehaviours().commonBehaviours;
+    // this.behaviours = new CommonBehaviours().commonBehaviours;
+    this.commonBehavioursInstance = new CommonBehaviours();              //TODO: Refactor this V
+    this.behaviours = this.commonBehavioursInstance.commonBehaviours;    //TODO: Refactor this ^
     model.assignPlayer(this.factory.getUnit("player"));
+    this.commonBehavioursInstance.addEventListener("MustStop", () => {console.log('Stop from listener')})
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));
     this.addBackground();
@@ -57,6 +60,10 @@ export default class Game {
         };
         model.player.currentVertex = vertex;
         model.player.updateInfo(`vertex Id: ${vertex.ID}` + '\n' + vertexEdges);
+        model.player.rect.x = model.player.currentVertex.vertexData[0];
+        model.player.rect.y = model.player.currentVertex.vertexData[1];
+        model.player.behaviours.push("stop");
+        // console.log(model.player.`currentVertex.vertexData[0]);
       } else {
         // model.player.currentVertex = null;
       };
@@ -70,7 +77,7 @@ export default class Game {
     scene.map.forEach((el) => {
       let graphic = new PIXI.Graphics();
       graphic.beginFill(0x346123);
-      graphic.drawCircle(el.position.x, el.position.y, 10);
+      graphic.drawCircle(el.position.x, el.position.y, 1);
       graphic.endFill(); //? What is this used for in PIXI.js ?
       graphic.interactive = true;
       graphic.buttonMode = true;
