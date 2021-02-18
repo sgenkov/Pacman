@@ -56,15 +56,10 @@ export default class Game {
       if (node.vertexData && node.vertexData[0] === model.player.rect.x && node.vertexData[1] === model.player.rect.y) {
         model.player.currentNode = node;
 
-        // console.log(node);
         if (!node.EDGES.hasOwnProperty(model.player.lastMovementDirection)) {
           // (!model.player.behaviours.includes("stop")) && model.player.behaviours.unshift("stop");
-          model.player.speed.x = 0; //*SOLUTION
-          model.player.speed.y = 0; //*SOLUTION
-          console.log('model.player.currentNodeX :', model.player.currentNode.vertexData[0]);
-          console.log('model.player.currentNodeY', model.player.currentNode.vertexData[1]);
-          console.log('model.player.rect.x', model.player.rect.x);
-          console.log('model.player.rect.y', model.player.rect.y);
+          model.player.speed.x = 0; //* ~~SOLUTION
+          model.player.speed.y = 0; //* ~~SOLUTION
         };
       } else {
         // model.player.currentNode = null;
@@ -76,7 +71,6 @@ export default class Game {
       model.player.updateInfo(model.player.rect.x, model.player.rect.y, `node Id: ${model.player.currentNode.ID}` + '\n' + nodeEdges);
     });
 
-    // console.log(model.player.behaviours);
     delegate.render(model.gameElements);
   };
 
