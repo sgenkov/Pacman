@@ -7,6 +7,7 @@ import scene from './scene.json';
 import * as PIXI from 'pixi.js';
 import { assetsLoader } from './index';
 import { colideWithCircle } from './utils';
+import Model from './Model';
 export default class Game {
   constructor(delegate) {
     this.name = "play";
@@ -52,9 +53,15 @@ export default class Game {
     });
 
     model.nodes.forEach(node => {
-      if (colideWithCircle(node, model.player)) {
-      // if (node.vertexData && node.vertexData[0] === model.player.rect.x && node.vertexData[1] === model.player.rect.y) {
+      // if (colideWithCircle(node, model.player)) {
+      if (node.vertexData && node.vertexData[0] === model.player.rect.x && node.vertexData[1] === model.player.rect.y) {
         model.player.currentNode = node;
+        model.player.allowedDirections.length = 0;
+
+        for (let allowedDirection in model.player.currentNode.EDGES) {
+          model.player.allowedDirections.push(allowedDirection);
+        };
+        console.log(model.player.allowedDirections);
 
         if (!node.EDGES.hasOwnProperty(model.player.lastMovementDirection)) {
           // (!model.player.behaviours.includes("stop")) && model.player.behaviours.unshift("stop");
@@ -62,6 +69,12 @@ export default class Game {
           model.player.speed.y = 0; //* ~~SOLUTION
         };
       };
+
+      const currentAction = behaviours[model.player.nextAction];
+      if (currentAction) {
+        currentAction(model.player);
+      };
+
 
       let nodeEdges = '';
       for (let edge in model.player.currentNode.EDGES) {

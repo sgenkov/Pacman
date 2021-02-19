@@ -11,6 +11,8 @@ export default class Pacman {
         this.previousNode = null;
         this.radius = 1; 
         this.lastMovementDirection = null;
+        this.nextAction = null;
+        this.allowedDirections = [];
         this.baseSpeed = 0;
         this.speed = { x: 0, y: 0 };
         this.prevSpeed = this.speed;
