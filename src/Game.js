@@ -61,7 +61,7 @@ export default class Game {
         for (let allowedDirection in model.player.currentNode.EDGES) {
           model.player.allowedDirections.push(allowedDirection);
         };
-        console.log(model.player.allowedDirections);
+        // console.log(model.player.allowedDirections);
 
         if (!node.EDGES.hasOwnProperty(model.player.lastMovementDirection)) {
           // (!model.player.behaviours.includes("stop")) && model.player.behaviours.unshift("stop");
@@ -71,7 +71,8 @@ export default class Game {
       };
 
       const currentAction = behaviours[model.player.nextAction];
-      if (currentAction) {
+      if (currentAction && model.player.allowedDirections.includes(model.player.nextAction.replace('move','').toLowerCase())) {
+        // console.log(model.player.nextAction.replace('move','').toLowerCase());
         currentAction(model.player);
       };
 

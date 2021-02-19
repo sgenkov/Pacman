@@ -5,7 +5,7 @@ const disabled = false; //^ Debug mode
 export const onKeyDown = ({ keyCode }, behaviours) => {
   // console.log('Key Down', keyCode);
   let { keyBindings } = scene;
-  const player = model.player;
+  // const player = model.player;
   if(keyCode === 88) debugger;
   // model.gameElements.forEach(el => { //* No need to iterate over the whole gameElements
   //   el.behaviours.forEach(b => {
@@ -17,8 +17,10 @@ export const onKeyDown = ({ keyCode }, behaviours) => {
         //   })
         // });
         
-        player.nextAction = scene.keyBindings.player1[keyCode];
-        console.log('player nextAction assigned : ', player.nextAction);
+        model.player.nextAction = scene.keyBindings.player1[keyCode][0];
+        model.player.allowedDirections.length = 0;
+        model.player.allowedDirections.push(scene.keyBindings.player1[keyCode][1]);
+        // console.log('player nextAction assigned : ', model.player.nextAction);
         //TODO: Add protection against foreign buttons pressed
     // player.behaviours.forEach(b => {
     //   if (keyBindings[b] && keyBindings[b][keyCode]) {

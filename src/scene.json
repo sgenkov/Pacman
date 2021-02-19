@@ -2,16 +2,20 @@
   "keyBindings": {
     "player1": {
       "65": [
-        "moveLeft"
+        "moveLeft",
+        "right"
       ],
       "68": [
-        "moveRight"
+        "moveRight",
+        "left"
       ],
       "83": [
-        "moveDown"
+        "moveDown",
+        "up"
       ],
       "87": [
-        "moveUp"
+        "moveUp",
+        "down"
       ],
       "88": [
         "debugger"
