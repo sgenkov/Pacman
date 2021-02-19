@@ -8,9 +8,8 @@ export default class Pacman {
         DC.objectsCreation && console.log("Pacman created"); //^ FLOW
         this.name = 'pacman';
         this.currentNode = model.defaultLocations.pacman.node;
-        // console.log(this.currentNode);
         this.previousNode = null;
-        this.radius = 1; //TODO: replace with rect.width || rect.height ?
+        this.radius = 1; 
         this.lastMovementDirection = null;
         this.baseSpeed = 0;
         this.speed = { x: 0, y: 0 };
