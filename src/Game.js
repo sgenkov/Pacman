@@ -52,8 +52,8 @@ export default class Game {
     });
 
     model.nodes.forEach(node => {
-      // if (colideWithCircle(node, model.player)) {
-      if (node.vertexData && node.vertexData[0] === model.player.rect.x && node.vertexData[1] === model.player.rect.y) {
+      if (colideWithCircle(node, model.player)) {
+      // if (node.vertexData && node.vertexData[0] === model.player.rect.x && node.vertexData[1] === model.player.rect.y) {
         model.player.currentNode = node;
 
         if (!node.EDGES.hasOwnProperty(model.player.lastMovementDirection)) {
@@ -61,13 +61,13 @@ export default class Game {
           model.player.speed.x = 0; //* ~~SOLUTION
           model.player.speed.y = 0; //* ~~SOLUTION
         };
-      } else {
-        // model.player.currentNode = null;
       };
+
       let nodeEdges = '';
       for (let edge in model.player.currentNode.EDGES) {
         nodeEdges += edge + ' : ' + model.player.currentNode.EDGES[edge] + '\n';
       };
+      // console.log('infoUp');
       model.player.updateInfo(model.player.rect.x, model.player.rect.y, `node Id: ${model.player.currentNode.ID}` + '\n' + nodeEdges);
     });
 

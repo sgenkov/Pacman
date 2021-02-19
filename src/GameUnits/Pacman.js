@@ -8,8 +8,9 @@ export default class Pacman {
         DC.objectsCreation && console.log("Pacman created"); //^ FLOW
         this.name = 'pacman';
         this.currentNode = model.defaultLocations.pacman.node;
+        // console.log(this.currentNode);
         this.previousNode = null;
-        // this.radius = 0; //TODO: replace with rect.width || rect.height ?
+        this.radius = 1; //TODO: replace with rect.width || rect.height ?
         this.lastMovementDirection = null;
         this.baseSpeed = 0;
         this.speed = { x: 0, y: 0 };
@@ -29,9 +30,7 @@ export default class Pacman {
         });
         app2.stage.addChild(this.info);
     }
-    updateInfo = (XX, YY, additionText = '') => {
-        this.info.text = `X: ${XX}, Y: ${YY}` + '\n' + additionText;
+    updateInfo = (X, Y, additionText = '') => {
+        this.info.text = `X: ${X}, Y: ${Y}` + '\n' + additionText;
     };
-
-
 };

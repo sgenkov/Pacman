@@ -18,10 +18,12 @@ export default class CommonBehaviours {
       },
       "moveUp": (el) => {
         DC.traceBehaviours && console.log('moveUp behaviour'); //^ FLOW
+        // console.log(el.currentNode);
         if (!possibleMove(el.currentNode.EDGES, "up")) return;
         // el.prevNode = el.currentNode;
         // el.currentNode = null;
         el.lastMovementDirection = "up";
+        el.speed.x = 0;
         el.speed.y = -complexSpeed(el);
         el.prevSpeed.y = -complexSpeed(el);
       },
@@ -29,6 +31,7 @@ export default class CommonBehaviours {
         DC.traceBehaviours && console.log('moveDown behaviour'); //^ FLOW
         if (!possibleMove(el.currentNode.EDGES, "down")) return;
         el.lastMovementDirection = "down";
+        el.speed.x = 0;
         el.speed.y = complexSpeed(el);
         el.prevSpeed.y = complexSpeed(el);
       },
@@ -36,6 +39,7 @@ export default class CommonBehaviours {
         DC.traceBehaviours && console.log('moveLeft behaviour'); //^ FLOW
         if (!possibleMove(el.currentNode.EDGES, "left")) return;
         el.lastMovementDirection = "left";
+        el.speed.y = 0;
         el.speed.x = -complexSpeed(el);
         el.prevSpeed.x = -complexSpeed(el);
       },
@@ -43,6 +47,7 @@ export default class CommonBehaviours {
         DC.traceBehaviours && console.log('moveRight behaviour'); //^ FLOW
         if (!possibleMove(el.currentNode.EDGES, "right")) return;
         el.lastMovementDirection = "right";
+        el.speed.y = 0;
         el.speed.x = complexSpeed(el);
         el.prevSpeed.x = complexSpeed(el);
       },
