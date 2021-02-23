@@ -16,11 +16,11 @@ export const onKeyDown = ({ keyCode }, behaviours) => {
         // console.log(scene.keyBindings.player1[keyCode][1]);
         // console.log('player nextAction assigned : ', model.player.nextAction);
         if (model.player.allowedDirections.includes(scene.keyBindings.player1[keyCode][1])) {
-          console.log('true');
+          // console.log('true');
           model.player.behaviours.forEach(b => {
             if (keyBindings[b] && keyBindings[b][keyCode][0]) {
-              console.log(keyBindings[b][keyCode][0]);
-              console.log('TRUE');
+              // console.log(keyBindings[b][keyCode][0]);
+              // console.log('TRUE');
               // keyBindings[b][keyCode][0].forEach(bb => {
               //   behaviours[bb](model.player);
               // });

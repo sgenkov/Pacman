@@ -23,6 +23,7 @@ export default class Game {
     this.commonBehavioursInstance = new CommonBehaviours();              //TODO: Refactor this V
     this.behaviours = this.commonBehavioursInstance.commonBehaviours;    //TODO: Refactor this ^
     model.assignPlayer(this.factory.getUnit("player"));
+    model.assignGhost(this.factory.getUnit("ghost"));
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));
     this.addBackground();

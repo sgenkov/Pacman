@@ -4,10 +4,11 @@ import Rectangle from '../Rectangle';
 import { app2 } from '../index';
 import * as PIXI from 'pixi.js'
 export default class Ghost {
-    constructor() { //TODO: Refactor this constructor
+    constructor(color) { //TODO: Refactor this constructor
         DC.objectsCreation && console.log("Ghost created"); //^ FLOW
         this.name = 'ghost';
-        this.currentNode = model.defaultLocations.pacman.node;
+        this.color = color;
+        this.currentNode = model.defaultLocations.blueGhost.node;
         this.previousNode = null;
         this.radius = 1; 
         this.lastMovementDirection = null;
@@ -16,9 +17,9 @@ export default class Ghost {
         this.baseSpeed = 0;
         this.speed = { x: 0, y: 0 };
         this.prevSpeed = this.speed;
-        this.behaviours = ["player1", "move", "updateInfo"]; //* Remove "updateInfo" from behaviours
+        this.behaviours = ["move"];
         this.rect = new Rectangle(this.currentNode.position.x, this.currentNode.position.y, 12, 12);
-        this.createInfo(); //^ For coordinates tracking
+        // this.createInfo(); //^ For coordinates tracking
     };
 
     createInfo = () => {

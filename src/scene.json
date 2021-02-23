@@ -34,10 +34,10 @@
   ],
   "startingNodes": {
     "pacman": 22,
-    "blueGhost": 0,
-    "orangeGhost": null,
-    "pinkGhost": null,
-    "redGhost": null
+    "blueGhost": 63,
+    "orangeGhost": 51,
+    "pinkGhost": 33,
+    "redGhost": 34
   },
   "map": [
     {

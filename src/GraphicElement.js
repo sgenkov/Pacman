@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import { assetsLoader } from "./index";
-import DC from './debugConfig.json';  
+import DC from './debugConfig.json';
 
 export default class GraphicElement {
   constructor(el) {
@@ -26,7 +26,15 @@ export default class GraphicElement {
       // this.sprite.STATE = el.state; //* future use
 
     } else if (this.name === "ghost") {
-      throw new Error("Ghost not implemented!");
+      DC.objectsCreation && console.log('New GraphicElement created'); //^ FLOW
+      this.sheet = new PIXI.AnimatedSprite([
+        assetsLoader.SHEETS.ghost_blue_R1,
+        assetsLoader.SHEETS.ghost_blue_R2,
+      ]);
+      this.sheet.anchor.set(0.5);
+      this.sheet.animationSpeed = 0.2;
+      this.sheet.loop = true;
+      this.sheet.NAME = this.name; 
     } else {
       throw new Error("GraphicElement.js : unknown graphic type");
     };

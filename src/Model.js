@@ -6,15 +6,12 @@ export default class Model extends EventTarget {
         this.freeGameElements = [];
         this.nodes = [];
         this.player = null;
-        const node = this.calculatePositions(); //* To avoid recalculations. Think about this later!
         this.defaultLocations = {
-            pacman: {
-                node: node
-            },
-            blueGhost: {},
-            orangeGhost: {},
-            pinkGhost: {},
-            redGhost: {}
+            pacman: { node: this.calculatePosition('pacman') },
+            blueGhost: { node: this.calculatePosition('blueGhost') },
+            orangeGhost: { node: this.calculatePosition('orangeGhost') },
+            pinkGhost: { node: this.calculatePosition('pinkGhost') },
+            redGhost: { node: this.calculatePosition('redGhost') }
         };
     };
     assignPlayer = (unit) => {
@@ -22,8 +19,12 @@ export default class Model extends EventTarget {
         this.player = unit;
     };
 
-    calculatePositions = () => { //* To avoid recalculations. Think about this later!
-        return scene.map.find(node => node.id === scene.startingNodes.pacman);
+    assignGhost = (unit) => {
+        this.gameElements.push(unit);
+    };
+
+    calculatePosition = (name) => {
+        return scene.map.find(node => node.id === scene.startingNodes[name]);
     };
 };
 // export default new Model();
