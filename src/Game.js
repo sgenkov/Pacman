@@ -10,6 +10,15 @@ import { colideWithCircle } from './utils';
 import Model from './Model';
 export default class Game {
   constructor(delegate) {
+    const Graph = require('node-dijkstra');
+    const route = new Graph();
+    route.addNode('A', { B: 1 });
+    route.addNode('B', { A: 1, C: 2, D: 4, E: 4 });
+    route.addNode('C', { B: 2, D: 1 });
+    route.addNode('D', { C: 1, B: 4, E: 1 });
+    route.addNode('E', { D: 1, B: 4 });
+    const test = route.path('A', 'E')
+    console.log(test);
     this.name = "play";
     this.delegate = delegate;
     this.score = 0;
@@ -27,7 +36,6 @@ export default class Game {
     // model.assignGhost(this.factory.getUnit("ghost", "orange"));
     // model.assignGhost(this.factory.getUnit("ghost", "pink"));
     // model.assignGhost(this.factory.getUnit("ghost", "red"));
-    console.log(model.gameElements);
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));
     this.addBackground();
@@ -76,7 +84,7 @@ export default class Game {
       };
 
       const currentAction = behaviours[model.player.nextAction];
-      if (currentAction && model.player.allowedDirections.includes(model.player.nextAction.replace('move','').toLowerCase())) {
+      if (currentAction && model.player.allowedDirections.includes(model.player.nextAction.replace('move', '').toLowerCase())) {
         // console.log(model.player.nextAction.replace('move','').toLowerCase());
         currentAction(model.player);
       };
