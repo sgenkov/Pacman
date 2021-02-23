@@ -26,11 +26,15 @@
     [
       "pacmanSheet",
       "pacmanSheet.png"
+    ],
+    [
+      "ghostsSheet",
+      "ghostsSheet.png"
     ]
   ],
   "startingNodes": {
     "pacman": 22,
-    "blueGhost": null,
+    "blueGhost": 0,
     "orangeGhost": null,
     "pinkGhost": null,
     "redGhost": null

@@ -1,6 +1,7 @@
 import { app } from './index';
 import * as PIXI from 'pixi.js';
 import sheetSource from './pacmanSheet.json';
+import sheetSource2 from './ghostsSheet.json';
 import { assets } from './scene.json';
 import DC from './debugConfig.json';
 
@@ -19,7 +20,8 @@ export default class GameAssetsLoader {
         app.loader.onError.add(this.reportError);
 
         app.loader.load();
-        app.stage.interactive = true; //TODO: Examine this. What it does? It shouldn't be in this place
+        app.stage.interactive = true; //TODO: Examine this. What it does? Should it be in this place
+
     };
 
     showProgress = (e) => {
@@ -36,10 +38,17 @@ export default class GameAssetsLoader {
 
     createSheets = () => {
         let baseSheet = new PIXI.BaseTexture.from(app.loader.resources["pacmanSheet"].url);
-        for (let key in sheetSource.frames) {
+        for (let key in sheetSource.frames) { //* load sheet1
           const { x, y, w, h } = sheetSource.frames[key].frame;
           this.SHEETS[key.split('.')[0]] = new PIXI.Texture(baseSheet, new PIXI.Rectangle(x, y, w, h));
         };
+
+        baseSheet = new PIXI.BaseTexture.from(app.loader.resources["ghostsSheet"].url);
+        for (let key in sheetSource2.frames) { //* load sheet2
+            const { x, y, w, h } = sheetSource2.frames[key].frame;
+            this.SHEETS[key.split('.')[0]] = new PIXI.Texture(baseSheet, new PIXI.Rectangle(x, y, w, h));
+          };
+        console.log(this.SHEETS);
       };
 
 };

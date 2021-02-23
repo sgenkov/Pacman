@@ -5,23 +5,30 @@ const disabled = false; //^ Debug mode
 export const onKeyDown = ({ keyCode }, behaviours) => {
   // console.log('Key Down', keyCode);
   let { keyBindings } = scene;
-  // const player = model.player;
+  if (isUndefinedKey(keyBindings, keyCode)) return;
+ 
   if(keyCode === 88) debugger;
-  // model.gameElements.forEach(el => { //* No need to iterate over the whole gameElements
-  //   el.behaviours.forEach(b => {
-    //     if (keyBindings[b] && keyBindings[b][keyCode]) {
-      //       keyBindings[b][keyCode].forEach(bb => {
-        //         behaviours[bb](el)
-        //       })
-        //     }
-        //   })
-        // });
+
         
-        model.player.nextAction = scene.keyBindings.player1[keyCode][0];
+        scene.keyBindings.player1[keyCode] && (model.player.nextAction = scene.keyBindings.player1[keyCode][0]);
         model.player.allowedDirections.length = 0;
         model.player.allowedDirections.push(scene.keyBindings.player1[keyCode][1]);
+        // console.log(scene.keyBindings.player1[keyCode][1]);
         // console.log('player nextAction assigned : ', model.player.nextAction);
-        //TODO: Add protection against foreign buttons pressed
+        if (model.player.allowedDirections.includes(scene.keyBindings.player1[keyCode][1])) {
+          console.log('true');
+          model.player.behaviours.forEach(b => {
+            if (keyBindings[b] && keyBindings[b][keyCode][0]) {
+              console.log(keyBindings[b][keyCode][0]);
+              console.log('TRUE');
+              // keyBindings[b][keyCode][0].forEach(bb => {
+              //   behaviours[bb](model.player);
+              // });
+              behaviours[keyBindings[b][keyCode][0]](model.player);
+
+            };
+          });
+        };
     // player.behaviours.forEach(b => {
     //   if (keyBindings[b] && keyBindings[b][keyCode]) {
     //     keyBindings[b][keyCode].forEach(bb => {
@@ -42,4 +49,15 @@ export const onKeyUp = ({ keyCode }) => {
         // player.behaviours.push("stop");
       };
     });
+};
+
+const isUndefinedKey = (keyBindings, keyCode) => {
+  let escape = true;
+  for (let key in keyBindings.player1) {
+    if(+key === keyCode) {
+      escape = false;
+      break;
+    };
+  };
+  return escape;
 };
