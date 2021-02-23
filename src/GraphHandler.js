@@ -5,8 +5,8 @@ import Graph from 'node-dijkstra';
 export default class GraphHandler {
   constructor() {
     this.maze = this.createGraph();
-    this.testPath = this.calculateShortestPath(63, 34).map(el => +el);
-    console.log(this.testPath);
+    this.testPath = this.calculateShortestPath(63, 34);
+    // console.log(this.testPath);
     this.nodesCreate();
   };
 
@@ -18,7 +18,6 @@ export default class GraphHandler {
         const targetPosition = map.find(el => el.id === node.edges[edge]).position;
         neighbours = {
           ...neighbours,
-
           [node.edges[edge]]: Math.sqrt(Math.pow(node.position.x - targetPosition.x, 2) + Math.pow(node.position.y - targetPosition.y, 2)) //TODO: Try if this works without SQRT
         };
       };
@@ -28,14 +27,13 @@ export default class GraphHandler {
   };
 
   calculateShortestPath = (from, to) => {
-    return this.maze.path(`${from}`, `${to}`);
+    return this.maze.path(`${from}`, `${to}`).map(el => +el);
   };
 
   nodesCreate = () => {
     map.forEach((el) => {
       let graphic = new PIXI.Graphics();
-      // const color = 0x346123;
-      const color = this.testPath.includes(el.id)? 0xFFBD26 : 0x346123;
+      const color = 0xffffff;
       graphic.beginFill(color);
       graphic.drawCircle(el.position.x, el.position.y, 5); //TODO: Turn back the 3-th param to 1
       graphic.endFill(); //? What is this used for in PIXI.js ?

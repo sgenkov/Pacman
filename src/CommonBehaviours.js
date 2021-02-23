@@ -63,7 +63,7 @@ export default class CommonBehaviours {
       },
       "updateInfo": (el) => {
         el.updateInfo();
-      }
+      },
     };
   }
 }

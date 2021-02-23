@@ -90,6 +90,14 @@ export default class Game {
       model.player.updateInfo(model.player.rect.x, model.player.rect.y, `node Id: ${model.player.currentNode.ID}` + '\n' + nodeEdges);
     });
 
+    const playerCurrentNode = model.player.currentNode.ID;
+    if(playerCurrentNode) {
+      const testPath = this.graphHandler.calculateShortestPath(63, playerCurrentNode);
+      model.nodes.forEach(node => {
+        node.tint = testPath.includes(node.ID)? 0xFF6B26 : 0x346123
+      });
+    };
+
     delegate.render(model.gameElements);
   };
 

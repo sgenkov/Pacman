@@ -14,6 +14,7 @@ export default class Model extends EventTarget {
             redGhost: { node: this.calculatePosition('redGhost') }
         };
     };
+
     assignPlayer = (unit) => {
         this.gameElements.push(unit);
         this.player = unit;
