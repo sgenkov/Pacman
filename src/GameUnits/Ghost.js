@@ -23,6 +23,7 @@ export default class Ghost {
     };
 
     createInfo = () => {
+        console.log('Ghost createInfo()');
         // this.info = new PIXI.Text(`X: ${this.rect.x}, Y: ${this.rect.y}`, { //^ For coordinates tracking
         //     fontSize: 30,
         //     fill: 0xffffff,
@@ -33,6 +34,7 @@ export default class Ghost {
         // app2.stage.addChild(this.info);
     }
     updateInfo = (X, Y, additionText = '') => {
+        console.log('Ghost updateInfo()');
         // this.info.text = `X: ${X}, Y: ${Y}` + '\n' + additionText;
     };
 };

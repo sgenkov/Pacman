@@ -21,9 +21,9 @@ export const onKeyDown = ({ keyCode }, behaviours) => {
       if (keyBindings[b] && keyBindings[b][keyCode][0]) {
         // console.log(keyBindings[b][keyCode][0]);
         // console.log('TRUE');
-        // keyBindings[b][keyCode][0].forEach(bb => {
-        //   behaviours[bb](model.player);
-        // });
+        keyBindings[b][keyCode][0].forEach(bb => {
+          behaviours[bb](model.player);
+        });
         behaviours[keyBindings[b][keyCode][0]](model.player);
 
       };
