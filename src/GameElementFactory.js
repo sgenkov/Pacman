@@ -22,12 +22,12 @@ export default class GameElementFactory {
 
     };
 
-    getUnit = (type, el) => {
-        return this.createUnit(type, el);
+    getUnit = (type, color) => {
+        return this.createUnit(type, color);
     };
 
-    createUnit = (type, el) => {
-        return this.unitMap.get(type)(el);
+    createUnit = (type, color) => {
+        return this.unitMap.get(type)(color);
     };
 
     createPlayer = () => {
@@ -35,8 +35,8 @@ export default class GameElementFactory {
         return newPlayer;
     };
 
-    createGhost = () => {
-        const newGhost = new Ghost();
+    createGhost = (color) => {
+        const newGhost = new Ghost(color);
         return newGhost;
     };
 

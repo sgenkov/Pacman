@@ -7,10 +7,10 @@ export default class GraphicElement {
     // console.log('el rect', el.rect);
     this.name = el.name;
     this.sheet = null;
-    this.createSprite(el);
+    this.createSprite(el.color);
   };
 
-  createSprite = (el) => {
+  createSprite = (color) => {
     if (this.name === "pacman") {
       DC.objectsCreation && console.log('New GraphicElement created'); //^ FLOW
       this.sheet = new PIXI.AnimatedSprite([

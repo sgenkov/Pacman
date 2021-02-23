@@ -8,6 +8,7 @@ export default class Pacman {
         DC.objectsCreation && console.log("Pacman created"); //^ FLOW
         this.name = 'pacman';
         this.currentNode = model.defaultLocations.pacman.node;
+        // console.log('Pacman current node : ', this.currentNode);
         this.previousNode = null;
         this.radius = 1; 
         this.lastMovementDirection = null;

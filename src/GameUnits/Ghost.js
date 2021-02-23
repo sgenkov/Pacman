@@ -8,7 +8,8 @@ export default class Ghost {
         DC.objectsCreation && console.log("Ghost created"); //^ FLOW
         this.name = 'ghost';
         this.color = color;
-        this.currentNode = model.defaultLocations.blueGhost.node;
+        this.currentNode = model.defaultLocations[`${color}Ghost`].node;
+        // console.log('Ghost current node : ', this.currentNode);
         this.previousNode = null;
         this.radius = 1; 
         this.lastMovementDirection = null;
@@ -19,20 +20,19 @@ export default class Ghost {
         this.prevSpeed = this.speed;
         this.behaviours = ["move"];
         this.rect = new Rectangle(this.currentNode.position.x, this.currentNode.position.y, 12, 12);
-        // this.createInfo(); //^ For coordinates tracking
     };
 
     createInfo = () => {
-        this.info = new PIXI.Text(`X: ${this.rect.x}, Y: ${this.rect.y}`, { //^ For coordinates tracking
-            fontSize: 30,
-            fill: 0xffffff,
-            align: "left",
-            stroke: "#cccccc",
-            strokeThickness: 0,
-        });
-        app2.stage.addChild(this.info);
+        // this.info = new PIXI.Text(`X: ${this.rect.x}, Y: ${this.rect.y}`, { //^ For coordinates tracking
+        //     fontSize: 30,
+        //     fill: 0xffffff,
+        //     align: "left",
+        //     stroke: "#cccccc",
+        //     strokeThickness: 0,
+        // });
+        // app2.stage.addChild(this.info);
     }
     updateInfo = (X, Y, additionText = '') => {
-        this.info.text = `X: ${X}, Y: ${Y}` + '\n' + additionText;
+        // this.info.text = `X: ${X}, Y: ${Y}` + '\n' + additionText;
     };
 };
