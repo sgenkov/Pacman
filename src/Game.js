@@ -7,18 +7,9 @@ import scene from './scene.json';
 import * as PIXI from 'pixi.js';
 import { assetsLoader } from './index';
 import { colideWithCircle } from './utils';
-import Model from './Model';
+import GraphHandler from './GraphHandler';
 export default class Game {
   constructor(delegate) {
-    const Graph = require('node-dijkstra');
-    const route = new Graph();
-    route.addNode('A', { B: 1 });
-    route.addNode('B', { A: 1, C: 2, D: 4, E: 4 });
-    route.addNode('C', { B: 2, D: 1 });
-    route.addNode('D', { C: 1, B: 4, E: 1 });
-    route.addNode('E', { D: 1, B: 4 });
-    const test = route.path('A', 'E')
-    console.log(test);
     this.name = "play";
     this.delegate = delegate;
     this.score = 0;
@@ -28,9 +19,10 @@ export default class Game {
   init = () => {
     DC.mainFlow && console.log('Game.js : Game init'); //^ FLOW
     this.factory = new GameElementFactory();
-    // this.behaviours = new CommonBehaviours().commonBehaviours;
+    this.graphHandler = new GraphHandler();
     this.commonBehavioursInstance = new CommonBehaviours();              //TODO: Refactor this V
     this.behaviours = this.commonBehavioursInstance.commonBehaviours;    //TODO: Refactor this ^
+
     model.assignPlayer(this.factory.getUnit("player"));
     model.assignGhost(this.factory.getUnit("ghost", "blue"));
     // model.assignGhost(this.factory.getUnit("ghost", "orange"));
@@ -39,7 +31,7 @@ export default class Game {
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));
     this.addBackground();
-    this.nodesCreate();
+    // this.nodesCreate();
     app.ticker.add(this.gameTicker);
   };
 
@@ -99,23 +91,6 @@ export default class Game {
     });
 
     delegate.render(model.gameElements);
-  };
-
-  nodesCreate = () => {
-    scene.map.forEach((el) => {
-      let graphic = new PIXI.Graphics();
-      graphic.beginFill(0x346123);
-      graphic.drawCircle(el.position.x, el.position.y, 1);
-      graphic.endFill(); //? What is this used for in PIXI.js ?
-      graphic.interactive = true;
-      graphic.buttonMode = true;
-      graphic.ID = el.id;
-      graphic.EDGES = el.edges;
-      // graphic.anchor.set(0.5); //* WHY THIS DOESN'T WORK?
-      graphic.on('click', () => console.log(el));
-      model.nodes.push(graphic);
-      app.stage.addChild(graphic);
-    });
   };
 
   addBackground = () => {
