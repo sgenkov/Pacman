@@ -42,7 +42,7 @@ export default class Game {
   };
 
   gameTicker = () => {
-    console.log(model.gameElements);
+    // console.log(model.gameElements);
     let {
       behaviours,
       delegate,
@@ -83,12 +83,7 @@ export default class Game {
       };
 
 
-      let nodeEdges = '';
-      for (let edge in model.player.currentNode.EDGES) {
-        nodeEdges += edge + ' : ' + model.player.currentNode.EDGES[edge] + '\n';
-      };
-      // console.log('infoUp');
-      model.player.updateInfo(model.player.rect.x, model.player.rect.y, `node Id: ${model.player.currentNode.ID}` + '\n' + nodeEdges);
+      this.updateGameInfo();
     });
 
     const playerCurrentNode = model.player.currentNode.ID;
@@ -103,6 +98,12 @@ export default class Game {
   };
 
   updateGameInfo = () => {
+    let nodeEdges = '';
+      for (let edge in model.player.currentNode.EDGES) {
+        nodeEdges += edge + ' : ' + model.player.currentNode.EDGES[edge] + '\n';
+      };
+      // console.log('infoUp');
+      model.player.updateInfo(model.player.rect.x, model.player.rect.y, `node Id: ${model.player.currentNode.ID}` + '\n' + nodeEdges);
   };
 
   addBackground = () => {
