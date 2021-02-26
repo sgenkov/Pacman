@@ -57,40 +57,43 @@ export default class Game {
         };
       });
     });
+    model.gameElements.forEach(gameElement => {
+      model.nodes.forEach(node => {
+        // if (colideWithCircle(node, model.player)) {
+        if (node.vertexData && node.vertexData[0] === gameElement.rect.x && node.vertexData[1] === gameElement.rect.y) {
+          gameElement.currentNode = node;
+          gameElement.allowedDirections.length = 0;
 
-    model.nodes.forEach(node => {
-      // if (colideWithCircle(node, model.player)) {
-      if (node.vertexData && node.vertexData[0] === model.player.rect.x && node.vertexData[1] === model.player.rect.y) {
-        model.player.currentNode = node;
-        model.player.allowedDirections.length = 0;
+          for (let allowedDirection in gameElement.currentNode.EDGES) {
+            gameElement.allowedDirections.push(allowedDirection);
+          };
+          // console.log(model.player.allowedDirections);
 
-        for (let allowedDirection in model.player.currentNode.EDGES) {
-          model.player.allowedDirections.push(allowedDirection);
+          if (!node.EDGES.hasOwnProperty(gameElement.lastMovementDirection)) {
+            // (!model.player.behaviours.includes("stop")) && model.player.behaviours.unshift("stop");
+            gameElement.speed.x = 0; //* ~~NOT GOOD SOLUTION
+            gameElement.speed.y = 0; //* ~~NOT GOOD SOLUTION
+            // gameElement.behaviours.unshift('stop');
+          };
         };
-        // console.log(model.player.allowedDirections);
 
-        if (!node.EDGES.hasOwnProperty(model.player.lastMovementDirection)) {
-          // (!model.player.behaviours.includes("stop")) && model.player.behaviours.unshift("stop");
-          model.player.speed.x = 0; //* ~~NOT GOOD SOLUTION
-          model.player.speed.y = 0; //* ~~NOT GOOD SOLUTION
+        const currentAction = behaviours[gameElement.nextAction];
+        if (currentAction && gameElement.allowedDirections.includes(gameElement.nextAction.replace('move', '').toLowerCase())) {
+          // console.log(model.player.nextAction.replace('move','').toLowerCase());
+          currentAction(gameElement);
         };
-      };
-
-      const currentAction = behaviours[model.player.nextAction];
-      if (currentAction && model.player.allowedDirections.includes(model.player.nextAction.replace('move', '').toLowerCase())) {
-        // console.log(model.player.nextAction.replace('move','').toLowerCase());
-        currentAction(model.player);
-      };
 
 
-      this.updateGameInfo();
+        this.updateGameInfo();
+      });
     });
 
+
     const playerCurrentNode = model.player.currentNode.ID;
-    if(playerCurrentNode) {
+    if (playerCurrentNode) {
       const testPath = this.graphHandler.calculateShortestPath(63, playerCurrentNode);
       model.nodes.forEach(node => {
-        node.tint = testPath.includes(node.ID)? 0xFF6B26 : 0x346123
+        node.tint = testPath.includes(node.ID) ? 0xFF6B26 : 0x346123
       });
     };
 
@@ -99,11 +102,11 @@ export default class Game {
 
   updateGameInfo = () => {
     let nodeEdges = '';
-      for (let edge in model.player.currentNode.EDGES) {
-        nodeEdges += edge + ' : ' + model.player.currentNode.EDGES[edge] + '\n';
-      };
-      // console.log('infoUp');
-      model.player.updateInfo(model.player.rect.x, model.player.rect.y, `node Id: ${model.player.currentNode.ID}` + '\n' + nodeEdges);
+    for (let edge in model.player.currentNode.EDGES) {
+      nodeEdges += edge + ' : ' + model.player.currentNode.EDGES[edge] + '\n';
+    };
+    // console.log('infoUp');
+    model.player.updateInfo(model.player.rect.x, model.player.rect.y, `node Id: ${model.player.currentNode.ID}` + '\n' + nodeEdges);
   };
 
   addBackground = () => {

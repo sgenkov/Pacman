@@ -57,6 +57,7 @@ export default class CommonBehaviours {
         el.speed.x = 0;
         el.speed.y = 0;
         el.behaviours = el.behaviours.filter(e => e !== "stop");
+        // el.behaviours.shift();
       },
       "debugger": () => {
         debugger;
