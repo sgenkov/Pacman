@@ -6,6 +6,7 @@ export default class Model extends EventTarget {
         this.freeGameElements = [];
         this.nodes = [];
         this.player = null;
+        this.ghost = null;
         this.defaultLocations = {
             pacman: { node: this.calculatePosition('pacman') },
             blueGhost: { node: this.calculatePosition('blueGhost') },
@@ -22,6 +23,7 @@ export default class Model extends EventTarget {
 
     assignGhost = (unit) => {
         this.gameElements.push(unit);
+        this.ghost = unit;
     };
 
     calculatePosition = (name) => {

@@ -8,6 +8,7 @@ import * as PIXI from 'pixi.js';
 import { assetsLoader } from './index';
 import { colideWithCircle } from './utils';
 import GraphHandler from './GraphHandler';
+import UnitStrategyManager from './UnitStrategyManager';
 export default class Game {
   constructor(delegate) {
     this.name = "play";
@@ -20,6 +21,7 @@ export default class Game {
     DC.mainFlow && console.log('Game.js : Game init'); //^ FLOW
     this.factory = new GameElementFactory();
     this.graphHandler = new GraphHandler();
+    this.unitStrategyManager = new UnitStrategyManager();
     this.commonBehavioursInstance = new CommonBehaviours();              //TODO: Refactor this V
     this.behaviours = this.commonBehavioursInstance.commonBehaviours;    //TODO: Refactor this ^
 
@@ -79,6 +81,7 @@ export default class Game {
 
         const currentAction = behaviours[gameElement.nextAction];
         if (currentAction && gameElement.allowedDirections.includes(gameElement.nextAction.replace('move', '').toLowerCase())) {
+          console.log(currentAction);
           // console.log(model.player.nextAction.replace('move','').toLowerCase());
           currentAction(gameElement);
         };
