@@ -8,6 +8,7 @@ import PixiDelegate from './PixiDelegate';
 import GameAssetsLoader from "./GameAssetsLoader";
 import DC from './debugConfig.json'; // ^FLOW
 import Model from './Model';
+import GraphHandler from "./GraphHandler";
 
 export const app = new Application({
   // width: window.innerWidth - 15,
@@ -23,6 +24,7 @@ export const app2 = new Application({ //^ For coordinates tracking
 });
 export const model = new Model();
 export const assetsLoader = new GameAssetsLoader();
+export const graphHandler = new GraphHandler();
 
 document.body.appendChild(app.view);
 document.body.appendChild(app2.view); //^ For coordinates tracking

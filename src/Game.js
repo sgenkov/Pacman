@@ -1,5 +1,5 @@
 import { onKeyDown, onKeyUp } from './ControlsHandler';
-import { app, model } from './index';
+import { app, model, graphHandler } from './index';
 import CommonBehaviours from './CommonBehaviours';
 import GameElementFactory from './GameElementFactory';
 import DC from './debugConfig.json'; // ^FLOW
@@ -20,7 +20,7 @@ export default class Game {
   init = () => {
     DC.mainFlow && console.log('Game.js : Game init'); //^ FLOW
     this.factory = new GameElementFactory();
-    this.graphHandler = new GraphHandler();
+    // this.graphHandler = new GraphHandler();
     this.unitStrategyManager = new UnitStrategyManager();
     this.commonBehavioursInstance = new CommonBehaviours();              //TODO: Refactor this V
     this.behaviours = this.commonBehavioursInstance.commonBehaviours;    //TODO: Refactor this ^
@@ -94,13 +94,13 @@ export default class Game {
     });
 
 
-    const playerCurrentNode = model.player.currentNode.ID;
-    if (playerCurrentNode) {
-      const testPath = this.graphHandler.calculateShortestPath(63, playerCurrentNode);
-      model.nodes.forEach(node => {
-        node.tint = testPath.includes(node.ID) ? 0xFF6B26 : 0x346123
-      });
-    };
+    // const playerCurrentNode = model.player.currentNode.ID;
+    // if (playerCurrentNode) {
+    //   const testPath = this.graphHandler.calculateShortestPath(63, playerCurrentNode);
+    //   model.nodes.forEach(node => {
+    //     node.tint = testPath.includes(node.ID) ? 0xFF6B26 : 0x346123
+    //   });
+    // };
 
     delegate.render(model.gameElements);
   };
