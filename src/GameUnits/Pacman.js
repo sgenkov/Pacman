@@ -1,5 +1,3 @@
-import DC from '../debugConfig.json'; //^ debug
-import Rectangle from '../Rectangle';
 import GameUnit from './GameUnit';
 export default class Pacman extends GameUnit {
     constructor(unitName) {
