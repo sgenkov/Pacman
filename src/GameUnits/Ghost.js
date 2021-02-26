@@ -11,14 +11,14 @@ export default class Ghost {
         this.currentNode = model.defaultLocations[`${color}Ghost`].node;
         // console.log('Ghost current node : ', this.currentNode);
         this.previousNode = null;
-        this.radius = 1; 
+        this.radius = 1;
         this.lastMovementDirection = null;
         this.nextAction = null;
         this.allowedDirections = [];
         this.baseSpeed = 0;
         this.speed = { x: 0, y: 0 };
         this.prevSpeed = this.speed;
-        this.behaviours = ["move"];
+        this.behaviours = ["player1", "move"];
         this.rect = new Rectangle(this.currentNode.position.x, this.currentNode.position.y, 12, 12);
     };
 

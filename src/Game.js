@@ -42,6 +42,7 @@ export default class Game {
   };
 
   gameTicker = () => {
+    console.log(model.gameElements);
     let {
       behaviours,
       delegate,
@@ -70,8 +71,8 @@ export default class Game {
 
         if (!node.EDGES.hasOwnProperty(model.player.lastMovementDirection)) {
           // (!model.player.behaviours.includes("stop")) && model.player.behaviours.unshift("stop");
-          model.player.speed.x = 0; //* ~~SOLUTION
-          model.player.speed.y = 0; //* ~~SOLUTION
+          model.player.speed.x = 0; //* ~~NOT GOOD SOLUTION
+          model.player.speed.y = 0; //* ~~NOT GOOD SOLUTION
         };
       };
 
@@ -99,6 +100,9 @@ export default class Game {
     };
 
     delegate.render(model.gameElements);
+  };
+
+  updateGameInfo = () => {
   };
 
   addBackground = () => {

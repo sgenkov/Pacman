@@ -12,7 +12,7 @@ export default class CommonBehaviours {
 
     this.commonBehaviours = {
       "move": (el) => {
-        DC.traceBehaviours && console.log('move behaviour'); //^ FLOW
+        // DC.traceBehaviours && console.log('move behaviour'); //^ FLOW
         el.rect.x += el.speed.x;
         el.rect.y += el.speed.y;
       },

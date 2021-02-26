@@ -160,5 +160,6 @@
 // lion.speak();
 
 
-const a = "1" - 2 + 3 + 1 + 1 + 1 + 1
-console.log(a);
+// const a = "1" - 2 + 3 + 1 + 1 + 1 + 1
+// console.log(a);
+

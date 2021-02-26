@@ -7,6 +7,7 @@ export default class Pacman {
     constructor() { //TODO: Refactor this constructor
         DC.objectsCreation && console.log("Pacman created"); //^ FLOW
         this.name = 'pacman';
+        
         this.currentNode = model.defaultLocations.pacman.node;
         // console.log('Pacman current node : ', this.currentNode);
         this.previousNode = null;
