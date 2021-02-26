@@ -6,20 +6,22 @@ export default class UnitStrategyManager {
         ]);
     };
 
-    calculateAction = (unitName) => {
-        this.strategyMap.get(unitName).calculateAction();
+    calculateAction = (gameElement) => {
+        return this.strategyMap.get(gameElement.name).calculateAction(gameElement);
     };
 
 };
 
 class PacmanNextAction {
-    calculateAction = () => {
-
+    calculateAction = (gameElement) => {
+        // console.log('Pacman calculateAction()', gameElement.nextAction);
+        return gameElement.nextAction;
     };
 };
 
 class GhostNextAction {
-    calculateAction = () => {
-
+    calculateAction = (gameElement) => {
+        // console.log('Ghost calculateAction()', gameElement.nextAction);
+        return gameElement.nextAction;
     };
 };

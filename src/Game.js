@@ -79,10 +79,12 @@ export default class Game {
           };
         };
 
-        const currentAction = behaviours[gameElement.nextAction];
+        // const currentAction = behaviours[gameElement.nextAction];
+        // console.log(gameElement);
+        const currentAction = behaviours[this.unitStrategyManager.calculateAction(gameElement)];
         if (currentAction && gameElement.allowedDirections.includes(gameElement.nextAction.replace('move', '').toLowerCase())) {
-          console.log(currentAction);
           // console.log(model.player.nextAction.replace('move','').toLowerCase());
+          // console.log(currentAction);
           currentAction(gameElement);
         };
 
