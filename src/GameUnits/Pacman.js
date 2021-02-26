@@ -1,39 +1,13 @@
-import { model } from '../index';
 import DC from '../debugConfig.json'; //^ debug
 import Rectangle from '../Rectangle';
-import { app2 } from '../index';
-import * as PIXI from 'pixi.js'
-export default class Pacman {
-    constructor() { //TODO: Refactor this constructor
+import GameUnit from './GameUnit';
+export default class Pacman extends GameUnit {
+    constructor(unitName) {
+        super(unitName);
         DC.objectsCreation && console.log("Pacman created"); //^ FLOW
-        this.name = 'pacman';
-        
-        this.currentNode = model.defaultLocations.pacman.node;
-        // console.log('Pacman current node : ', this.currentNode);
-        this.previousNode = null;
-        this.radius = 1; 
-        this.lastMovementDirection = null;
-        this.nextAction = null;
-        this.allowedDirections = [];
-        this.baseSpeed = 0;
-        this.speed = { x: 0, y: 0 };
-        this.prevSpeed = this.speed;
-        this.behaviours = ["player1", "move", "updateInfo"]; //* Remove "updateInfo" from behaviours
+        this.behaviours = ["player1", "move", "updateInfo"]; 
         this.rect = new Rectangle(this.currentNode.position.x, this.currentNode.position.y, 12, 12);
         this.createInfo(); //^ For coordinates tracking
     };
 
-    createInfo = () => {
-        this.info = new PIXI.Text(`X: ${this.rect.x}, Y: ${this.rect.y}`, { //^ For coordinates tracking
-            fontSize: 30,
-            fill: 0xffffff,
-            align: "left",
-            stroke: "#cccccc",
-            strokeThickness: 0,
-        });
-        app2.stage.addChild(this.info);
-    }
-    updateInfo = (X, Y, additionText = '') => {
-        this.info.text = `X: ${X}, Y: ${Y}` + '\n' + additionText;
-    };
 };
