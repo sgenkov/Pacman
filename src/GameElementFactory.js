@@ -31,12 +31,12 @@ export default class GameElementFactory {
     };
 
     createPlayer = () => {
-        const newPlayer = new Pacman("pacman");
+        const newPlayer = new Pacman();
         return newPlayer;
     };
 
     createGhost = (color) => {
-        const newGhost = new Ghost("ghost", color);
+        const newGhost = new Ghost(color);
         return newGhost;
     };
 
