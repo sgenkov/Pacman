@@ -7,7 +7,7 @@ export default class GraphHandler {
     this.maze = this.createGraph();
     this.testPath = this.calculateShortestPath(63, 34);
     // console.log(this.testPath);
-    this.nodesCreate();
+    // this.nodesCreate();
   };
 
   createGraph = () => {

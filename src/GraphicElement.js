@@ -4,7 +4,7 @@ import DC from './debugConfig.json';
 
 export default class GraphicElement {
   constructor(el) {
-    // console.log('el rect', el.rect);
+    console.log(el);
     this.name = el.name;
     this.sheet = null;
     this.createSprite(el.color);

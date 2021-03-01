@@ -15,8 +15,6 @@ export default class UnitStrategyManager {
 
 class PacmanNextAction {
     calculateAction = (gameElement) => {
-        // console.log('Pacman move');
-        // console.log('Pacman calculateAction()', gameElement.nextAction);
         return gameElement.nextAction;
     };
 };
@@ -40,8 +38,6 @@ class GhostNextAction {
 
         };
 
-        // console.log(gameElement.nextAction);
         return gameElement.nextAction;
-        // return 'moveDown'
     };
 };

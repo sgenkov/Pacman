@@ -9,7 +9,7 @@ export default class PixiDelegate {
     };
 
     createElement = (el) => {
-        // console.log(el);
+        console.log(el);
         let graphic = new GraphicElement(el);
         graphic.sheet.scale.x = 2; //todo: Modify this to be scalable
         graphic.sheet.scale.y = 2; //todo: Modify this to be scalable

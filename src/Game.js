@@ -20,7 +20,7 @@ export default class Game {
   init = () => {
     DC.mainFlow && console.log('Game.js : Game init'); //^ FLOW
     this.factory = new GameElementFactory();
-    // this.graphHandler = new GraphHandler();
+    graphHandler.nodesCreate();
     this.unitStrategyManager = new UnitStrategyManager();
     this.commonBehavioursInstance = new CommonBehaviours();              //TODO: Refactor this V
     this.behaviours = this.commonBehavioursInstance.commonBehaviours;    //TODO: Refactor this ^
@@ -30,6 +30,7 @@ export default class Game {
     // model.assignGhost(this.factory.getUnit("ghost", "orange"));
     // model.assignGhost(this.factory.getUnit("ghost", "pink"));
     // model.assignGhost(this.factory.getUnit("ghost", "red"));
+    console.log(model.gameElements);
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));
     this.addBackground();
@@ -79,28 +80,16 @@ export default class Game {
           };
         };
 
-        // const currentAction = behaviours[gameElement.nextAction];
-        // console.log(gameElement);
         const currentAction = behaviours[this.unitStrategyManager.calculateAction(gameElement)];
         if (currentAction && gameElement.allowedDirections.includes(gameElement.nextAction.replace('move', '').toLowerCase())) {
-          // console.log(model.player.nextAction.replace('move','').toLowerCase());
-          // console.log(currentAction);
           currentAction(gameElement);
         };
-
 
         this.updateGameInfo();
       });
     });
 
 
-    // const playerCurrentNode = model.player.currentNode.ID;
-    // if (playerCurrentNode) {
-    //   const testPath = this.graphHandler.calculateShortestPath(63, playerCurrentNode);
-    //   model.nodes.forEach(node => {
-    //     node.tint = testPath.includes(node.ID) ? 0xFF6B26 : 0x346123
-    //   });
-    // };
 
     delegate.render(model.gameElements);
   };
