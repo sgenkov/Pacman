@@ -29,8 +29,8 @@ export default class GraphicElement {
     } else if (this.name === "ghost") {
       DC.objectsCreation && console.log('New GraphicElement created'); //^ FLOW
       this.sheet = new PIXI.AnimatedSprite([
-        assetsLoader.SHEETS.ghost_blue_R1,
-        assetsLoader.SHEETS.ghost_blue_R2,
+        assetsLoader.SHEETS[`ghost_${color}_R1`],
+        assetsLoader.SHEETS[`ghost_${color}_R2`],
       ]);
       this.sheet.anchor.set(0.5);
       this.sheet.animationSpeed = 0.2;

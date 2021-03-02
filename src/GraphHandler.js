@@ -24,7 +24,7 @@ export default class GraphHandler {
   };
 
   calculateShortestPath = (from, to) => {
-    return this.maze.path(`${from}`, `${to}`).map(el => +el);
+    return this.maze.path(`${from}`, `${to}`)?.map(el => +el);
   };
 
   nodesCreate = () => {

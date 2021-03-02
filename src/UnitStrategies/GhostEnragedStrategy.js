@@ -15,14 +15,17 @@ export default class GhostEnragedStrategy {
             if (gameElement.currentNode.ID) {
                 const testPath = graphHandler.calculateShortestPath(gameElement.currentNode.ID, playerCurrentNodeId);
                 pathTinting && model.nodes.forEach(node => { //^path tracing
-                    // node.tint = testPath.includes(node.ID) ? this.colorMap.get(gameElement.color) : 0x346123;
-
+                    if (!testPath) { //TODO: STRANGE BEHAVIOUR? ASK EVGENI
+                        gameElement.innerStateMachine.setState("wandering");
+                        return gameElement.nextAction;
+                    };
                     if (testPath.includes(node.ID)) {
-                            node.tint = this.colorMap.get(gameElement.color);
+                        node.tint = this.colorMap.get(gameElement.color);
                     } else {
                         node.tint = 0x34612;
                     };
                 });
+                if (!testPath) return; //TODO: STRANGE BEHAVIOUR? ASK EVGENI
                 const destination = testPath[1];
                 for (let direction in gameElement.currentNode.EDGES) {
                     if (gameElement.currentNode.EDGES[direction] === destination) {
