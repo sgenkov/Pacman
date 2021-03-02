@@ -45,7 +45,8 @@ export default class Game extends EventTarget {
 
   gameTicker = () => {
     ++ this.loopCount;
-    if (this.loopCount % 20 === 0) this.dispatchEvent(new CustomEvent("testEvent"));
+    // if (this.loopCount % 20 === 0) this.dispatchEvent(new CustomEvent("testEvent"));
+
     let {
       behaviours,
       delegate,
