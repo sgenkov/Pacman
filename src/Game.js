@@ -8,7 +8,7 @@ import * as PIXI from 'pixi.js';
 import { assetsLoader } from './index';
 import { colideWithCircle } from './utils';
 import GraphHandler from './GraphHandler';
-import UnitStrategyManager from './UnitStrategyManager';
+// import UnitStrategyManager from './UnitStrategies';
 export default class Game {
   constructor(delegate) {
     this.name = "play";
@@ -21,7 +21,7 @@ export default class Game {
     DC.mainFlow && console.log('Game.js : Game init'); //^ FLOW
     this.factory = new GameElementFactory();
     graphHandler.nodesCreate();
-    this.unitStrategyManager = new UnitStrategyManager();
+    // this.unitStrategyManager = new UnitStrategyManager();
     this.commonBehavioursInstance = new CommonBehaviours();              //TODO: Refactor this V
     this.behaviours = this.commonBehavioursInstance.commonBehaviours;    //TODO: Refactor this ^
 
@@ -30,7 +30,7 @@ export default class Game {
     // model.assignGhost(this.factory.getUnit("ghost", "orange"));
     // model.assignGhost(this.factory.getUnit("ghost", "pink"));
     // model.assignGhost(this.factory.getUnit("ghost", "red"));
-    console.log(model.gameElements);
+    // console.log(model.gameElements);
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));
     this.addBackground();
@@ -78,12 +78,14 @@ export default class Game {
             gameElement.speed.y = 0; //* ~~NOT GOOD SOLUTION
             // gameElement.behaviours.unshift('stop');
           };
+
+          
+          const currentAction = behaviours[gameElement.nextMove()];
+          if (currentAction && gameElement.allowedDirections.includes(gameElement.nextAction.replace('move', '').toLowerCase())) {
+            currentAction(gameElement);
+          };
         };
 
-        const currentAction = behaviours[this.unitStrategyManager.calculateAction(gameElement)];
-        if (currentAction && gameElement.allowedDirections.includes(gameElement.nextAction.replace('move', '').toLowerCase())) {
-          currentAction(gameElement);
-        };
 
         this.updateGameInfo();
       });
