@@ -2,5 +2,6 @@
     "mainFlow": false,
     "objectsCreation": false,
     "traceBehaviours": false,
-    "assetsLoading": false
+    "assetsLoading": false,
+    "pathTinting": true
 }

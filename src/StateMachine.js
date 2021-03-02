@@ -6,7 +6,6 @@ export default class StateMachine {
     };
 
     setState = (state) => {
-        console.log(state);
         let {
             states,
             currentState,

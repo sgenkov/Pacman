@@ -1,4 +1,5 @@
 import { model, graphHandler } from '../index';
+import { pathTinting } from '../debugConfig.json';
 export default class GhostEnragedStrategy {
     constructor() {
         this.colorMap = new Map([
@@ -9,17 +10,15 @@ export default class GhostEnragedStrategy {
         ]);
     }
     calculateAction = (gameElement) => {
-        console.log(gameElement.color);
         const playerCurrentNodeId = model.player.currentNode.ID;
         if (playerCurrentNodeId) {
             if (gameElement.currentNode.ID) {
                 const testPath = graphHandler.calculateShortestPath(gameElement.currentNode.ID, playerCurrentNodeId);
-                model.nodes.forEach(node => {
+                pathTinting && model.nodes.forEach(node => { //^path tracing
                     // node.tint = testPath.includes(node.ID) ? this.colorMap.get(gameElement.color) : 0x346123;
 
                     if (testPath.includes(node.ID)) {
-                        
-                        node.tint = this.colorMap.get(gameElement.color);
+                            node.tint = this.colorMap.get(gameElement.color);
                     } else {
                         node.tint = 0x34612;
                     };
