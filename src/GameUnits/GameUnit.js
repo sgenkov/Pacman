@@ -8,7 +8,7 @@ export default class GameUnit {
         DC.objectsCreation && console.log("Unit created"); //^ FLOW
         this.name = unitName;
         this.currentNode = color? model.defaultLocations[`${color}Ghost`].node : model.defaultLocations[unitName].node;
-
+        
         this.previousNode = null;
         this.radius = 1;
         this.lastMovementDirection = null;
@@ -18,7 +18,6 @@ export default class GameUnit {
         this.speed = { x: 0, y: 0 };
         this.prevSpeed = this.speed;
         this.rect = new Rectangle(this.currentNode.position.x, this.currentNode.position.y, 12, 12);
-        
     };
     nextMove = () => {
         return this.strategy.calculateAction(this);

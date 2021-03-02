@@ -7,10 +7,10 @@ export default class Ghost extends GameUnit {
         super(unitName, color);
         this.color = color;
         this.behaviours = ["move"];
-        this.state = "hunter";
-        this.strategy = new GhostEnragedStrategy();
+        this.state = null;
+        this.strategy = null;
 
-        this.states = ["enraged", "wandering"]; // "scared", 
+        this.states = ["wandering", "enraged"]; // "scared", 
 
         this.innerStateMachine = new StateMachine({
             enraged: {
@@ -36,7 +36,7 @@ export default class Ghost extends GameUnit {
                 },
             },
         },
-            "enraged");
+            "wandering");
 
         // this.addEventListener("testEvent", (event) => { console.log(event) });
         setInterval(() => this.innerStateMachine.setState(this.getNextState()), 10000);

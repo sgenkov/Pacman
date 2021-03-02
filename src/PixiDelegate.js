@@ -9,7 +9,6 @@ export default class PixiDelegate {
     };
 
     createElement = (el) => {
-        // console.log(el);
         let graphic = new GraphicElement(el);
         graphic.sheet.scale.x = 2; //todo: Modify this to be scalable
         graphic.sheet.scale.y = 2; //todo: Modify this to be scalable
@@ -26,11 +25,12 @@ export default class PixiDelegate {
             app: {
                 stage,
             }
-        } = this;
+        } = this;   
+        // console.log(graphics);
 
         let graphic;
         const foundIndex = graphics.findIndex(g => {
-            return (g.name === el.name);
+            return ((g.name === el.name) && (g.color === el.color));
         });
 
         if (graphics.length == 0 || foundIndex === -1) {
@@ -92,6 +92,7 @@ export default class PixiDelegate {
     }
 
     render(gameElements) {
+        // console.log(gameElements);
         if (this.app == null) {
             return;
         };

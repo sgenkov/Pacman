@@ -27,7 +27,9 @@ export default class Model extends EventTarget {
     };
 
     calculatePosition = (name) => {
-        return scene.map.find(node => node.id === scene.startingNodes[name]);
+        const found = scene.map.find(node => node.id === scene.startingNodes[name]);
+        // console.log(found);
+        return found;
     };
 };
 // export default new Model();

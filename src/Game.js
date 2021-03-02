@@ -24,10 +24,10 @@ export default class Game extends EventTarget {
     this.behaviours = this.commonBehavioursInstance.commonBehaviours;    //TODO: Refactor this ^
 
     model.assignPlayer(this.factory.getUnit("player"));
+    model.assignGhost(this.factory.getUnit("ghost", "orange"));
     model.assignGhost(this.factory.getUnit("ghost", "blue"));
-    // model.assignGhost(this.factory.getUnit("ghost", "orange"));
-    // model.assignGhost(this.factory.getUnit("ghost", "pink"));
-    // model.assignGhost(this.factory.getUnit("ghost", "red"));
+    model.assignGhost(this.factory.getUnit("ghost", "pink"));
+    model.assignGhost(this.factory.getUnit("ghost", "red"));
     // console.log(model.gameElements);
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));
@@ -61,6 +61,7 @@ export default class Game extends EventTarget {
         };
       });
     });
+
     model.gameElements.forEach(gameElement => {
       model.nodes.forEach(node => {
         // if (colideWithCircle(node, model.player)) {

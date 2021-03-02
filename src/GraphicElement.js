@@ -6,6 +6,7 @@ export default class GraphicElement {
   constructor(el) {
     // console.log(el);
     this.name = el.name;
+    this.color = el.color;
     this.sheet = null;
     this.createSprite(el.color);
   };
