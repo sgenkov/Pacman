@@ -1,4 +1,4 @@
-import { PacmanAction } from '../UnitStrategies';
+import { PacmanNextAction } from '../UnitStrategies';
 import GameUnit from './GameUnit';
 export default class Pacman extends GameUnit {
     constructor() {
@@ -7,6 +7,6 @@ export default class Pacman extends GameUnit {
         this.behaviours = ["player1", "move", "updateInfo"]; 
         this.createInfo(); //^ For coordinates tracking
         this.state = "alive";
-        this.strategy = new PacmanAction();
+        this.strategy = new PacmanNextAction();
     };   
 };

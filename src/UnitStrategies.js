@@ -1,6 +1,6 @@
 import { model, graphHandler } from './index';
 
-export class PacmanAction {
+export class PacmanNextAction {
     calculateAction = (gameElement) => {
         return gameElement.nextAction;
     };
