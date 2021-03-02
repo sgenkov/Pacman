@@ -1,5 +1,6 @@
 import GameUnit from './GameUnit';
 import { GhostEnragedNextAction, GhostWanderingNextAction } from '../UnitStrategies';
+import StateMachine from '../StateMachine';
 export default class Ghost extends GameUnit {
     constructor(color) {
         const unitName = "ghost";
@@ -10,17 +11,40 @@ export default class Ghost extends GameUnit {
         this.strategy = new GhostEnragedNextAction();
 
         this.states = ["enraged", "wandering"]; //"scared", 
-        setInterval(this.setState, 10000);
+        this.innerStateMachine = new StateMachine({
+            enraged: {
+                allowedStates: ["wandering", "scared"],
+                init: () => {
+                    this.state = "enraged";
+                    this.strategy = new GhostEnragedNextAction();
+                },
+                deInit: () => {
+                    this.state = null;
+                    this.strategy = null;
+                },
+            },
+            wandering: {
+                allowedStates: ["enraged", "scared"],
+                init: () => {
+                    this.state = "wandering";
+                    this.strategy = new GhostWanderingNextAction();
+                },
+                deInit: () => {
+                    this.state = null;
+                    this.strategy = null;
+                },
+            },
+        },
+            "enraged");
+
+        setInterval(() => this.innerStateMachine.setState(this.getNexState()), 10000);
+
     };
 
-    setState = () => {
+    getNexState = () => {
         this.states.unshift(this.states.pop());
-        this.state = this.states[0];
-        console.log(this.state);
-        this.strategy = null;
-        this.strategy = this.state === "enraged"
-            ? new GhostEnragedNextAction()
-            : new GhostWanderingNextAction();
+        const NEXT_STATE = this.states[0];
+        return NEXT_STATE;
     };
 
 };
