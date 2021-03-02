@@ -31,47 +31,22 @@ export class GhostEnragedNextAction {
 
 export class GhostWanderingNextAction {
     calculateAction = (gameElement) => {
-        // console.log(gameElement.currentNode.EDGES);
-        // let move = testRnd(gameElement);
-
-        // gameElement.nextAction = 'move' + move.charAt(0).toUpperCase() + move.slice(1);
-
-        // return gameElement.nextAction;
-        const a = Math.round(Math.random() * 3);
-        let action;
-        switch (a) {
+        switch (Math.floor(Math.random() * 4)) {
             case 0:
-                action = "moveUp";
+                gameElement.nextAction = "moveUp";
                 break;
             case 1:
-                action = "moveDown";
+                gameElement.nextAction = "moveDown";
                 break;
             case 2:
-                action = "moveLeft";
+                gameElement.nextAction = "moveLeft";
                 break;
             case 3:
-                action = "moveRight";
+                gameElement.nextAction = "moveRight";
                 break;
             default:
-                action = "moveUp";
+                gameElement.nextAction = "moveUp";
         };
-        return action;
+        return gameElement.nextAction;
     };
-};
-
-const testRnd = (gameElement) => {
-    console.log(gameElement);
-    let move;
-    for (let direction in gameElement.currentNode.EDGES) {
-        // console.log(direction);
-        if (Math.random() * 3 > 2) {
-            move = direction;
-        };
-    };
-
-    if (!move) {
-        move = testRnd();
-    } else {
-        return move;
-    }
 };

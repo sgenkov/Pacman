@@ -10,7 +10,7 @@ export default class Ghost extends GameUnit {
         this.strategy = new GhostEnragedNextAction();
 
         this.states = ["enraged", "wandering"]; //"scared", 
-        setInterval(this.setState, 6000);
+        setInterval(this.setState, 10000);
     };
 
     setState = () => {
