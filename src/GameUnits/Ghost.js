@@ -11,6 +11,7 @@ export default class Ghost extends GameUnit {
         this.strategy = new GhostEnragedNextAction();
 
         this.states = ["enraged", "wandering"]; //"scared", 
+
         this.innerStateMachine = new StateMachine({
             enraged: {
                 allowedStates: ["wandering", "scared"],
@@ -37,11 +38,11 @@ export default class Ghost extends GameUnit {
         },
             "enraged");
 
-        setInterval(() => this.innerStateMachine.setState(this.getNexState()), 10000);
+        setInterval(() => this.innerStateMachine.setState(this.getNextState()), 10000);
 
     };
 
-    getNexState = () => {
+    getNextState = () => {
         this.states.unshift(this.states.pop());
         const NEXT_STATE = this.states[0];
         return NEXT_STATE;

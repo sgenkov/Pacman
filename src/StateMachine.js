@@ -6,7 +6,7 @@ export default class StateMachine {
     };
 
     setState = (state) => {
-        // console.log('state change attempt');
+        console.log(state);
         let {
             states,
             currentState,
