@@ -1,12 +1,5 @@
-import { model, graphHandler } from './index';
-
-export class PacmanNextAction {
-    calculateAction = (gameElement) => {
-        return gameElement.nextAction;
-    };
-};
-
-export class GhostEnragedNextAction {
+import { model, graphHandler } from '../index';
+export default class GhostEnragedStrategy {
     calculateAction = (gameElement) => {
         const playerCurrentNodeId = model.player.currentNode.ID;
         if (playerCurrentNodeId) {
@@ -25,28 +18,6 @@ export class GhostEnragedNextAction {
 
         };
 
-        return gameElement.nextAction;
-    };
-};
-
-export class GhostWanderingNextAction {
-    calculateAction = (gameElement) => {
-        switch (Math.floor(Math.random() * 4)) {
-            case 0:
-                gameElement.nextAction = "moveUp";
-                break;
-            case 1:
-                gameElement.nextAction = "moveDown";
-                break;
-            case 2:
-                gameElement.nextAction = "moveLeft";
-                break;
-            case 3:
-                gameElement.nextAction = "moveRight";
-                break;
-            default:
-                gameElement.nextAction = "moveUp";
-        };
         return gameElement.nextAction;
     };
 };

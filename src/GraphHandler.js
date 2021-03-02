@@ -5,9 +5,6 @@ import Graph from 'node-dijkstra';
 export default class GraphHandler {
   constructor() {
     this.maze = this.createGraph();
-    // this.testPath = this.calculateShortestPath(63, 34);
-    // console.log(this.testPath);
-    // this.nodesCreate();
   };
 
   createGraph = () => {

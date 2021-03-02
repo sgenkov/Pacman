@@ -3,18 +3,16 @@ import { app, model, graphHandler } from './index';
 import CommonBehaviours from './CommonBehaviours';
 import GameElementFactory from './GameElementFactory';
 import DC from './debugConfig.json'; // ^FLOW
-import scene from './scene.json';
 import * as PIXI from 'pixi.js';
 import { assetsLoader } from './index';
-import { colideWithCircle } from './utils';
-import GraphHandler from './GraphHandler';
-// import UnitStrategyManager from './UnitStrategies';
-export default class Game {
+export default class Game extends EventTarget {
   constructor(delegate) {
+    super();
     this.name = "play";
     this.delegate = delegate;
     this.score = 0;
     this.backGround = null;
+    this.loopCount = 0;
   };
 
   init = () => {
@@ -34,6 +32,7 @@ export default class Game {
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));
     this.addBackground();
+    // this.addEventListener("testEvent", (event) => {console.log(event)});
     // this.nodesCreate();
     app.ticker.add(this.gameTicker);
   };
@@ -45,7 +44,8 @@ export default class Game {
   };
 
   gameTicker = () => {
-    // console.log(model.gameElements);
+    ++ this.loopCount;
+    if (this.loopCount % 20 === 0) this.dispatchEvent(new CustomEvent("testEvent"));
     let {
       behaviours,
       delegate,
