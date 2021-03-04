@@ -9,21 +9,18 @@ export default class PixiDelegate {
     };
 
     createElement = (el) => {
-       
+
 
         let graphic = new GraphicElement(el);
-        // console.log(graphic.sheet.REVERSE);
-        graphic.sheet.scale.x = graphic.sheet.REVERSE? -2 : 2;
+        graphic.sheet.scale.x = graphic.sheet.REVERSE ? -2 : 2;
         graphic.sheet.scale.y = 2;
         graphic.sheet.PREV_SPEED = el.prevSpeed;
         graphic.sheet.SPEED = el.speed;
         this.graphics.push(graphic);
-        // console.log(graphic);
         return graphic.sheet;
     }
 
     getGraphic = (el) => {
-        // console.log(el.lastMovementDirection);
         this.app.stage.removeChild(el.GRAPHIC); //TODO: Ask Evgeni for this solution
         let {
             graphics,
@@ -31,48 +28,22 @@ export default class PixiDelegate {
             app: {
                 stage,
             }
-        } = this;   
-        // console.log(graphics);
+        } = this;
 
         let graphic;
         const foundIndex = graphics.findIndex(g => {
-            // console.log((g.name === el.name) && (g.color === el.color));
-            // console.log('g : ', g);
-            // console.log('el : ', el);
             return ((g.name === el.name) && (g.color === el.color) && (g.LAST_MOVEMENT_DIRECTION === el.lastMovementDirection));
-            //&& (g.LAST_MOVEMENT_DIRECTION === el.lastMovementDirection)
         });
 
         if (graphics.length == 0 || foundIndex === -1) {
-            // console.log('CREATE');
             graphic = createElement(el);
         } else {
-            // console.log('FOUND');
             graphic = graphics[foundIndex].sheet;
-            // graphics.splice(foundIndex, 1);
-            // console.log('GraphicElement founded'); //^ flow
-            // freeGraphics.splice(foundIndex, 1);
         };
 
-
-        
-        // if (graphic.PREV_SPEED.x > 0) {
-        //     graphic.angle = 0;
-        // };
-        // if (graphic.PREV_SPEED.x < 0) {
-        //     graphic.angle = 180;
-        // };
-        // if (graphic.PREV_SPEED.y > 0) {
-        //     graphic.angle = 90;
-        // };
-        // if (graphic.PREV_SPEED.y < 0) {
-        //     graphic.angle = -90;
-        // };
-
-        
-            stage.addChild(graphic);
-            graphic.geId = el.id;
-        el.GRAPHIC = graphic;
+        stage.addChild(graphic);
+        graphic.geId = el.id;
+        el.GRAPHIC = graphic; //* Suspicious - Ask Evgeni
         return graphic;
     };
 
@@ -104,8 +75,6 @@ export default class PixiDelegate {
     }
 
     render(gameElements) {
-        // console.log(this.graphics);
-        // console.log(gameElements.length);
         if (this.app == null) {
             return;
         };
@@ -144,12 +113,12 @@ export default class PixiDelegate {
                 // if (map[el.id]) {
                 //     graphic = map[el.id];
                 // } else {
-                    // graphic = getGraphic(el);
-                    // if (graphic.SPEED.x === 0 && graphic.SPEED.y === 0) {
-                    //     graphic.stop();
-                    // } else {
-                    //     graphic.play();
-                    // };
+                // graphic = getGraphic(el);
+                // if (graphic.SPEED.x === 0 && graphic.SPEED.y === 0) {
+                //     graphic.stop();
+                // } else {
+                //     graphic.play();
+                // };
                 // };
                 graphic = getGraphic(el);
                 if (graphic.SPEED.x === 0 && graphic.SPEED.y === 0) {
