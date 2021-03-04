@@ -19,7 +19,6 @@ export default class Game extends EventTarget {
     DC.mainFlow && console.log('Game.js : Game init'); //^ FLOW
     this.factory = new GameElementFactory();
     graphHandler.nodesCreate();
-    // this.unitStrategyManager = new UnitStrategyManager();
     this.commonBehavioursInstance = new CommonBehaviours();              //TODO: Refactor this V
     this.behaviours = this.commonBehavioursInstance.commonBehaviours;    //TODO: Refactor this ^
 
@@ -28,12 +27,10 @@ export default class Game extends EventTarget {
     model.assignGhost(this.factory.getUnit("ghost", "blue"));
     model.assignGhost(this.factory.getUnit("ghost", "pink"));
     model.assignGhost(this.factory.getUnit("ghost", "red"));
-    // console.log(model.gameElements);
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));
     this.addBackground();
     // this.addEventListener("testEvent", (event) => {console.log(event)});
-    // this.nodesCreate();
     app.ticker.add(this.gameTicker);
   };
 
@@ -72,7 +69,6 @@ export default class Game extends EventTarget {
           for (let allowedDirection in gameElement.currentNode.EDGES) {
             gameElement.allowedDirections.push(allowedDirection);
           };
-          // console.log(model.player.allowedDirections);
 
           if (!node.EDGES.hasOwnProperty(gameElement.lastMovementDirection)) {
             // (!model.player.behaviours.includes("stop")) && model.player.behaviours.unshift("stop");

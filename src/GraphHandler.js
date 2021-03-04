@@ -36,7 +36,7 @@ export default class GraphHandler {
       graphic.endFill(); //? What is this used for in PIXI.js ?
       graphic.interactive = true;
       graphic.buttonMode = true;
-      graphic.ID = el.id;
+      graphic.ID = el.id; 
       graphic.EDGES = el.edges;
       graphic.on('click', () => console.log(el));
       model.nodes.push(graphic);

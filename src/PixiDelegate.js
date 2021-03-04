@@ -9,16 +9,22 @@ export default class PixiDelegate {
     };
 
     createElement = (el) => {
+       
+
         let graphic = new GraphicElement(el);
-        graphic.sheet.scale.x = 2; //todo: Modify this to be scalable
-        graphic.sheet.scale.y = 2; //todo: Modify this to be scalable
+        // console.log(graphic.sheet.REVERSE);
+        graphic.sheet.scale.x = graphic.sheet.REVERSE? -2 : 2;
+        graphic.sheet.scale.y = 2;
         graphic.sheet.PREV_SPEED = el.prevSpeed;
         graphic.sheet.SPEED = el.speed;
         this.graphics.push(graphic);
+        // console.log(graphic);
         return graphic.sheet;
     }
 
     getGraphic = (el) => {
+        // console.log(el.lastMovementDirection);
+        this.app.stage.removeChild(el.GRAPHIC); //TODO: Ask Evgeni for this solution
         let {
             graphics,
             createElement,
@@ -30,37 +36,43 @@ export default class PixiDelegate {
 
         let graphic;
         const foundIndex = graphics.findIndex(g => {
-            return ((g.name === el.name) && (g.color === el.color));
+            // console.log((g.name === el.name) && (g.color === el.color));
+            // console.log('g : ', g);
+            // console.log('el : ', el);
+            return ((g.name === el.name) && (g.color === el.color) && (g.LAST_MOVEMENT_DIRECTION === el.lastMovementDirection));
+            //&& (g.LAST_MOVEMENT_DIRECTION === el.lastMovementDirection)
         });
 
         if (graphics.length == 0 || foundIndex === -1) {
+            // console.log('CREATE');
             graphic = createElement(el);
         } else {
+            // console.log('FOUND');
             graphic = graphics[foundIndex].sheet;
+            // graphics.splice(foundIndex, 1);
             // console.log('GraphicElement founded'); //^ flow
             // freeGraphics.splice(foundIndex, 1);
         };
-        // console.log(graphic);
-        // graphic.angle = graphic.PREV_SPEED.x < 0? 90 : 0;
-        if (graphic.PREV_SPEED.x > 0) {
-            graphic.angle = 0;
-        };
-        if (graphic.PREV_SPEED.x < 0) {
-            graphic.angle = 180;
-        };
-        if (graphic.PREV_SPEED.y > 0) {
-            graphic.angle = 90;
-        };
-        if (graphic.PREV_SPEED.y < 0) {
-            graphic.angle = -90;
-        };
-        if (graphic.SPEED.x === 0 && graphic.SPEED.y === 0) {
-            //TODO: how to stop the animation here
-        };
 
-        graphic.geId = el.id;
-        stage.addChild(graphic);
 
+        
+        // if (graphic.PREV_SPEED.x > 0) {
+        //     graphic.angle = 0;
+        // };
+        // if (graphic.PREV_SPEED.x < 0) {
+        //     graphic.angle = 180;
+        // };
+        // if (graphic.PREV_SPEED.y > 0) {
+        //     graphic.angle = 90;
+        // };
+        // if (graphic.PREV_SPEED.y < 0) {
+        //     graphic.angle = -90;
+        // };
+
+        
+            stage.addChild(graphic);
+            graphic.geId = el.id;
+        el.GRAPHIC = graphic;
         return graphic;
     };
 
@@ -92,7 +104,8 @@ export default class PixiDelegate {
     }
 
     render(gameElements) {
-        // console.log(gameElements);
+        // console.log(this.graphics);
+        // console.log(gameElements.length);
         if (this.app == null) {
             return;
         };
@@ -105,41 +118,50 @@ export default class PixiDelegate {
                 screen,
                 stage
             },
+            app,
             size,
             applySize,
             freeUpGraphic,
             getGraphic
         } = this;
+        // console.log(children);
+        // app.stage.removeChildren();
 
-        let map = children.reduce((acc, el) => {
-            if (el.geId == null) {
-                return acc;
-            } else {
-                return {
-                    ...acc,
-                    [el.geId]: el,
-                }
-            }
-        }, {});
+        // let map = children.reduce((acc, el) => {
+        //     if (el.geId == null) {
+        //         return acc;
+        //     } else {
+        //         return {
+        //             ...acc,
+        //             [el.geId]: el,
+        //         }
+        //     }
+        // }, {});
         gameElements.forEach(el => {
             if (colide(el.rect, size || screen)) {
                 let graphic;
 
-                if (map[el.id]) {
-                    graphic = map[el.id];
+                // if (map[el.id]) {
+                //     graphic = map[el.id];
+                // } else {
+                    // graphic = getGraphic(el);
+                    // if (graphic.SPEED.x === 0 && graphic.SPEED.y === 0) {
+                    //     graphic.stop();
+                    // } else {
+                    //     graphic.play();
+                    // };
+                // };
+                graphic = getGraphic(el);
+                if (graphic.SPEED.x === 0 && graphic.SPEED.y === 0) {
+                    graphic.stop();
                 } else {
-                    graphic = getGraphic(el);
-                    if (graphic.SPEED.x === 0 && graphic.SPEED.y === 0) {
-                        graphic.stop();
-                    } else {
-                        graphic.play();
-                    };
+                    graphic.play();
                 };
                 applySize(el, graphic);
             } else {
-                if (map[el.id]) {
-                    freeUpGraphic(map[el.id]);
-                };
+                // if (map[el.id]) {
+                //     freeUpGraphic(map[el.id]);
+                // };
             };
         });
 

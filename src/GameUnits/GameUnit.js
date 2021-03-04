@@ -11,7 +11,7 @@ export default class GameUnit {
         
         this.previousNode = null;
         this.radius = 1;
-        this.lastMovementDirection = null;
+        this.lastMovementDirection = 'left';
         this.nextAction = null;
         this.allowedDirections = [];
         this.baseSpeed = 0;

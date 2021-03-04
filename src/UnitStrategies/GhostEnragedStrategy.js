@@ -15,9 +15,9 @@ export default class GhostEnragedStrategy {
             if (gameElement.currentNode.ID) {
                 const testPath = graphHandler.calculateShortestPath(gameElement.currentNode.ID, playerCurrentNodeId);
                 pathTinting && model.nodes.forEach(node => { //^path tracing
-                    if (!testPath) { //TODO: STRANGE BEHAVIOUR? ASK EVGENI
+                    if (!testPath) { //TODO: STRANGE BEHAVIOUR? ASK Evgeni 
                         gameElement.innerStateMachine.setState("wandering");
-                        return gameElement.nextAction;
+                        return gameElement.nextAction; //TODO: Ask Evgeni why this return doesn't terminate the function
                     };
                     if (testPath.includes(node.ID)) {
                         node.tint = this.colorMap.get(gameElement.color);
@@ -25,7 +25,7 @@ export default class GhostEnragedStrategy {
                         node.tint = 0x34612;
                     };
                 });
-                if (!testPath) return; //TODO: STRANGE BEHAVIOUR? ASK EVGENI
+                if (!testPath) return; //TODO: STRANGE BEHAVIOUR? ASK Evgeni
                 const destination = testPath[1];
                 for (let direction in gameElement.currentNode.EDGES) {
                     if (gameElement.currentNode.EDGES[direction] === destination) {
