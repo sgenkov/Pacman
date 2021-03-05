@@ -16,6 +16,7 @@ export default class PixiDelegate {
         graphic.sheet.scale.y = 2;
         graphic.sheet.PREV_SPEED = el.prevSpeed;
         graphic.sheet.SPEED = el.speed;
+        graphic.state = el.state;
         this.graphics.push(graphic);
         return graphic.sheet;
     }
@@ -32,7 +33,13 @@ export default class PixiDelegate {
 
         let graphic;
         const foundIndex = graphics.findIndex(g => {
-            return ((g.name === el.name) && (g.color === el.color) && (g.LAST_MOVEMENT_DIRECTION === el.lastMovementDirection));
+            // console.log(el.state);
+            return (
+                (g.name === el.name)
+                && (g.color === el.color)
+                && (g.LAST_MOVEMENT_DIRECTION === el.lastMovementDirection)
+                && (g.state === el.state)
+                );
         });
 
         if (graphics.length == 0 || foundIndex === -1) {
@@ -123,8 +130,10 @@ export default class PixiDelegate {
                 graphic = getGraphic(el);
                 if (graphic.SPEED.x === 0 && graphic.SPEED.y === 0) {
                     graphic.stop();
+                    // console.log('stop');
                 } else {
                     graphic.play();
+                    // console.log('play');
                 };
                 applySize(el, graphic);
             } else {

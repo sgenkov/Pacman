@@ -13,20 +13,20 @@ export default class GhostEnragedStrategy {
         const playerCurrentNodeId = model.player.currentNode.ID;
         if (playerCurrentNodeId) {
             if (gameElement.currentNode.ID) {
-                const testPath = graphHandler.calculateShortestPath(gameElement.currentNode.ID, playerCurrentNodeId);
+                const shortestPath = graphHandler.calculateShortestPath(gameElement.currentNode.ID, playerCurrentNodeId);
                 pathTinting && model.nodes.forEach(node => { //^path tracing
-                    if (!testPath) { //TODO: STRANGE BEHAVIOUR? ASK Evgeni 
+                    if (!shortestPath) { //TODO: STRANGE BEHAVIOUR? ASK Evgeni 
                         gameElement.innerStateMachine.setState("wandering");
                         return gameElement.nextAction; //TODO: Ask Evgeni why this return doesn't terminate the function
                     };
-                    if (testPath.includes(node.ID)) {
+                    if (shortestPath.includes(node.ID)) {
                         node.tint = this.colorMap.get(gameElement.color);
                     } else {
                         node.tint = 0x34612;
                     };
                 });
-                if (!testPath) return; //TODO: STRANGE BEHAVIOUR? ASK Evgeni
-                const destination = testPath[1];
+                if (!shortestPath) return; //TODO: STRANGE BEHAVIOUR? ASK Evgeni
+                const destination = shortestPath[1];
                 for (let direction in gameElement.currentNode.EDGES) {
                     if (gameElement.currentNode.EDGES[direction] === destination) {
                         gameElement.nextAction = 'move' + direction.charAt(0).toUpperCase() + direction.slice(1);

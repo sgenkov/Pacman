@@ -4,8 +4,6 @@ import DC from './debugConfig.json';
 
 export default class GraphicElement {
   constructor(el) {
-    // console.log(el);
-    // console.log(el.lastMovementDirection);
     this.name = el.name;
     this.color = el.color;
     this.sheet = null;
@@ -34,27 +32,35 @@ export default class GraphicElement {
     } else if (this.name === "ghost") {
       DC.objectsCreation && console.log('New GraphicElement created'); //^ FLOW
       let directionIndex = el.lastMovementDirection[0].toUpperCase();
-      if (directionIndex === "L") {
-        directionIndex = "R";
+      if (el.state === "scared") {
         this.sheet = new PIXI.AnimatedSprite([
-          assetsLoader.SHEETS[`ghost_${el.color}_${directionIndex}1`],
-          assetsLoader.SHEETS[`ghost_${el.color}_${directionIndex}2`],
+          assetsLoader.SHEETS[`ghost_scared1`],
+          assetsLoader.SHEETS[`ghost_scared2`],
         ]);
         this.sheet.REVERSE = true;
       } else {
-        this.sheet = new PIXI.AnimatedSprite([
-          assetsLoader.SHEETS[`ghost_${el.color}_${directionIndex}1`],
-          assetsLoader.SHEETS[`ghost_${el.color}_${directionIndex}2`],
-        ]);
-        this.sheet.REVERSE = false;
-      };
+        if (directionIndex === "L") {
+          directionIndex = "R";
+          this.sheet = new PIXI.AnimatedSprite([
+            assetsLoader.SHEETS[`ghost_${el.color}_${directionIndex}1`],
+            assetsLoader.SHEETS[`ghost_${el.color}_${directionIndex}2`],
+          ]);
+          this.sheet.REVERSE = true;
+        } else {
+          this.sheet = new PIXI.AnimatedSprite([
+            assetsLoader.SHEETS[`ghost_${el.color}_${directionIndex}1`],
+            assetsLoader.SHEETS[`ghost_${el.color}_${directionIndex}2`],
+          ]);
+          this.sheet.REVERSE = false;
+        };
+      }
 
-      
+
       this.sheet.anchor.set(0.5);
       this.sheet.animationSpeed = 0.2;
       // this.sheet.scale.x = 4 //? Why this doesn't work?
       this.sheet.loop = true;
-      this.sheet.NAME = this.name; 
+      this.sheet.NAME = this.name;
     } else {
       throw new Error("GraphicElement.js : unknown graphic type");
     };
