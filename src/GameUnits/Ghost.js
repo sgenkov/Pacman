@@ -10,7 +10,7 @@ export default class Ghost extends GameUnit {
         this.state = null;
         this.strategy = null;
 
-        this.states = ["wandering", "enraged", "scared"]; // "scared", 
+        this.states = ["enraged", "scared", "wandering"];//, "wandering"
 
         this.innerStateMachine = new StateMachine({
             enraged: {

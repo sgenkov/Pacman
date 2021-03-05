@@ -27,6 +27,18 @@ export default class GraphHandler {
     return this.maze.path(`${from}`, `${to}`)?.map(el => +el);
   };
 
+  calculateLongestPath = (ghost, pacman) => {
+    // console.log(ghost);
+    let longestPath = 0; //todo: try with null
+
+    for (let i = 0; i < this.maze.graph.size; ++i) {
+      const currentPath = this.maze.path(`${ghost}`, `${i}`, { cost: true });
+      if (currentPath.cost > longestPath) longestPath = currentPath.path.map(el => +el);
+    };
+    // console.log(longestPath);
+    return longestPath;
+  };
+
   nodesCreate = () => {
     map.forEach((el) => {
       let graphic = new PIXI.Graphics();
@@ -36,7 +48,7 @@ export default class GraphHandler {
       graphic.endFill(); //? What is this used for in PIXI.js ?
       graphic.interactive = true;
       graphic.buttonMode = true;
-      graphic.ID = el.id; 
+      graphic.ID = el.id;
       graphic.EDGES = el.edges;
       graphic.on('click', () => console.log(el));
       model.nodes.push(graphic);

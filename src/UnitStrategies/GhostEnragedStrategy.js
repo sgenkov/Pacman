@@ -11,8 +11,7 @@ export default class GhostEnragedStrategy {
     }
     calculateAction = (gameElement) => {
         const playerCurrentNodeId = model.player.currentNode.ID;
-        if (playerCurrentNodeId) {
-            if (gameElement.currentNode.ID) {
+        if (playerCurrentNodeId && gameElement.currentNode.ID) {
                 const shortestPath = graphHandler.calculateShortestPath(gameElement.currentNode.ID, playerCurrentNodeId);
                 pathTinting && model.nodes.forEach(node => { //^path tracing
                     if (!shortestPath) { //TODO: STRANGE BEHAVIOUR? ASK Evgeni 
@@ -31,7 +30,6 @@ export default class GhostEnragedStrategy {
                     if (gameElement.currentNode.EDGES[direction] === destination) {
                         gameElement.nextAction = 'move' + direction.charAt(0).toUpperCase() + direction.slice(1);
                     };
-                };
             };
 
         };
