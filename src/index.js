@@ -22,8 +22,8 @@ export const app2 = new Application({ //^ For coordinates tracking
   height: 200,
   backgroundColor: 0x000000,
 });
-export const model = new Model();
 export const assetsLoader = new GameAssetsLoader();
+export const model = new Model();
 export const graphHandler = new GraphHandler();
 
 document.body.appendChild(app.view);

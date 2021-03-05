@@ -1,15 +1,19 @@
 import { Text } from 'pixi.js';
 import { app } from './index';
 import gameStateModel from './GameStateModel';
+import * as PIXI from 'pixi.js';
+import { assetsLoader } from './index';
 import DC from './debugConfig.json'; // ^FLOW
 
 export default class Menu {
     constructor() {
         this.name = "menu";
+        this.backGround = null;
     };
 
     init = () => {
         DC.mainFlow && console.log('Menu.js : MENU INIT'); //^ FLOW
+        this.addBackground();
         this.render();
     };
 
@@ -39,11 +43,24 @@ export default class Menu {
 
     ticker = () => {
         console.log("menu ticker");
-    }
+    };
 
     onClick = () => {
         gameStateModel.setState({
-          currentScreen: "play",
+            currentScreen: "play",
         });
+    };
+
+    addBackground = () => {
+        let { backGround } = this;
+        console.log(assetsLoader.SHEETS.background);
+        backGround = PIXI.Sprite.from(assetsLoader.SHEETS.background);
+        backGround.anchor.set(0.5);
+        backGround.position.x = app.view.width / 2;
+        backGround.position.y = app.view.height / 2;
+        backGround.scale.x = 2.75;
+        backGround.scale.y = 2.75;
+        // this.backGround = backGround; 
+        app.stage.addChild(backGround);
     };
 };

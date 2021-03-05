@@ -30,7 +30,7 @@ export default class Game extends EventTarget {
     
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));
-    this.addBackground();
+    // this.addBackground();
     // this.addEventListener("testEvent", (event) => {console.log(event)});
     app.ticker.add(this.gameTicker);
   };
@@ -39,6 +39,7 @@ export default class Game extends EventTarget {
     DC.mainFlow && console.log('Game.js : Game deInit'); //^ FLOW
     document.removeEventListener("keyup", onKeyUp);
     document.removeEventListener("keydown", onKeyDown);
+    // app.stage.removeChildren(); //TODO: add this row later
   };
 
   gameTicker = () => {
@@ -106,6 +107,7 @@ export default class Game extends EventTarget {
 
   addBackground = () => {
     let { backGround } = this;
+    console.log(assetsLoader.SHEETS.background);
     backGround = PIXI.Sprite.from(assetsLoader.SHEETS.background);
     backGround.anchor.set(0.5);
     backGround.position.x = app.view.width / 2;
