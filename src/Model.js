@@ -2,6 +2,7 @@ import scene from './scene.json';
 export default class Model extends EventTarget {
     constructor() {
         super();
+        this.ASSETS_LOADED = false;
         this.gameElements = [];
         this.freeGameElements = [];
         this.nodes = [];

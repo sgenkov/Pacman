@@ -2,8 +2,10 @@ import { app } from './index';
 import * as PIXI from 'pixi.js';
 import sheetSource from './pacmanSheet.json';
 import sheetSource2 from './ghostsSheet.json';
+import sheetSource3 from './logo.json';
 import { assets } from './scene.json';
 import DC from './debugConfig.json';
+import { model } from './index';
 
 export default class GameAssetsLoader {
 
@@ -39,15 +41,21 @@ export default class GameAssetsLoader {
     createSheets = () => {
         let baseSheet = new PIXI.BaseTexture.from(app.loader.resources["pacmanSheet"].url);
         for (let key in sheetSource.frames) { //* load sheet1
-          const { x, y, w, h } = sheetSource.frames[key].frame;
-          this.SHEETS[key.split('.')[0]] = new PIXI.Texture(baseSheet, new PIXI.Rectangle(x, y, w, h));
+            const { x, y, w, h } = sheetSource.frames[key].frame;
+            this.SHEETS[key.split('.')[0]] = new PIXI.Texture(baseSheet, new PIXI.Rectangle(x, y, w, h));
         };
 
         baseSheet = new PIXI.BaseTexture.from(app.loader.resources["ghostsSheet"].url);
         for (let key in sheetSource2.frames) { //* load sheet2
             const { x, y, w, h } = sheetSource2.frames[key].frame;
             this.SHEETS[key.split('.')[0]] = new PIXI.Texture(baseSheet, new PIXI.Rectangle(x, y, w, h));
-          };
-      };
+        };
+
+        for (let key in sheetSource3.frames) { //* load logo
+            this.SHEETS[key.split('.')[0]] = new PIXI.Texture(app.loader.resources["logo"].texture);
+        };
+        // console.log(this.SHEETS);
+        model.ASSETS_LOADED = true;
+    };
 
 };

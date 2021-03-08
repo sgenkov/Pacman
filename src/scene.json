@@ -30,6 +30,10 @@
     [
       "ghostsSheet",
       "ghostsSheet.png"
+    ],
+    [
+      "logo",
+      "logo.png"
     ]
   ],
   "startingNodes": {

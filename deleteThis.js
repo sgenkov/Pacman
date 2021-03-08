@@ -162,9 +162,24 @@
 
 // const a = "1" - 2 + 3 + 1 + 1 + 1 + 1
 // console.log(a);
-const arr = [0, 0, 0, 0];
-for (let i = 0; i < 10000; ++i) {
-    const choose = Math.floor(Math.random() * 4);
-    arr[choose]++;
-};
-console.log(arr);
+
+
+// const arr = [0, 0, 0, 0];
+// for (let i = 0; i < 10000; ++i) {
+//     const choose = Math.floor(Math.random() * 4);
+//     arr[choose]++;
+// };
+// console.log(arr);
+
+// a = 3;
+// var a = 5;
+// console.log(a);
+
+// 'use strict';
+
+function myFunc() {
+    console.log(this);
+}
+
+// myFunc();
+console.log(this);

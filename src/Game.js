@@ -5,6 +5,7 @@ import GameElementFactory from './GameElementFactory';
 import DC from './debugConfig.json'; // ^FLOW
 import * as PIXI from 'pixi.js';
 import { assetsLoader } from './index';
+import Dot from './Dot/Dot.js';
 export default class Game extends EventTarget {
   constructor(delegate) {
     super();
@@ -27,10 +28,13 @@ export default class Game extends EventTarget {
     model.assignGhost(this.factory.getUnit("ghost", "blue"));
     model.assignGhost(this.factory.getUnit("ghost", "pink"));
     model.assignGhost(this.factory.getUnit("ghost", "red"));
+
+    new Dot({x: 100, y: 31});
+    new Dot({x: 100, y: 119}, 'big');
     
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));
-    // this.addBackground();
+    this.addBackground();
     // this.addEventListener("testEvent", (event) => {console.log(event)});
     app.ticker.add(this.gameTicker);
   };
@@ -107,7 +111,6 @@ export default class Game extends EventTarget {
 
   addBackground = () => {
     let { backGround } = this;
-    console.log(assetsLoader.SHEETS.background);
     backGround = PIXI.Sprite.from(assetsLoader.SHEETS.background);
     backGround.anchor.set(0.5);
     backGround.position.x = app.view.width / 2;

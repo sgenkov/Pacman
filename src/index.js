@@ -23,13 +23,13 @@ export const app2 = new Application({ //^ For coordinates tracking
   backgroundColor: 0x000000,
 });
 export const assetsLoader = new GameAssetsLoader();
+assetsLoader.loadAssets();
 export const model = new Model();
 export const graphHandler = new GraphHandler();
 
 document.body.appendChild(app.view);
-document.body.appendChild(app2.view); //^ For coordinates tracking
+// document.body.appendChild(app2.view); //^ For coordinates tracking
 
-assetsLoader.loadAssets();
 
 let screen;
 const stateMachine = new StateMachine(
