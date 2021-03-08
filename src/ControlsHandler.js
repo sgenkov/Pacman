@@ -1,5 +1,5 @@
 import { model } from './index';
-import scene from './scene.json';
+import scene from './config/scene.json';
 
 const disabled = false; //^ Debug mode
 export const onKeyDown = ({ keyCode }, behaviours) => {

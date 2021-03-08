@@ -1,5 +1,5 @@
 import { model } from '../index';
-import DC from '../debugConfig.json'; //^ debug
+import DC from '../config/debugConfig.json'; //^ debug
 import Rectangle from '../Rectangle';
 import { app2 } from '../index';
 import * as PIXI from 'pixi.js'

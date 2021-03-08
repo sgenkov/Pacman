@@ -1,6 +1,6 @@
 const fs = require('fs');
-const targetFile = './scene.json';
-const sourceFile = './sceneBackup.json';
+const targetFile = '../config/scene.json';
+const sourceFile = '../config/sceneBackup.json';
 const file = require(sourceFile);
 
 

@@ -3,7 +3,7 @@ import { app, model } from './index';
 import gameStateModel from './GameStateModel';
 import * as PIXI from 'pixi.js';
 import { assetsLoader } from './index';
-import DC from './debugConfig.json'; // ^FLOW
+import DC from './config/debugConfig.json'; // ^FLOW
 
 export default class Menu {
     constructor() {

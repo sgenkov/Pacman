@@ -2,7 +2,7 @@ import { onKeyDown, onKeyUp } from './ControlsHandler';
 import { app, model, graphHandler } from './index';
 import CommonBehaviours from './CommonBehaviours';
 import GameElementFactory from './GameElementFactory';
-import DC from './debugConfig.json'; // ^FLOW
+import DC from './config/debugConfig.json'; // ^FLOW
 import * as PIXI from 'pixi.js';
 import { assetsLoader } from './index';
 import Dot from './Dot/Dot.js';

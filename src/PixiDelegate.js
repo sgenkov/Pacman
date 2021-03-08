@@ -1,4 +1,4 @@
-import { colide } from "./utils";
+import { colide } from "./Utils/utils";
 import GraphicElement from './GraphicElement';
 export default class PixiDelegate {
     constructor(app, size) {

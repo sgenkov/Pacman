@@ -1,4 +1,4 @@
-import scene from './scene.json';
+import scene from './config/scene.json';
 export default class Model extends EventTarget {
     constructor() {
         super();

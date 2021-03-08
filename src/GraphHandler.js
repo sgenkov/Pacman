@@ -1,4 +1,4 @@
-import { map } from './scene.json';
+import { map } from './config/scene.json';
 import { app, model } from './index';
 import * as PIXI from 'pixi.js';
 import Graph from 'node-dijkstra';

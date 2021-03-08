@@ -1,5 +1,5 @@
 import { model, graphHandler } from '../index';
-import { pathTinting } from '../debugConfig.json';
+import { pathTinting } from '../config/debugConfig.json';
 export default class GhostEnragedStrategy {
     constructor() {
         this.colorMap = new Map([

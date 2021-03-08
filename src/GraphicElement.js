@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import { assetsLoader } from "./index";
-import DC from './debugConfig.json';
+import DC from './config/debugConfig.json';
 
 export default class GraphicElement {
   constructor(el) {

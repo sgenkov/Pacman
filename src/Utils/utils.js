@@ -1,4 +1,4 @@
-import Vector from './Vector';
+import Vector from '../Vector';
 export const colide = (rect1, rect2) => {
     // console.log(rect1, rect2);
     return (rect1.x < rect2.x + rect2.width

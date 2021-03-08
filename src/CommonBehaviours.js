@@ -1,5 +1,5 @@
-import DC from './debugConfig.json'; //^ FLOW
-import { possibleMove } from './utils';
+import DC from './config/debugConfig.json'; //^ FLOW
+import { possibleMove } from './Utils/utils';
 
 
 export default class CommonBehaviours {

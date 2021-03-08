@@ -6,7 +6,7 @@ import gameStateModel from "./GameStateModel";
 import Game from "./Game";
 import PixiDelegate from './PixiDelegate';
 import GameAssetsLoader from "./GameAssetsLoader";
-import DC from './debugConfig.json'; // ^FLOW
+import DC from './config/debugConfig.json'; // ^FLOW
 import Model from './Model';
 import GraphHandler from "./GraphHandler";
 

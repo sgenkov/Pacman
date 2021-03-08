@@ -1,10 +1,10 @@
 import { app } from './index';
 import * as PIXI from 'pixi.js';
-import sheetSource from './pacmanSheet.json';
-import sheetSource2 from './ghostsSheet.json';
-import sheetSource3 from './logo.json';
-import { assets } from './scene.json';
-import DC from './debugConfig.json';
+import sheetSource from './config/pacmanSheet.json';
+import sheetSource2 from './config/ghostsSheet.json';
+import sheetSource3 from './config/logo.json';
+import { assets } from './config/scene.json';
+import DC from './config/debugConfig.json';
 import { model } from './index';
 
 export default class GameAssetsLoader {
