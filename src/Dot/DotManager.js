@@ -1,4 +1,4 @@
-import { map, bigFoodPositionsByNodeId } from '../config/scene.json';
+import { map, bigFoodPositionsByNodeId, exceptionDots } from '../config/scene.json';
 import Dot from './Dot';
 export default class DotManager {
     constructor() {
@@ -21,6 +21,7 @@ export default class DotManager {
     createSmallDots = () => {
         const { buildDirections } = this;
         map.forEach((node) => {
+            if (exceptionDots.some(el => el === node.id)) return;
             buildDirections.forEach(buildDirection => {
                 if (node.edges[buildDirection] === undefined) return;
                 let max;
