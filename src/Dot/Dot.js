@@ -1,11 +1,11 @@
 import * as PIXI from 'pixi.js';
-import { app } from '..';
+import { app } from '../index';
 export default class Dot {
     constructor(position, type = "small") {
         this.position = position;
         this.radius = (type === "small")
-            ? 3
-            : 6;
+            ? 2
+            : 7;
         this.graphic = null;
         this.eaten = false;
 

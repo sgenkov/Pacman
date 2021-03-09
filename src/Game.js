@@ -6,6 +6,7 @@ import DC from './config/debugConfig.json'; // ^FLOW
 import * as PIXI from 'pixi.js';
 import { assetsLoader } from './index';
 import Dot from './Dot/Dot.js';
+import DotManager from './Dot/DotManager';
 export default class Game extends EventTarget {
   constructor(delegate) {
     super();
@@ -19,6 +20,7 @@ export default class Game extends EventTarget {
   init = () => {
     DC.mainFlow && console.log('Game.js : Game init'); //^ FLOW
     this.factory = new GameElementFactory();
+    this.dotManager = new DotManager();
     graphHandler.nodesCreate();
     this.commonBehavioursInstance = new CommonBehaviours();              //TODO: Refactor this V
     this.behaviours = this.commonBehavioursInstance.commonBehaviours;    //TODO: Refactor this ^
@@ -28,9 +30,13 @@ export default class Game extends EventTarget {
     model.assignGhost(this.factory.getUnit("ghost", "blue"));
     model.assignGhost(this.factory.getUnit("ghost", "pink"));
     model.assignGhost(this.factory.getUnit("ghost", "red"));
+    this.dotManager.createDots();
 
-    new Dot({x: 100, y: 31});
-    new Dot({x: 100, y: 119}, 'big');
+
+
+    // new Dot({x: 100, y: 31});
+    // new Dot({x: 100, y: 119}, 'big');
+    // new DotManager();
     
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));

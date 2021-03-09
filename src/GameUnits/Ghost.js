@@ -1,5 +1,5 @@
 import GameUnit from './GameUnit';
-import { GhostEnragedStrategy, GhostWanderingStrategy, GhostScaredStrategy } from '../UnitStrategies';
+import { GhostEnragedStrategy, GhostWanderingStrategy, GhostScaredStrategy, GhostEatenStrategy } from '../UnitStrategies';
 import StateMachine from '../StateMachine';
 export default class Ghost extends GameUnit {
     constructor(color) {
@@ -40,6 +40,17 @@ export default class Ghost extends GameUnit {
                 init: () => {
                     this.state = "scared";
                     this.strategy = new GhostScaredStrategy();
+                },
+                deInit: () => {
+                    this.state = null;
+                    this.strategy = null;
+                },
+            },
+            eaten: {
+                allowedStates: ["wandering"],
+                init: () => {
+                    this.state = "eaten";
+                    this.strategy = new GhostEatenStrategy();
                 },
                 deInit: () => {
                     this.state = null;
