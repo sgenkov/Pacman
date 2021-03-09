@@ -53,9 +53,25 @@ export default class GraphicElement {
           ]);
           this.sheet.REVERSE = false;
         };
-      }
+      };
 
 
+      this.sheet.anchor.set(0.5);
+      this.sheet.animationSpeed = 0.2;
+      // this.sheet.scale.x = 4 //? Why this doesn't work?
+      this.sheet.loop = true;
+      this.sheet.NAME = this.name;
+
+    } else if (this.name === "dot") {
+      console.log('Dot Created');
+      // this.sheet = new PIXI.Graphics();
+      // this.sheet.beginFill(0xFFF748);
+      // this.sheet.drawCircle(el.position.x, el.position.y, el.radius);
+      // this.sheet.endFill();
+      this.sheet = new PIXI.AnimatedSprite([
+        assetsLoader.SHEETS[`ghost_scared3`],
+        assetsLoader.SHEETS[`ghost_scared4`],
+      ]);
       this.sheet.anchor.set(0.5);
       this.sheet.animationSpeed = 0.2;
       // this.sheet.scale.x = 4 //? Why this doesn't work?

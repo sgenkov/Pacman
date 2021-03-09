@@ -5,7 +5,6 @@ import GameElementFactory from './GameElementFactory';
 import DC from './config/debugConfig.json'; // ^FLOW
 import * as PIXI from 'pixi.js';
 import { assetsLoader } from './index';
-import Dot from './Dot/Dot.js';
 import DotManager from './Dot/DotManager';
 export default class Game extends EventTarget {
   constructor(delegate) {
@@ -30,13 +29,7 @@ export default class Game extends EventTarget {
     model.assignGhost(this.factory.getUnit("ghost", "blue"));
     model.assignGhost(this.factory.getUnit("ghost", "pink"));
     model.assignGhost(this.factory.getUnit("ghost", "red"));
-    this.dotManager.createDots();
-
-
-
-    // new Dot({x: 100, y: 31});
-    // new Dot({x: 100, y: 119}, 'big');
-    // new DotManager();
+    model.emplaceDots(this.dotManager.createDots());
     
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));
@@ -75,12 +68,14 @@ export default class Game extends EventTarget {
       model.nodes.forEach(node => {
         // if (colideWithCircle(node, model.player)) {
         if (node.vertexData && node.vertexData[0] === gameElement.rect.x && node.vertexData[1] === gameElement.rect.y) {
-          gameElement.currentNode = node;
-          gameElement.allowedDirections.length = 0;
-
-          for (let allowedDirection in gameElement.currentNode.EDGES) {
-            gameElement.allowedDirections.push(allowedDirection);
-          };
+            gameElement.currentNode = node;
+            gameElement.allowedDirections.length = 0;
+  
+              for (let allowedDirection in gameElement.currentNode.EDGES) {
+                gameElement.allowedDirections.push(allowedDirection);
+              };
+          
+          
 
           if (!node.EDGES.hasOwnProperty(gameElement.lastMovementDirection)) {
             // (!model.player.behaviours.includes("stop")) && model.player.behaviours.unshift("stop");
@@ -89,11 +84,12 @@ export default class Game extends EventTarget {
             // gameElement.behaviours.unshift('stop');
           };
 
-          
           const currentAction = behaviours[gameElement.nextMove()];
           if (currentAction && gameElement.allowedDirections.includes(gameElement.nextAction.replace('move', '').toLowerCase())) {
             currentAction(gameElement);
           };
+
+          
         };
 
 

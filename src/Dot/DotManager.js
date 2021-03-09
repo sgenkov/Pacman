@@ -2,24 +2,30 @@ import { map, bigFoodPositionsByNodeId, exceptionDots } from '../config/scene.js
 import Dot from './Dot';
 export default class DotManager {
     constructor() {
+        this.dots = [];
         this.buildDirections = ["right", "down"];
     };
 
-    createDots = () => {
-        this.createBigDots();
-        this.createSmallDots();
+    createDots = () => { //Todo: Reduce this function
+        const bigDots = this.createBigDots();
+        const smallDots = this.createSmallDots();
+        const res = bigDots.concat(smallDots);
+        // console.log(res);
+        return res;
     };
 
     createBigDots = () => {
+        const bigDots = [];
         bigFoodPositionsByNodeId.forEach(nodeId => {
             const position = map.find(node => node.id === nodeId).position;
-            new Dot(position, "big");
+            bigDots.push(new Dot(position, "big"));
         });
-
+        return bigDots;
     };
 
     createSmallDots = () => {
         const { buildDirections } = this;
+        const smallDots = [];
         map.forEach((node) => {
             if (exceptionDots.some(el => el === node.id)) return;
             buildDirections.forEach(buildDirection => {
@@ -34,13 +40,12 @@ export default class DotManager {
                             ...node.position,
                             [currentDirection]: node.position[currentDirection] + dotsGap * i
                         };
-                        new Dot(newPosition);
+                        smallDots.push(new Dot(newPosition));
                     };
-
-
                 };
             });
         });
+        return smallDots;
     };
 
 };

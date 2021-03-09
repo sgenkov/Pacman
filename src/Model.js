@@ -8,6 +8,7 @@ export default class Model extends EventTarget {
         this.nodes = [];
         this.player = null;
         this.ghost = null;
+        this.dots = null;
         this.defaultLocations = {
             pacman: { node: this.calculatePosition('pacman') },
             blueGhost: { node: this.calculatePosition('blueGhost') },
@@ -24,9 +25,15 @@ export default class Model extends EventTarget {
 
     assignGhost = (unit) => {
         this.gameElements.push(unit);
-        this.ghost = unit;
+        // this.ghost = unit;
     };
 
+    emplaceDots = (dots) => {
+        this.dots = dots;
+        dots.forEach(dot => this.gameElements.push(dot));
+        // this.gameElements = [...this.gameElements, ...dots];
+        // console.log(this.gameElements);
+    };
     calculatePosition = (name) => {
         const found = scene.map.find(node => node.id === scene.startingNodes[name]);
         return found;

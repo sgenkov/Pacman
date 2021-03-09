@@ -9,6 +9,7 @@ export const onKeyDown = ({ keyCode }, behaviours) => {
   if (isUndefinedKey(keyBindings, keyCode)) return; //* BEWARE THE KEY PROTECTION!
 
   model.gameElements.forEach( gameElement => {
+    if (gameElement.name !== "pacman") return;
     gameElement.nextAction = scene.keyBindings.player1[keyCode][0];
     gameElement.allowedDirections.length = 0;
     gameElement.allowedDirections.push(scene.keyBindings.player1[keyCode][1]);
