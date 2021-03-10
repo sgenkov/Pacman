@@ -6,16 +6,18 @@ export default class PixiDelegate {
         this.size = size;
         this.isInRangeBypass = false; //* Delete this later
         this.graphics = [];
+        this.counter = 0; //!Del this
     };
 
     createElement = (el) => {
-
-
         let graphic = new GraphicElement(el);
         graphic.sheet.scale.x = graphic.sheet.REVERSE ? -2 : 2;
         graphic.sheet.scale.y = 2;
-        graphic.sheet.PREV_SPEED = el.prevSpeed;
+        // graphic.sheet.PREV_SPEED = el.prevSpeed;
         graphic.sheet.SPEED = el.speed;
+        graphic.sheet.TYPE = el.type;
+        // graphic.rect = el.rect;
+        graphic.TYPE = el.type;
         graphic.state = el.state;
         this.graphics.push(graphic);
         return graphic.sheet;
@@ -32,20 +34,45 @@ export default class PixiDelegate {
         } = this;
 
         let graphic;
-        const foundIndex = graphics.findIndex(g => {
-            // console.log(el.state);
-            return (
-                (g.name === el.name)
-                && (g.color === el.color)
-                && (g.LAST_MOVEMENT_DIRECTION === el.lastMovementDirection)
-                && (g.state === el.state)
-                );
-        });
+        let foundIndex;
 
-        if (graphics.length == 0 || foundIndex === -1) {
-            graphic = createElement(el);
+        if (el.name !== "dot") {
+            // console.log('first');
+            foundIndex = graphics.findIndex(g => {
+                return (
+                    (g.name === el.name)
+                    && (g.color === el.color)
+                    && (g.lastMovementDirection === el.lastMovementDirection) //g.LAST_MOVEMENT_DIRECTION
+                    && (g.state === el.state)
+                );
+            });
         } else {
+            // console.log('second');
+            foundIndex = graphics.findIndex(g => {
+                // return false;
+                // console.log(el.rect);
+                const res = (
+                    (g.name === el.name)
+                    && (g.type === el.type)
+                    // && (g.NAME === el.name)
+                );
+                // console.log(res);
+                return res;
+            });
+            // console.log(foundIndex);
+        }
+
+        this.counter++;
+        if (this.counter > 100000 && this.counter < 100002) console.log(graphics);
+
+        if (graphics.length === 0 || foundIndex === -1) {
+            // console.log('create');
+            graphic = createElement(el);
+            // console.log(graphic);
+        } else {
+            // console.log('found');
             graphic = graphics[foundIndex].sheet;
+            // console.log(graphic);
         };
         // console.log(graphic);
         stage.addChild(graphic);
@@ -71,6 +98,8 @@ export default class PixiDelegate {
     applySize = ({ rect: { x, y, width, height } }, graphic) => {
         graphic.x = x;
         graphic.y = y;
+        // console.log(graphic.x);
+        // console.log('apply : ', x, y);
         // graphic.width = width;
         // graphic.height = height;
     };
@@ -83,9 +112,9 @@ export default class PixiDelegate {
     }
 
     render(gameElements) {
-        if (this.app == null) {
-            return;
-        };
+        // if (this.app == null) {
+        //     return;
+        // };
 
         let {
             app: {
@@ -104,47 +133,52 @@ export default class PixiDelegate {
         // console.log(children);
         // app.stage.removeChildren();
 
-        // let map = children.reduce((acc, el) => {
-        //     if (el.geId == null) {
-        //         return acc;
-        //     } else {
-        //         return {
-        //             ...acc,
-        //             [el.geId]: el,
-        //         }
-        //     }
-        // }, {});
+        let map = children.reduce((acc, el) => {
+            if (el.geId == null) {
+                return acc;
+            } else {
+                return {
+                    ...acc,
+                    [el.geId]: el,
+                }
+            }
+        }, {});
         gameElements.forEach(el => {
-            if (colide(el.rect, size || screen)) {
+            // console.log(el);
+            if (true) {//colide(el.rect, size || screen)
                 let graphic;
 
-                // if (map[el.id]) {
-                //     graphic = map[el.id];
-                // } else {
-                // graphic = getGraphic(el);
-                // if (graphic.SPEED.x === 0 && graphic.SPEED.y === 0) {
-                //     graphic.stop();
-                // } else {
-                //     graphic.play();
-                // };
-                // };
-                graphic = getGraphic(el);
-                if (!graphic.SPEED) return;
-                if (graphic.SPEED.x === 0 && graphic.SPEED.y === 0) {
-                    graphic.stop();
-                    // console.log('stop');
+                if (map[el.id]) {
+                    graphic = map[el.id];
                 } else {
-                    graphic.play();
-                    // console.log('play');
+                    graphic = getGraphic(el);
+                    if (graphic.SPEED) {
+                        if (graphic.SPEED.x === 0 && graphic.SPEED.y === 0) {
+                            graphic.stop();
+                        } else {
+                            graphic.play();
+                        };
+                    }
                 };
-                applySize(el, graphic);
+
+
+                // graphic = getGraphic(el);
+                // if (graphic.SPEED) { //  if (graphic.SPEED) {
+                //     if (graphic.SPEED.x === 0 && graphic.SPEED.y === 0) {
+                //         graphic.stop();
+                //     } else {
+                //         graphic.play();
+                //     };
+                // }
+
+            applySize(el, graphic);
             } else {
-                // if (map[el.id]) {
-                //     freeUpGraphic(map[el.id]);
-                // };
+                if (map[el.id]) {
+                    freeUpGraphic(map[el.id]);
+                };
             };
         });
-
+        // this.app.ticker.stop(); //* !!!!!!
         // console.log(`Stage.children.length : ${this.app.stage.children.length}`);
         // console.log(`free graphics length : ${this.freeGraphics.length}`);
     };

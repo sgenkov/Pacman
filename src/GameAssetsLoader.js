@@ -3,6 +3,7 @@ import * as PIXI from 'pixi.js';
 import sheetSource from './config/pacmanSheet.json';
 import sheetSource2 from './config/ghostsSheet.json';
 import sheetSource3 from './config/logo.json';
+import sheetSource4 from './config/dotsNEyes.json';
 import { assets } from './config/scene.json';
 import DC from './config/debugConfig.json';
 import { model } from './index';
@@ -53,6 +54,12 @@ export default class GameAssetsLoader {
 
         for (let key in sheetSource3.frames) { //* load logo
             this.SHEETS[key.split('.')[0]] = new PIXI.Texture(app.loader.resources["logo"].texture);
+        };
+
+        baseSheet = new PIXI.BaseTexture.from(app.loader.resources["dotsNEyes"].url);
+        for (let key in sheetSource4.frames) { //* load sheet2
+            const { x, y, w, h } = sheetSource4.frames[key].frame;
+            this.SHEETS[key.split('.')[0]] = new PIXI.Texture(baseSheet, new PIXI.Rectangle(x, y, w, h));
         };
         // console.log(this.SHEETS);
         model.ASSETS_LOADED = true;

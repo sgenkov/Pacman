@@ -12,16 +12,15 @@ export default class CommonBehaviours {
 
     this.commonBehaviours = {
       "move": (el) => {
-        // DC.traceBehaviours && console.log('move behaviour'); //^ FLOW
+        DC.traceBehaviours && console.log('move behaviour'); //^ FLOW
         el.rect.x += el.speed.x;
         el.rect.y += el.speed.y;
+        (el.rect.x > 620) && (el.rect.x = 0);
+        (el.rect.x < 0) && (el.rect.x = 620);
       },
       "moveUp": (el) => {
         DC.traceBehaviours && console.log('moveUp behaviour'); //^ FLOW
-        // console.log(el.currentNode);
         if (!possibleMove(el.currentNode.EDGES, "up")) return;
-        // el.prevNode = el.currentNode;
-        // el.currentNode = null;
         el.lastMovementDirection = "up";
         el.speed.x = 0;
         el.speed.y = -complexSpeed(el);
@@ -57,7 +56,6 @@ export default class CommonBehaviours {
         el.speed.x = 0;
         el.speed.y = 0;
         el.behaviours = el.behaviours.filter(e => e !== "stop");
-        // el.behaviours.shift();
       },
       "debugger": () => {
         debugger;

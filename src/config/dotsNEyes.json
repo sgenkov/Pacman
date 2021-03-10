@@ -1,0 +1,54 @@
+{"frames": {
+
+"bigDot.png":
+{
+	"frame": {"x":1,"y":1,"w":6,"h":6},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":6,"h":6},
+	"sourceSize": {"w":6,"h":6}
+},
+"eyes_D.png":
+{
+	"frame": {"x":22,"y":1,"w":10,"h":5},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":10,"h":5},
+	"sourceSize": {"w":10,"h":5}
+},
+"eyes_R.png":
+{
+	"frame": {"x":9,"y":1,"w":11,"h":5},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":11,"h":5},
+	"sourceSize": {"w":11,"h":5}
+},
+"eyes_U.png":
+{
+	"frame": {"x":34,"y":1,"w":10,"h":5},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":10,"h":5},
+	"sourceSize": {"w":10,"h":5}
+},
+"smallDot.png":
+{
+	"frame": {"x":46,"y":1,"w":2,"h":2},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":2,"h":2},
+	"sourceSize": {"w":2,"h":2}
+}},
+"animations": {
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "DotsNEyes.png",
+	"format": "RGBA8888",
+	"size": {"w":49,"h":8},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:a42afbf73f6dff24e63d2da729fbf7a5:72f1ce41ca86ab2ba0d3857fd2591ffd:e9af73fa0d0826393eeb07a0eb1a488d$"
+}
+}

@@ -23,18 +23,12 @@ export default class Game extends EventTarget {
     graphHandler.nodesCreate();
     this.commonBehavioursInstance = new CommonBehaviours();              //TODO: Refactor this V
     this.behaviours = this.commonBehavioursInstance.commonBehaviours;    //TODO: Refactor this ^
-
-    model.assignPlayer(this.factory.getUnit("player"));
-    model.assignGhost(this.factory.getUnit("ghost", "orange"));
-    model.assignGhost(this.factory.getUnit("ghost", "blue"));
-    model.assignGhost(this.factory.getUnit("ghost", "pink"));
-    model.assignGhost(this.factory.getUnit("ghost", "red"));
-    // model.emplaceDots(this.dotManager.createDots());
-    
+    this.createUnits();
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));
     this.addBackground();
     // this.addEventListener("testEvent", (event) => {console.log(event)});
+    setTimeout(() => console.log(model.gameElements), 4000)
     app.ticker.add(this.gameTicker);
   };
 
@@ -46,8 +40,11 @@ export default class Game extends EventTarget {
   };
 
   gameTicker = () => {
-    ++ this.loopCount;
+    ++this.loopCount;
     // if (this.loopCount % 20 === 0) this.dispatchEvent(new CustomEvent("testEvent"));
+
+    // if (this.loopCount > 1000 && this.loopCount < 1002) console.log(model.gameElements);
+    
 
     let {
       behaviours,
@@ -67,16 +64,16 @@ export default class Game extends EventTarget {
     model.gameElements.forEach(gameElement => {
       model.nodes.forEach(node => {
         // if (colideWithCircle(node, model.player)) {
-          // console.log(gameElement.name);
+        // console.log(gameElement.name);
         if (gameElement.name !== "dot" && node.vertexData && node.vertexData[0] === gameElement.rect.x && node.vertexData[1] === gameElement.rect.y) {
-            gameElement.currentNode = node;
-            gameElement.allowedDirections.length = 0;
-  
-              for (let allowedDirection in gameElement.currentNode.EDGES) {
-                gameElement.allowedDirections.push(allowedDirection);
-              };
-          
-          
+          gameElement.currentNode = node;
+          gameElement.allowedDirections.length = 0;
+
+          for (let allowedDirection in gameElement.currentNode.EDGES) {
+            gameElement.allowedDirections.push(allowedDirection);
+          };
+
+
 
           if (!node.EDGES.hasOwnProperty(gameElement.lastMovementDirection)) {
             // (!model.player.behaviours.includes("stop")) && model.player.behaviours.unshift("stop");
@@ -90,7 +87,7 @@ export default class Game extends EventTarget {
             currentAction(gameElement);
           };
 
-          
+
         };
 
 
@@ -103,7 +100,17 @@ export default class Game extends EventTarget {
     delegate.render(model.gameElements);
   };
 
+  createUnits = () => {
+    model.emplaceDots(this.dotManager.createDots());
+    model.assignPlayer(this.factory.getUnit("player"));
+    model.assignGhost(this.factory.getUnit("ghost", "red"));
+    // model.assignGhost(this.factory.getUnit("ghost", "orange"));
+    // model.assignGhost(this.factory.getUnit("ghost", "blue"));
+    // model.assignGhost(this.factory.getUnit("ghost", "pink"));
+  };
+
   updateGameInfo = () => {
+    if (!model.player) return; //! Delete this row later
     let nodeEdges = '';
     for (let edge in model.player.currentNode.EDGES) {
       nodeEdges += edge + ' : ' + model.player.currentNode.EDGES[edge] + '\n';

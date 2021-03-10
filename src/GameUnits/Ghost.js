@@ -66,12 +66,11 @@ export default class Ghost extends GameUnit {
     };
 
     getNextState = () => {
-        this.states.unshift(this.states.pop());
         const NEXT_STATE = this.states[0];
-        // console.log(NEXT_STATE); 
+        this.states.push(this.states.shift());
         return NEXT_STATE;
     };
-    deInit = () => {
+    deInit = () => {//* Not used
         // this.removeEventListener("testEvent", (event) => { console.log(event) });
     }
 

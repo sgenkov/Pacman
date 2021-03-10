@@ -3,5 +3,5 @@
     "objectsCreation": false,
     "traceBehaviours": false,
     "assetsLoading": false,
-    "pathTinting": true
+    "pathTinting": false
 }

@@ -4,11 +4,13 @@ import DC from './config/debugConfig.json';
 
 export default class GraphicElement {
   constructor(el) {
+    this.dotsCount = 0; //! Del this 
     this.name = el.name;
+    this.type = el.type;
     this.color = el.color;
     this.sheet = null;
     this.lastMovementDirection = el.lastMovementDirection;
-    this.LAST_MOVEMENT_DIRECTION = el.lastMovementDirection;
+    // this.LAST_MOVEMENT_DIRECTION = el.lastMovementDirection;
     this.unitMap = new Map([
       ["pacman", this.createPacman],
       ["ghost", this.createGhost],
@@ -22,7 +24,8 @@ export default class GraphicElement {
       this.unitMap.get(el.name)(el);
     } catch {
       console.log("UNKNOWN GRAPHIC TYPE!");
-    }
+    };
+    
   };
 
   createPacman = (el) => {
@@ -38,9 +41,7 @@ export default class GraphicElement {
     this.sheet.anchor.set(0.5);
     this.sheet.animationSpeed = 0.2;
     this.sheet.loop = true;
-    this.sheet.NAME = this.name; //* future use   
-    // this.sprite.STATE = el.state; //* future use
-
+    // this.sheet.NAME = this.name; //* future use   
   };
 
   createGhost = (el) => {
@@ -77,21 +78,28 @@ export default class GraphicElement {
     this.sheet.NAME = this.name;
   };
 
-  createDot = () => {
+  createDot = (el) => {
     console.log('Dot Created');
+    // console.log(el.type);
     // this.sheet = new PIXI.Graphics();
     // this.sheet.beginFill(0xFFF748);
     // this.sheet.drawCircle(el.position.x, el.position.y, el.radius);
     // this.sheet.endFill();
-    this.sheet = new PIXI.AnimatedSprite([
-      assetsLoader.SHEETS[`ghost_scared3`],
-      assetsLoader.SHEETS[`ghost_scared4`],
+
+    // this.sheet = PIXI.Sprite.from(assetsLoader.SHEETS[`${el.type}Dot`]); //* alternative
+
+    this.sheet = new PIXI.AnimatedSprite([ //* alternative
+      assetsLoader.SHEETS[`${el.type}Dot`]
     ]);
+
     this.sheet.anchor.set(0.5);
-    this.sheet.animationSpeed = 0.2;
-    // this.sheet.scale.x = 4 //? Why this doesn't work?
-    this.sheet.loop = true;
-    this.sheet.NAME = this.name;
+    this.sheet.REVERSE = false;
+    this.sheet.loop = false;
+    // this.sheet.NAME = this.name;
+    // this.sheet.TYPE = this.type;
+    // this.sheet.interactive = true;
+    // this.sheet.buttonMode = true;
+    // this.sheet.on('click', () => console.log(this.sheet));
   };
 
 };
