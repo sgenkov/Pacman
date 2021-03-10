@@ -5,6 +5,7 @@ export default class Dot {
     constructor(position, type = "small") {
         this.name = "dot";
         this.type = type;
+        this.speed = { x: 0, y: 0 };
         this.position = position;
         this.radius = (type === "small")
             ? 2
@@ -13,7 +14,7 @@ export default class Dot {
         this.eaten = false;
         this.rect = new Rectangle(this.position.x, this.position.y, 12, 12);
         this.behaviours = [];
-        // this.draw();
+        // this.draw(); 
     };
 
     draw = () => { //? Obsolete?

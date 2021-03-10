@@ -48,10 +48,10 @@
     "redGhost": 69
   },
   "bigFoodPositionsByNodeId": [
-    50,
-    32,
     64,
-    31
+    32,
+    31,
+    50
   ],
   "exceptionDots": [
     68, 69, 11, 10

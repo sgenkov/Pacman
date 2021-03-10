@@ -1,5 +1,6 @@
 import { colide } from "./Utils/utils";
 import GraphicElement from './GraphicElement';
+const _ = require('lodash');
 export default class PixiDelegate {
     constructor(app, size) {
         this.app = app;
@@ -20,7 +21,7 @@ export default class PixiDelegate {
         graphic.TYPE = el.type;
         graphic.state = el.state;
         this.graphics.push(graphic);
-        return graphic.sheet;
+        return graphic;
     }
 
     getGraphic = (el) => {
@@ -56,9 +57,9 @@ export default class PixiDelegate {
                     && (g.type === el.type)
                     // && (g.NAME === el.name)
                 );
-                // console.log(res);
                 return res;
             });
+            // console.log(graphics[foundIndex]);
             // console.log(foundIndex);
         }
 
@@ -67,12 +68,12 @@ export default class PixiDelegate {
 
         if (graphics.length === 0 || foundIndex === -1) {
             // console.log('create');
-            graphic = createElement(el);
+            graphic = createElement(el).sheet;
             // console.log(graphic);
         } else {
             // console.log('found');
-            graphic = graphics[foundIndex].sheet;
-            // console.log(graphic);
+            const foundGraphic = graphics[foundIndex].sheet;
+            graphic = _.cloneDeep(foundGraphic);
         };
         // console.log(graphic);
         stage.addChild(graphic);
@@ -152,13 +153,11 @@ export default class PixiDelegate {
                     graphic = map[el.id];
                 } else {
                     graphic = getGraphic(el);
-                    if (graphic.SPEED) {
                         if (graphic.SPEED.x === 0 && graphic.SPEED.y === 0) {
                             graphic.stop();
                         } else {
                             graphic.play();
                         };
-                    }
                 };
 
 

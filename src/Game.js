@@ -103,9 +103,9 @@ export default class Game extends EventTarget {
   createUnits = () => {
     model.emplaceDots(this.dotManager.createDots());
     model.assignPlayer(this.factory.getUnit("player"));
-    model.assignGhost(this.factory.getUnit("ghost", "red"));
+    // model.assignGhost(this.factory.getUnit("ghost", "red"));
     // model.assignGhost(this.factory.getUnit("ghost", "orange"));
-    // model.assignGhost(this.factory.getUnit("ghost", "blue"));
+    model.assignGhost(this.factory.getUnit("ghost", "blue"));
     // model.assignGhost(this.factory.getUnit("ghost", "pink"));
   };
 
