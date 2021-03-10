@@ -47,8 +47,9 @@ export default class PixiDelegate {
         } else {
             graphic = graphics[foundIndex].sheet;
         };
-
+        // console.log(graphic);
         stage.addChild(graphic);
+        // console.log(stage);
         graphic.geId = el.id;
         el.GRAPHIC = graphic; //* Suspicious - Ask Evgeni
         return graphic;
@@ -128,6 +129,7 @@ export default class PixiDelegate {
                 // };
                 // };
                 graphic = getGraphic(el);
+                if (!graphic.SPEED) return;
                 if (graphic.SPEED.x === 0 && graphic.SPEED.y === 0) {
                     graphic.stop();
                     // console.log('stop');

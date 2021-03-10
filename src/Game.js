@@ -67,7 +67,8 @@ export default class Game extends EventTarget {
     model.gameElements.forEach(gameElement => {
       model.nodes.forEach(node => {
         // if (colideWithCircle(node, model.player)) {
-        if (node.vertexData && node.vertexData[0] === gameElement.rect.x && node.vertexData[1] === gameElement.rect.y) {
+          // console.log(gameElement.name);
+        if (gameElement.name !== "dot" && node.vertexData && node.vertexData[0] === gameElement.rect.x && node.vertexData[1] === gameElement.rect.y) {
             gameElement.currentNode = node;
             gameElement.allowedDirections.length = 0;
   

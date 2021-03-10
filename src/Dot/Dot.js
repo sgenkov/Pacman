@@ -12,8 +12,8 @@ export default class Dot {
         // this.graphic = {};
         this.eaten = false;
         this.rect = new Rectangle(this.position.x, this.position.y, 12, 12);
-
-        this.draw();
+        this.behaviours = [];
+        // this.draw();
     };
 
     draw = () => { //? Obsolete?
