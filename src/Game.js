@@ -29,7 +29,7 @@ export default class Game extends EventTarget {
     model.assignGhost(this.factory.getUnit("ghost", "blue"));
     model.assignGhost(this.factory.getUnit("ghost", "pink"));
     model.assignGhost(this.factory.getUnit("ghost", "red"));
-    model.emplaceDots(this.dotManager.createDots());
+    // model.emplaceDots(this.dotManager.createDots());
     
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));
