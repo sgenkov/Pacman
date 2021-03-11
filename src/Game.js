@@ -6,6 +6,8 @@ import DC from './config/debugConfig.json'; // ^FLOW
 import * as PIXI from 'pixi.js';
 import { assetsLoader } from './index';
 import DotManager from './Dot/DotManager';
+import { colide } from './Utils/utils';
+
 export default class Game extends EventTarget {
   constructor(delegate) {
     super();
@@ -28,7 +30,6 @@ export default class Game extends EventTarget {
     document.addEventListener("keyup", (e) => onKeyUp(e));
     this.addBackground();
     // this.addEventListener("testEvent", (event) => {console.log(event)});
-    setTimeout(() => console.log(model.gameElements), 4000)
     app.ticker.add(this.gameTicker);
   };
 
@@ -40,17 +41,10 @@ export default class Game extends EventTarget {
   };
 
   gameTicker = () => {
-    ++this.loopCount;
-    // if (this.loopCount % 20 === 0) this.dispatchEvent(new CustomEvent("testEvent"));
-
-    // if (this.loopCount > 1000 && this.loopCount < 1002) console.log(model.gameElements);
-    
-
     let {
       behaviours,
       delegate,
     } = this;
-
 
     model.gameElements.forEach(el => {
       el.behaviours.forEach(b => {
@@ -62,9 +56,9 @@ export default class Game extends EventTarget {
     });
 
     model.gameElements.forEach(gameElement => {
+
       model.nodes.forEach(node => {
         // if (colideWithCircle(node, model.player)) {
-        // console.log(gameElement.name);
         if (gameElement.name !== "dot" && node.vertexData && node.vertexData[0] === gameElement.rect.x && node.vertexData[1] === gameElement.rect.y) {
           gameElement.currentNode = node;
           gameElement.allowedDirections.length = 0;
@@ -87,15 +81,11 @@ export default class Game extends EventTarget {
             currentAction(gameElement);
           };
 
-
         };
-
 
         this.updateGameInfo();
       });
     });
-
-
 
     delegate.render(model.gameElements);
   };
@@ -103,19 +93,17 @@ export default class Game extends EventTarget {
   createUnits = () => {
     model.emplaceDots(this.dotManager.createDots());
     model.assignPlayer(this.factory.getUnit("player"));
-    // model.assignGhost(this.factory.getUnit("ghost", "red"));
-    // model.assignGhost(this.factory.getUnit("ghost", "orange"));
+    model.assignGhost(this.factory.getUnit("ghost", "pink"));
+    model.assignGhost(this.factory.getUnit("ghost", "orange"));
     model.assignGhost(this.factory.getUnit("ghost", "blue"));
-    // model.assignGhost(this.factory.getUnit("ghost", "pink"));
+    model.assignGhost(this.factory.getUnit("ghost", "red"));
   };
 
   updateGameInfo = () => {
-    if (!model.player) return; //! Delete this row later
     let nodeEdges = '';
     for (let edge in model.player.currentNode.EDGES) {
       nodeEdges += edge + ' : ' + model.player.currentNode.EDGES[edge] + '\n';
     };
-    // console.log('infoUp');
     model.player.updateInfo(model.player.rect.x, model.player.rect.y, `node Id: ${model.player.currentNode.ID}` + '\n' + nodeEdges);
   };
 
@@ -127,7 +115,6 @@ export default class Game extends EventTarget {
     backGround.position.y = app.view.height / 2;
     backGround.scale.x = 2.75;
     backGround.scale.y = 2.75;
-    // this.backGround = backGround; 
     app.stage.addChild(backGround);
   };
 

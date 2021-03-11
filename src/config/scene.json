@@ -42,10 +42,10 @@
   ],
   "startingNodes": {
     "pacman": 22,
-    "blueGhost": 10,
+    "blueGhost": 69,
     "orangeGhost": 11,
     "pinkGhost": 68,
-    "redGhost": 69
+    "redGhost": 10
   },
   "bigFoodPositionsByNodeId": [
     64,

@@ -4,7 +4,6 @@ import DC from './config/debugConfig.json';
 
 export default class GraphicElement {
   constructor(el) {
-    this.dotsCount = 0; //! Del this 
     this.name = el.name;
     this.type = el.type;
     this.color = el.color;
@@ -25,7 +24,7 @@ export default class GraphicElement {
     } catch {
       console.log("UNKNOWN GRAPHIC TYPE!");
     };
-    
+
   };
 
   createPacman = (el) => {
@@ -37,11 +36,9 @@ export default class GraphicElement {
       assetsLoader.SHEETS.pacman3,
     ]);
     this.sheet.REVERSE = false;
-    // this.sheet.scale.x = -1; //* this works well
     this.sheet.anchor.set(0.5);
     this.sheet.animationSpeed = 0.2;
     this.sheet.loop = true;
-    // this.sheet.NAME = this.name; //* future use   
   };
 
   createGhost = (el) => {
@@ -69,8 +66,6 @@ export default class GraphicElement {
         this.sheet.REVERSE = false;
       };
     };
-
-
     this.sheet.anchor.set(0.5);
     this.sheet.animationSpeed = 0.2;
     // this.sheet.scale.x = 4 //? Why this doesn't work?
@@ -79,27 +74,10 @@ export default class GraphicElement {
   };
 
   createDot = (el) => {
-    console.log('Dot Created');
-    // console.log(el.type);
-    // this.sheet = new PIXI.Graphics();
-    // this.sheet.beginFill(0xFFF748);
-    // this.sheet.drawCircle(el.position.x, el.position.y, el.radius);
-    // this.sheet.endFill();
-
-    // this.sheet = PIXI.Sprite.from(assetsLoader.SHEETS[`${el.type}Dot`]); //* alternative
-
-    this.sheet = new PIXI.AnimatedSprite([ //* alternative
+    this.sheet = new PIXI.AnimatedSprite([
       assetsLoader.SHEETS[`${el.type}Dot`]
     ]);
-
     this.sheet.anchor.set(0.5);
-    this.sheet.REVERSE = false;
-    this.sheet.loop = false;
-    // this.sheet.NAME = this.name;
-    // this.sheet.TYPE = this.type;
-    // this.sheet.interactive = true;
-    // this.sheet.buttonMode = true;
-    // this.sheet.on('click', () => console.log(this.sheet));
   };
 
 };

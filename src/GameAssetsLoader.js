@@ -16,6 +16,7 @@ export default class GameAssetsLoader {
 
     loadAssets = () => {
         app.loader.baseUrl = "./assets";
+        // app.loader.baseUrl = "./alternativeAssets";
         assets.forEach(asset => app.loader.add(asset[0], asset[1]));
 
         app.loader.onProgress.add(this.showProgress);

@@ -10,7 +10,6 @@ export default class Dot {
         this.radius = (type === "small")
             ? 2
             : 7;
-        // this.graphic = {};
         this.eaten = false;
         this.rect = new Rectangle(this.position.x, this.position.y, 12, 12);
         this.behaviours = [];
@@ -23,11 +22,7 @@ export default class Dot {
         this.graphic.beginFill(0xFFF748);
         this.graphic.drawCircle(position.x, position.y, radius);
         this.graphic.endFill();
-
         app.stage.addChild(this.graphic);
-        // graphic.ID = el.id;
-        // graphic.EDGES = el.edges;
-        // model.nodes.push(graphic);
     };
 
 
