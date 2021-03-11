@@ -2,6 +2,7 @@ import { map } from './config/scene.json';
 import { app, model } from './index';
 import * as PIXI from 'pixi.js';
 import Graph from 'node-dijkstra';
+import DC from './config/debugConfig.json';
 export default class GraphHandler {
   constructor() {
     this.maze = this.createGraph();
@@ -42,15 +43,14 @@ export default class GraphHandler {
   nodesCreate = () => {
     map.forEach((el) => {
       let graphic = new PIXI.Graphics();
-      const color = 0xffffff;
-      graphic.beginFill(color);
-      graphic.drawCircle(el.position.x, el.position.y, 5); //TODO: Turn back the 3-th param to 1
+      graphic.beginFill(0xffffff);
+      graphic.drawCircle(el.position.x, el.position.y, DC.nodesInteractive?5:0); //TODO: Turn back the 3-th param to 1
       graphic.endFill(); //? What is this used for in PIXI.js ?
-      graphic.interactive = true;
-      graphic.buttonMode = true;
+      DC.nodesInteractive && (graphic.interactive = true); //^ DEBUG
+      DC.nodesInteractive && (graphic.buttonMode = true); //^ DEBUG
       graphic.ID = el.id;
       graphic.EDGES = el.edges;
-      graphic.on('click', () => console.log(el));
+      DC.nodesInteractive && (graphic.on('click', () => console.log(el))); //^ DEBUG
       model.nodes.push(graphic);
     });
     app.stage.addChild(...model.nodes);

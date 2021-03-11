@@ -3,5 +3,6 @@
     "objectsCreation": false,
     "traceBehaviours": false,
     "assetsLoading": false,
-    "pathTinting": false
+    "pathTinting": false,
+    "nodesInteractive": false
 }

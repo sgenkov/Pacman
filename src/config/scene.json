@@ -54,7 +54,54 @@
     50
   ],
   "exceptionDots": [
-    68, 69, 11, 10
+    68,
+    69,
+    11,
+    10
+  ],
+  "gameElementsConfig": [
+    {
+      "name": "pacman",
+      "behaviours": [
+        "player1",
+        "move",
+        "updateInfo"
+      ],
+      "hitGroup": [
+        "pacman"
+      ],
+      "colides": {
+        "dot": [
+          "score"
+        ],
+        "ghost": [
+          "suffer"
+        ]
+      }
+    },
+    {
+      "name": "ghost",
+      "behaviours": [
+        "move"
+      ],
+      "hitGroup": [
+        "ghost"
+      ],
+      "colides": {
+        "pacman": [
+          "die"
+        ]
+      }
+    },
+    {
+      "name": "dot",
+      "hitGroup": "dot",
+      "colides": {
+        "pacman": [
+          "disappear"
+        ]
+      }
+    }
   ],
   "map": [
     {
