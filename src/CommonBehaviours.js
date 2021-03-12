@@ -66,11 +66,18 @@ export default class CommonBehaviours {
       },
       disappear: (el) => {
         DC.unitsCollisionTrace && console.log('Disappear behaviour triggered');
-        el.eaten = true;
-        // app.stage.removeChild(el.GRAPHIC);
-        // const index = model.gameElements.findIndex(e => e === el);
-        // model.gameElements.splice(index,1);
-        // model.gameElements = model.gameElements.filter(ge => ge !== el);
+        app.stage.removeChild(el.GRAPHIC);
+        if (el.name === 'dot') {
+          ++model.score;
+          if (el.type === 'big') {
+            model.ghosts.forEach(ghost => ghost.innerStateMachine.setState("scared"));
+          };
+        } else {
+          model.score += 15;
+        };
+
+        model.updateScoreInfo();
+        model.gameElements = model.gameElements.filter(ge => ge !== el);
         el.behaviours = el.behaviours.filter(e => e !== "disappear");
       },
       die: (el) => {

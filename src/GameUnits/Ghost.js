@@ -13,7 +13,7 @@ export default class Ghost extends GameUnit {
         this.colides = null;
         this.eaten = null;
 
-        this.states = ["enraged", "scared", "wandering"];//, "wandering"
+        this.states = ["enraged", "wandering"];//, "wandering"
 
         this.innerStateMachine = new StateMachine({
             enraged: {

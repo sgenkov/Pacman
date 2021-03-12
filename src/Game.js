@@ -31,8 +31,7 @@ export default class Game extends EventTarget {
     this.addBackground();
     // this.addEventListener("testEvent", (event) => {console.log(event)});
     app.ticker.add(this.gameTicker);
-    setInterval(() => { console.log(model.gameElements.length) }, 2000);
-
+    // setInterval(() => { console.log(model.gameElements.length) }, 2000);
   };
 
   deInit = () => {
@@ -111,11 +110,11 @@ export default class Game extends EventTarget {
   };
 
   updateGameInfo = () => {
-    let nodeEdges = '';
-    for (let edge in model.player.currentNode.EDGES) {
-      nodeEdges += edge + ' : ' + model.player.currentNode.EDGES[edge] + '\n';
-    };
-    model.player.updateInfo(model.player.rect.x, model.player.rect.y, `node Id: ${model.player.currentNode.ID}` + '\n' + nodeEdges);
+    // let nodeEdges = '';
+    // for (let edge in model.player.currentNode.EDGES) {
+    //   nodeEdges += edge + ' : ' + model.player.currentNode.EDGES[edge] + '\n';
+    // };
+    // model.player.updateInfo(model.player.rect.x, model.player.rect.y, `node Id: ${model.player.currentNode.ID}` + '\n' + nodeEdges);
   };
 
   addBackground = () => {
