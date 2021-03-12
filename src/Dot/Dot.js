@@ -4,6 +4,7 @@ import Rectangle from '../Rectangle';
 export default class Dot {
     constructor(position, type = "small") {
         this.name = "dot";
+        this.hitGroup = this.name; //? Obsolete
         this.type = type;
         this.speed = { x: 0, y: 0 };
         this.position = position;
@@ -13,6 +14,9 @@ export default class Dot {
         this.eaten = false;
         this.rect = new Rectangle(this.position.x, this.position.y, 12, 12);
         this.behaviours = [];
+        this.colides = {
+            "pacman": ["disappear"]
+        };
         // this.draw(); 
     };
 

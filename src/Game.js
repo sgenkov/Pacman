@@ -31,6 +31,8 @@ export default class Game extends EventTarget {
     this.addBackground();
     // this.addEventListener("testEvent", (event) => {console.log(event)});
     app.ticker.add(this.gameTicker);
+    setTimeout(()=>{console.log(model.gameElements)},2000);
+    
   };
 
   deInit = () => {

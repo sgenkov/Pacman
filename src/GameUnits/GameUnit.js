@@ -8,7 +8,7 @@ export default class GameUnit {
         DC.objectsCreation && console.log("Unit created"); //^ FLOW
         this.name = unitName;
         this.currentNode = color? model.defaultLocations[`${color}Ghost`].node : model.defaultLocations[unitName].node;
-        
+        this.hitGroup = unitName; //? Obsolete
         this.previousNode = null;
         this.radius = 1;
         this.lastMovementDirection = 'left';

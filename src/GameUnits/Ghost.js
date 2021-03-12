@@ -1,6 +1,7 @@
 import GameUnit from './GameUnit';
 import { GhostEnragedStrategy, GhostWanderingStrategy, GhostScaredStrategy, GhostEatenStrategy } from '../UnitStrategies';
 import StateMachine from '../StateMachine';
+import { binaryReprezentation } from '../Utils/utils';
 export default class Ghost extends GameUnit {
     constructor(color) {
         const unitName = "ghost";
@@ -9,6 +10,9 @@ export default class Ghost extends GameUnit {
         this.behaviours = ["move"];
         this.state = null;
         this.strategy = null;
+        this.colides = {
+            "pacman": []
+        };
 
         this.states = ["enraged", "scared", "wandering"];//, "wandering"
 

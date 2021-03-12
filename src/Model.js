@@ -4,7 +4,7 @@ export default class Model extends EventTarget {
         super();
         this.ASSETS_LOADED = false;
         this.gameElements = [];
-        this.freeGameElements = [];
+        // this.freeGameElements = [];
         this.nodes = [];
         this.player = null;
         this.ghost = null;

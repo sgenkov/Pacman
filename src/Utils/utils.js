@@ -18,6 +18,7 @@ export const colideWithCircle = (node, unit) => {
 export const binaryReprezentation = [
     "player",
     "ghost",
+    "dot"
 ].reduce((map, key, index) => {
     return {
         ...map,
