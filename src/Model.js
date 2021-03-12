@@ -12,7 +12,8 @@ export default class Model extends EventTarget {
         this.nodes = [];
         this.player = null;
         this.ghosts = [];
-        this.dots = null;
+        // this.dots = null;
+        this.loopCount = 0;
         this.defaultLocations = {
             pacman: { node: this.calculatePosition('pacman') },
             blueGhost: { node: this.calculatePosition('blueGhost') },
@@ -34,7 +35,7 @@ export default class Model extends EventTarget {
     };
 
     emplaceDots = (dots) => {
-        this.dots = dots;
+        // this.dots = dots;
         dots.forEach(dot => this.gameElements.push(dot));
         // this.gameElements = [...this.gameElements, ...dots];
     };

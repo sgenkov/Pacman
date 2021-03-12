@@ -13,9 +13,9 @@ export default class Game extends EventTarget {
     super();
     this.name = "play";
     this.delegate = delegate;
-    this.score = 0;
+    // this.score = 0;
     this.backGround = null;
-    this.loopCount = 0;
+    // this.loopCount = 0;
   };
 
   init = () => {
@@ -42,6 +42,12 @@ export default class Game extends EventTarget {
   };
 
   gameTicker = () => {
+    ++model.loopCount;
+    if (model.loopCount % 400 === 0) {
+      console.log('ghost state changed');
+      model.ghosts.forEach(ghost => ghost.innerStateMachine.setState(ghost.getNextState()));
+    };
+
     let {
       behaviours,
       delegate,

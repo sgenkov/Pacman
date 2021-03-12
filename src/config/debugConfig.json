@@ -3,7 +3,7 @@
     "objectsCreation": false,
     "traceBehaviours": false,
     "assetsLoading": false,
-    "pathTinting": false,
-    "nodesInteractive": 0,
+    "pathTinting": 1,
+    "nodesInteractive": 1,
     "unitsCollisionTrace": 0
 }
