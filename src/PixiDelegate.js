@@ -23,7 +23,13 @@ export default class PixiDelegate {
     }
 
     getGraphic = (el) => {
+        // if (el.GRAPHIC && el.eaten === true) {
+        //     this.app.stage.removeChild(el.GRAPHIC); //TODO: Ask Evgeni for this solution
+        //     return;
+        // } else {
+        // };
         this.app.stage.removeChild(el.GRAPHIC); //TODO: Ask Evgeni for this solution
+        
         let {
             graphics,
             createElement,
@@ -63,6 +69,7 @@ export default class PixiDelegate {
         } else {
             graphic = graphics[foundIndex].sheet;
         };
+
         stage.addChild(graphic);
         graphic.geId = el.id;
         el.GRAPHIC = graphic; //* Suspicious - Ask Evgeni
@@ -118,7 +125,13 @@ export default class PixiDelegate {
                 }
             }
         }, {});
+        // app.stage.removeChildren();
         gameElements.forEach(el => {
+            if (el.eaten === true) {
+                stage.removeChild(el.GRAPHIC);
+                return;
+            };
+
             let graphic;
 
             if (map[el.id]) {
@@ -133,6 +146,7 @@ export default class PixiDelegate {
             };
 
             applySize(el, graphic);
+            
         });
     };
 };

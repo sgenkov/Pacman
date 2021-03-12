@@ -1,5 +1,6 @@
 import DC from './config/debugConfig.json'; //^ FLOW
 import { possibleMove } from './Utils/utils';
+import { model, app } from './index';
 
 
 export default class CommonBehaviours {
@@ -63,17 +64,30 @@ export default class CommonBehaviours {
       updateInfo: (el) => {
         el.updateInfo();
       },
-      disappear: () => {
-        console.log('Disappear behaviour triggered');
+      disappear: (el) => {
+        DC.unitsCollisionTrace && console.log('Disappear behaviour triggered');
+        el.eaten = true;
+        // app.stage.removeChild(el.GRAPHIC);
+        // const index = model.gameElements.findIndex(e => e === el);
+        // model.gameElements.splice(index,1);
+        // model.gameElements = model.gameElements.filter(ge => ge !== el);
+        el.behaviours = el.behaviours.filter(e => e !== "disappear");
       },
-      die: () => {
-        console.log('Die behaviour triggered');
+      die: (el) => {
+        DC.unitsCollisionTrace && console.log('Die behaviour triggered');
+        el.behaviours = el.behaviours.filter(e => e !== "die");
       },
-      suffer: () => {
-        console.log('Suffer behaviour triggered');
+      suffer: (el) => {
+        DC.unitsCollisionTrace && console.log('Suffer behaviour triggered');
+        el.behaviours = el.behaviours.filter(e => e !== "suffer");
       },
-      score: () => {
-        console.log('Score behaviour triggered');
+      score: (el) => {
+        DC.unitsCollisionTrace && console.log('Score behaviour triggered');
+        el.behaviours = el.behaviours.filter(e => e !== "score");
+      },
+      nullBehaviour: (el) => {
+        DC.unitsCollisionTrace && console.log('Null behaviour triggered');
+        el.behaviours = el.behaviours.filter(e => e !== "nullBehaviour");
       }
     };
   }

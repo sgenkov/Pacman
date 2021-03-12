@@ -8,9 +8,8 @@ export default class Pacman extends GameUnit {
         this.createInfo(); //^ For coordinates tracking
         this.state = "alive";
         this.colides = {
-            "dot": [
-                "score"
-            ],
+            "dot":"score",
+            "ghost":"die"
             // "ghost": []
         };
         this.strategy = new PacmanStrategy();

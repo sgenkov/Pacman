@@ -4,5 +4,6 @@
     "traceBehaviours": false,
     "assetsLoading": false,
     "pathTinting": false,
-    "nodesInteractive": false
+    "nodesInteractive": 0,
+    "unitsCollisionTrace": 0
 }

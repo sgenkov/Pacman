@@ -15,7 +15,7 @@ export default class Dot {
         this.rect = new Rectangle(this.position.x, this.position.y, 12, 12);
         this.behaviours = [];
         this.colides = {
-            "pacman": ["disappear"]
+            "pacman": "disappear"
         };
         // this.draw(); 
     };

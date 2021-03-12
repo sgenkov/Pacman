@@ -31,8 +31,8 @@ export default class Game extends EventTarget {
     this.addBackground();
     // this.addEventListener("testEvent", (event) => {console.log(event)});
     app.ticker.add(this.gameTicker);
-    setTimeout(()=>{console.log(model.gameElements)},2000);
-    
+    setInterval(() => { console.log(model.gameElements.length) }, 2000);
+
   };
 
   deInit = () => {
@@ -86,6 +86,15 @@ export default class Game extends EventTarget {
         };
 
         this.updateGameInfo();
+      });
+    });
+
+    model.gameElements.forEach(gameElement1 => { //TODO: merge this loop with the upper one
+      model.gameElements.forEach(gameElement2 => {
+        if (gameElement1 === gameElement2) return;
+        if (colide(gameElement1.rect, gameElement2.rect) && (gameElement2.hitGroup in gameElement1.colides)) {
+            gameElement1.behaviours.push(gameElement1.colides[`${gameElement2.hitGroup}`])
+        };
       });
     });
 

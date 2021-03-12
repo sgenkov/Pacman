@@ -10,9 +10,8 @@ export default class Ghost extends GameUnit {
         this.behaviours = ["move"];
         this.state = null;
         this.strategy = null;
-        this.colides = {
-            "pacman": []
-        };
+        this.colides = null;
+        this.eaten = null;
 
         this.states = ["enraged", "scared", "wandering"];//, "wandering"
 
@@ -21,6 +20,9 @@ export default class Ghost extends GameUnit {
                 allowedStates: ["wandering", "scared"],
                 init: () => {
                     this.state = "enraged";
+                    this.colides = {
+                        "pacman": "nullBehaviour"
+                    };
                     this.strategy = new GhostEnragedStrategy();
                 },
                 deInit: () => {
@@ -32,6 +34,9 @@ export default class Ghost extends GameUnit {
                 allowedStates: ["enraged", "scared"],
                 init: () => {
                     this.state = "wandering";
+                    this.colides = {
+                        "pacman": "nullBehaviour"
+                    };
                     this.strategy = new GhostWanderingStrategy();
                 },
                 deInit: () => {
@@ -43,6 +48,9 @@ export default class Ghost extends GameUnit {
                 allowedStates: ["enraged", "wandering"],
                 init: () => {
                     this.state = "scared";
+                    this.colides = {
+                        "pacman": "disappear"
+                    };
                     this.strategy = new GhostScaredStrategy();
                 },
                 deInit: () => {
@@ -54,6 +62,9 @@ export default class Ghost extends GameUnit {
                 allowedStates: ["wandering"],
                 init: () => {
                     this.state = "eaten";
+                    this.colides = {
+                        "pacman": "nullBehaviour"
+                    };
                     this.strategy = new GhostEatenStrategy();
                 },
                 deInit: () => {
