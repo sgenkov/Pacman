@@ -50,6 +50,11 @@ export default class GraphicElement {
         assetsLoader.SHEETS[`ghost_scared2`],
       ]);
       this.sheet.REVERSE = true;
+    } else if (el.state === "eaten") {
+      
+      this.sheet = new PIXI.AnimatedSprite([
+        assetsLoader.SHEETS[`eyes_D`],
+      ]);
     } else {
       if (directionIndex === "L") {
         directionIndex = "R";
