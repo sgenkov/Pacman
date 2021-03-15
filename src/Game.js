@@ -7,6 +7,7 @@ import * as PIXI from 'pixi.js';
 import { assetsLoader } from './index';
 import DotManager from './Dot/DotManager';
 import { colide } from './Utils/utils';
+import { Howl } from 'howler';
 
 export default class Game extends EventTarget {
   constructor(delegate) {

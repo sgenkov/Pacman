@@ -1,10 +1,12 @@
 import DC from './config/debugConfig.json'; //^ FLOW
 import { possibleMove } from './Utils/utils';
 import { model, app } from './index';
+import { SoundProvider } from './SoundProvider';
 
 
 export default class CommonBehaviours {
   constructor() {
+    this.soundProvider = new SoundProvider();
     const complexSpeed = (el) => {
       const commonSpeed = 1;
       const resultSpeed = commonSpeed + el.baseSpeed;
@@ -66,18 +68,8 @@ export default class CommonBehaviours {
       },
       disappear: (el) => {
         DC.unitsCollisionTrace && console.log('Disappear behaviour triggered');
+        // this.soundProvider.eatDot.play();
         app.stage.removeChild(el.GRAPHIC);
-        // if (el.name === 'dot') {
-        //   ++model.score;
-        //   if (el.type === 'big') {
-        // model.ghosts.forEach(ghost => ghost.innerStateMachine.setState("scared"));
-        // model.loopCount = 0;
-        //   };
-        // } else {
-        // model.score += 15;
-        // el.innerStateMachine.setState("eaten");
-        // };
-
         if (el.type === "small") {
           ++model.score;
         } else {
@@ -88,9 +80,11 @@ export default class CommonBehaviours {
         model.updateScoreInfo();
         model.gameElements = model.gameElements.filter(ge => ge !== el);
         el.behaviours = el.behaviours.filter(e => e !== "disappear");
+
       },
       backToBase: (el) => {
         DC.unitsCollisionTrace && console.log('BackToBase behaviour triggered');
+        this.soundProvider.eatGhost.play();
         model.score += 15;
         el.innerStateMachine.setState("eaten");
         el.behaviours = el.behaviours.filter(e => e !== "backToBase");
