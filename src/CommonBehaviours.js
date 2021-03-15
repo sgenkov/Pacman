@@ -91,7 +91,6 @@ export default class CommonBehaviours {
       },
       backToBase: (el) => {
         DC.unitsCollisionTrace && console.log('BackToBase behaviour triggered');
-        console.log('back to base');
         model.score += 15;
         el.innerStateMachine.setState("eaten");
         el.behaviours = el.behaviours.filter(e => e !== "backToBase");

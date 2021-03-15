@@ -1,9 +1,8 @@
 import { model, graphHandler } from '../index';
 import { pathTinting } from '../config/debugConfig.json';
-import { startingNodes as ghostsEatenNodes } from '../config/scene.json';
+import { ghostsEatenNodes } from '../config/scene.json';
 export default class GhostEatenStrategy {
     constructor() {
-        console.log('NEW EATEN STRATEGY');
         this.colorMap = new Map([
             ["blue", 0x2659FF],
             ["pink", 0xF597DF],
@@ -12,10 +11,7 @@ export default class GhostEatenStrategy {
         ]);
     }
     calculateAction = (gameElement) => {
-        // const a = gameElement.color + "Ghost";
-        // const b = startingNodes[a];
         const destinationNode = ghostsEatenNodes[gameElement.color + "Ghost"]
-        console.log(destinationNode);
         if (destinationNode && gameElement.currentNode.ID) {
                 const shortestPath = graphHandler.calculateShortestPath(gameElement.currentNode.ID, destinationNode);
                 pathTinting && model.nodes.forEach(node => { //^path tracing
