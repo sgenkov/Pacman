@@ -51,10 +51,18 @@ export default class GraphicElement {
       ]);
       this.sheet.REVERSE = true;
     } else if (el.state === "eaten") {
-      
-      this.sheet = new PIXI.AnimatedSprite([
-        assetsLoader.SHEETS[`eyes_D`],
-      ]);
+      if (directionIndex === "L") {
+        directionIndex = "R";
+        this.sheet = new PIXI.AnimatedSprite([
+          assetsLoader.SHEETS[`eyes_${directionIndex}`],
+        ]);
+        this.sheet.REVERSE = true;
+      } else {
+        this.sheet = new PIXI.AnimatedSprite([
+          assetsLoader.SHEETS[`eyes_${directionIndex}`],
+        ]);
+        this.sheet.REVERSE = false;
+      }
     } else {
       if (directionIndex === "L") {
         directionIndex = "R";

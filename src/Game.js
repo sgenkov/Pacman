@@ -43,7 +43,7 @@ export default class Game extends EventTarget {
 
   gameTicker = () => {
     ++model.loopCount;
-    if (model.loopCount % 1000 === 0) {
+    if (model.loopCount % 600 === 0) {
       // console.log('ghost state changed');
       model.ghosts.forEach(ghost => ghost.innerStateMachine.setState(ghost.getNextState()));
     };
