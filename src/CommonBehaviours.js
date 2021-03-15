@@ -67,18 +67,34 @@ export default class CommonBehaviours {
       disappear: (el) => {
         DC.unitsCollisionTrace && console.log('Disappear behaviour triggered');
         app.stage.removeChild(el.GRAPHIC);
-        if (el.name === 'dot') {
+        // if (el.name === 'dot') {
+        //   ++model.score;
+        //   if (el.type === 'big') {
+        // model.ghosts.forEach(ghost => ghost.innerStateMachine.setState("scared"));
+        // model.loopCount = 0;
+        //   };
+        // } else {
+        // model.score += 15;
+        // el.innerStateMachine.setState("eaten");
+        // };
+
+        if (el.type === "small") {
           ++model.score;
-          if (el.type === 'big') {
-            model.ghosts.forEach(ghost => ghost.innerStateMachine.setState("scared"));
-          };
         } else {
-          model.score += 15;
-        };
+          model.ghosts.forEach(ghost => ghost.innerStateMachine.setState("scared"));
+          model.loopCount = 0;
+        }
 
         model.updateScoreInfo();
         model.gameElements = model.gameElements.filter(ge => ge !== el);
         el.behaviours = el.behaviours.filter(e => e !== "disappear");
+      },
+      backToBase: (el) => {
+        DC.unitsCollisionTrace && console.log('BackToBase behaviour triggered');
+        console.log('back to base');
+        model.score += 15;
+        el.innerStateMachine.setState("eaten");
+        el.behaviours = el.behaviours.filter(e => e !== "backToBase");
       },
       die: (el) => {
         DC.unitsCollisionTrace && console.log('Die behaviour triggered');

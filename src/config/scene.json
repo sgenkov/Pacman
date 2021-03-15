@@ -5,7 +5,15 @@
         "moveLeft",
         "right"
       ],
+      "37": [
+        "moveLeft",
+        "right"
+      ],
       "68": [
+        "moveRight",
+        "left"
+      ],
+      "39": [
         "moveRight",
         "left"
       ],
@@ -13,7 +21,15 @@
         "moveDown",
         "up"
       ],
+      "40": [
+        "moveDown",
+        "up"
+      ],
       "87": [
+        "moveUp",
+        "down"
+      ],
+      "38": [
         "moveUp",
         "down"
       ],
@@ -46,6 +62,12 @@
     "orangeGhost": 11,
     "pinkGhost": 68,
     "redGhost": 10
+  },
+  "ghostsEatenNodes": {
+    "blueGhost": 69,
+    "orangeGhost": 11,
+    "pinkGhost": 68,
+    "redGhost": 69
   },
   "bigFoodPositionsByNodeId": [
     64,
