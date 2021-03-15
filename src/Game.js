@@ -44,7 +44,7 @@ export default class Game extends EventTarget {
 
   gameTicker = () => {
     ++model.loopCount;
-    if (model.loopCount % 600 === 0) {
+    if (model.loopCount % 1600 === 0) {
       // console.log('ghost state changed');
       model.ghosts.forEach(ghost => ghost.innerStateMachine.setState(ghost.getNextState()));
     };
@@ -110,10 +110,10 @@ export default class Game extends EventTarget {
   createUnits = () => {
     model.emplaceDots(this.dotManager.createDots());
     model.assignPlayer(this.factory.getUnit("player"));
-    model.assignGhost(this.factory.getUnit("ghost", "pink"));
-    model.assignGhost(this.factory.getUnit("ghost", "orange"));
+    // model.assignGhost(this.factory.getUnit("ghost", "pink"));
+    // model.assignGhost(this.factory.getUnit("ghost", "orange"));
     model.assignGhost(this.factory.getUnit("ghost", "blue"));
-    model.assignGhost(this.factory.getUnit("ghost", "red"));
+    // model.assignGhost(this.factory.getUnit("ghost", "red"));
   };
 
   updateGameInfo = () => {

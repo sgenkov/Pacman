@@ -13,6 +13,7 @@ export default class GhostEnragedStrategy {
         const playerCurrentNodeId = model.player.currentNode.ID;
         if (playerCurrentNodeId && gameElement.currentNode.ID) {
                 const shortestPath = graphHandler.calculateShortestPath(gameElement.currentNode.ID, playerCurrentNodeId);
+                console.log(shortestPath);
                 pathTinting && model.nodes.forEach(node => { //^path tracing
                     if (!shortestPath) { //TODO: STRANGE BEHAVIOUR? ASK Evgeni 
                         gameElement.innerStateMachine.setState("wandering");
