@@ -13,7 +13,40 @@ export default class Model extends EventTarget {
         this.player = null;
         this.ghosts = [];
         // this.dots = null;
-        this.loopCount = 0;
+        this.loopCounter = [
+            {
+                owner: "red",
+                value: 0,
+                state: "active",
+                reset: function() {
+                    this.value = 0;
+                }
+            },
+            {
+                owner: "blue",
+                value: 0,
+                state: "active",
+                reset: function() {
+                    this.value = 0;
+                }
+            },
+            {
+                owner: "pink",
+                value: 0,
+                state: "active",
+                reset: function() {
+                    this.value = 0;
+                }
+            },
+            {
+                owner: "orange",
+                value: 0,
+                state: "active",
+                reset: function() {
+                    this.value = 0;
+                }
+            },
+        ];
         this.defaultLocations = {
             pacman: { node: this.calculatePosition('pacman') },
             blueGhost: { node: this.calculatePosition('blueGhost') },
@@ -23,6 +56,11 @@ export default class Model extends EventTarget {
         };
         this.createInfo();
     };
+    loopUpdate = () => {
+        this.loopCounter.forEach(loop => {
+            (loop.state === "active") && (loop.value++);
+        });
+    }
 
     assignPlayer = (unit) => {
         this.gameElements.push(unit);

@@ -43,11 +43,24 @@ export default class Game extends EventTarget {
   };
 
   gameTicker = () => {
-    ++model.loopCount;
-    if (model.loopCount % 1600 === 0) {
-      // console.log('ghost state changed');
-      model.ghosts.forEach(ghost => ghost.innerStateMachine.setState(ghost.getNextState()));
-    };
+    // ++model.loopCount;
+    model.loopUpdate();
+    // if (model.loopCount % 1600 === 0) {
+    //   model.ghosts.forEach(ghost => ghost.innerStateMachine.setState(ghost.getNextState()));
+    // };
+
+    model.loopCounter.forEach(loopCounter => {
+      console.log(loopCounter.owner, loopCounter.value);
+      if (loopCounter.value % 90 === 0) {
+        loopCounter.reset();
+        return;
+      };
+      if ((loopCounter.state === "active") && loopCounter.value % 400 === 0) {
+        const currentGhost = model.ghosts.find(ghost => ghost.color === loopCounter.owner);
+        // console.log(currentGhost.color);
+        currentGhost.innerStateMachine.setState(currentGhost.getNextState());
+      };
+    });
 
     let {
       behaviours,
@@ -99,7 +112,7 @@ export default class Game extends EventTarget {
       model.gameElements.forEach(gameElement2 => {
         if (gameElement1 === gameElement2) return;
         if (colide(gameElement1.rect, gameElement2.rect) && (gameElement2.hitGroup in gameElement1.colides)) {
-            gameElement1.behaviours.push(gameElement1.colides[`${gameElement2.hitGroup}`])
+          gameElement1.behaviours.push(gameElement1.colides[`${gameElement2.hitGroup}`])
         };
       });
     });
@@ -110,10 +123,10 @@ export default class Game extends EventTarget {
   createUnits = () => {
     model.emplaceDots(this.dotManager.createDots());
     model.assignPlayer(this.factory.getUnit("player"));
-    // model.assignGhost(this.factory.getUnit("ghost", "pink"));
-    // model.assignGhost(this.factory.getUnit("ghost", "orange"));
+    model.assignGhost(this.factory.getUnit("ghost", "pink"));
+    model.assignGhost(this.factory.getUnit("ghost", "orange"));
     model.assignGhost(this.factory.getUnit("ghost", "blue"));
-    // model.assignGhost(this.factory.getUnit("ghost", "red"));
+    model.assignGhost(this.factory.getUnit("ghost", "red"));
   };
 
   updateGameInfo = () => {

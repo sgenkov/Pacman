@@ -73,7 +73,7 @@ export default class Ghost extends GameUnit {
                 },
             }
         },
-            "enraged"); // default "wandering"
+            "wandering"); // default "wandering"
 
         // this.addEventListener("testEvent", (event) => { console.log(event) });
         // setInterval(() => this.innerStateMachine.setState(this.getNextState()), 5000);
