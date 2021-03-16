@@ -13,14 +13,14 @@ export default class GhostEatenStrategy {
     calculateAction = (gameElement) => {
         const currentTimer = model.loopCounter.find(counter => counter.owner === gameElement.color);
         // console.log(currentTimer);
-        // currentTimer.state = "inactive";
+        currentTimer.state = "inactive";
         const destinationNode = ghostsEatenNodes[gameElement.color + "Ghost"]
         if (destinationNode && gameElement.currentNode.ID) {
             const shortestPath = graphHandler.calculateShortestPath(gameElement.currentNode.ID, destinationNode);
             model.nodes.forEach(node => { //^path tracing
                 if (!shortestPath) { 
                     gameElement.innerStateMachine.setState("wandering");
-                    // currentTimer.state = "active";
+                    currentTimer.state = "active";
                     return gameElement.nextAction; 
                 };
                 if (pathTinting) {
