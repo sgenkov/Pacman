@@ -6,7 +6,7 @@ import { SoundProvider } from './SoundProvider';
 
 export default class CommonBehaviours {
   constructor() {
-    this.soundProvider = new SoundProvider();
+    soundEnabled && (this.soundProvider = new SoundProvider());
     const complexSpeed = (el) => {
       const commonSpeed = 1;
       const resultSpeed = commonSpeed + el.baseSpeed;
@@ -74,6 +74,7 @@ export default class CommonBehaviours {
           ++model.score;
         } else {
           model.ghosts.forEach(ghost => ghost.innerStateMachine.setState("scared"));
+          model.player.baseSpeed = 0.5;
           model.loopCount = 0;
         }
 

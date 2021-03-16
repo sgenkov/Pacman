@@ -54,6 +54,10 @@
     [
       "dotsNEyes",
       "dotsNEyes.png"
+    ],
+    [
+      "mice",
+      "mice.png"
     ]
   ],
   "startingNodes": {

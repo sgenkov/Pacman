@@ -28,12 +28,26 @@ export default class GraphicElement {
   };
 
   createPacman = (el) => {
+    // DC.objectsCreation && console.log('New GraphicElement created'); //^ FLOW
+    // const directionIndex = el.lastMovementDirection[0].toUpperCase();
+    // this.sheet = new PIXI.AnimatedSprite([
+    //   assetsLoader.SHEETS[`pacman${directionIndex}1`],
+    //   assetsLoader.SHEETS[`pacman${directionIndex}2`],
+    //   assetsLoader.SHEETS.pacman3,
+    // ]);
+    // this.sheet.REVERSE = false;
+    // this.sheet.anchor.set(0.5);
+    // this.sheet.animationSpeed = 0.2;
+    // this.sheet.loop = true;
+
+
     DC.objectsCreation && console.log('New GraphicElement created'); //^ FLOW
     const directionIndex = el.lastMovementDirection[0].toUpperCase();
     this.sheet = new PIXI.AnimatedSprite([
-      assetsLoader.SHEETS[`pacman${directionIndex}1`],
-      assetsLoader.SHEETS[`pacman${directionIndex}2`],
-      assetsLoader.SHEETS.pacman3,
+      assetsLoader.SHEETS[`mouse${directionIndex}1`],
+      assetsLoader.SHEETS[`mouse${directionIndex}2`],
+      assetsLoader.SHEETS[`mouse${directionIndex}3`],
+      assetsLoader.SHEETS[`mouse${directionIndex}4`],
     ]);
     this.sheet.REVERSE = false;
     this.sheet.anchor.set(0.5);

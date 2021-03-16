@@ -66,10 +66,11 @@ export default class Game extends EventTarget {
       });
     });
 
+    // console.log(model.nodes[2]);
     model.gameElements.forEach(gameElement => {
 
       model.nodes.forEach(node => {
-        if (gameElement.name !== "dot" && node.vertexData && colideWithCircle(node, gameElement)) { //* ALT1
+        if (gameElement.name !== "dot" && node.vertexData && colideWithCircle(node, gameElement)) { //* ALT1 // && gameElement.currentNode !== node
         // if (gameElement.name !== "dot" && node.vertexData && node.vertexData[0] === gameElement.rect.x && node.vertexData[1] === gameElement.rect.y) { //*ALT2
           gameElement.rect.x = node.vertexData[0]; //* ALT1
           gameElement.rect.y = node.vertexData[1]; //* ALT1
@@ -79,8 +80,6 @@ export default class Game extends EventTarget {
           for (let allowedDirection in gameElement.currentNode.EDGES) {
             gameElement.allowedDirections.push(allowedDirection);
           };
-
-
 
           if (!node.EDGES.hasOwnProperty(gameElement.lastMovementDirection)) {
             // (!model.player.behaviours.includes("stop")) && model.player.behaviours.unshift("stop");

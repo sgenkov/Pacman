@@ -44,7 +44,7 @@ export default class GraphHandler {
     map.forEach((el) => {
       let graphic = new PIXI.Graphics();
       graphic.beginFill(0xffffff);
-      graphic.drawCircle(el.position.x, el.position.y, DC.nodesInteractive?5:0); //TODO: Turn back the 3-th param to 1
+      graphic.drawCircle(el.position.x, el.position.y, DC.nodesInteractive ? 5 : 0); //TODO: Turn back the 3-th param to 1
       graphic.endFill(); //? What is this used for in PIXI.js ?
       DC.nodesInteractive && (graphic.interactive = true); //^ DEBUG
       DC.nodesInteractive && (graphic.buttonMode = true); //^ DEBUG

@@ -8,12 +8,10 @@ export default class Model extends EventTarget {
         this.ASSETS_LOADED = false;
         this.gameElements = [];
         this.score = 0;
-        // this.freeGameElements = [];
         this.nodes = [];
         this.player = null;
         this.ghosts = [];
-        this.value = 666;
-        // this.dots = null;
+        // this.value = 666;
         this.loopCounter = [
             {
                 owner: "red",

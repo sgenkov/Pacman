@@ -45,7 +45,7 @@ export default class Ghost extends GameUnit {
                 },
             },
             scared: {
-                allowedStates: ["enraged", "wandering", "eaten"],
+                allowedStates: ["enraged", "wandering", "eaten", "scared"],
                 init: () => {
                     this.state = "scared";
                     this.colides = {

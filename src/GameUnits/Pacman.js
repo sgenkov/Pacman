@@ -13,5 +13,6 @@ export default class Pacman extends GameUnit {
             // "ghost": []
         };
         this.strategy = new PacmanStrategy();
+        // this.baseSpeed = 0.5;
     };
 };
