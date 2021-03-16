@@ -32,7 +32,6 @@ export default class Game extends EventTarget {
     this.addBackground();
     // this.addEventListener("testEvent", (event) => {console.log(event)});
     app.ticker.add(this.gameTicker);
-    // setInterval(() => { console.log(model.gameElements.length) }, 2000);
   };
 
   deInit = () => {
@@ -43,18 +42,9 @@ export default class Game extends EventTarget {
   };
 
   gameTicker = () => {
-    // ++model.loopCount;
     model.loopUpdate();
-    // if (model.loopCount % 1600 === 0) {
-    //   model.ghosts.forEach(ghost => ghost.innerStateMachine.setState(ghost.getNextState()));
-    // };
 
     model.loopCounter.forEach(loopCounter => {
-      // console.log(loopCounter.owner, loopCounter.value);
-      // if (loopCounter.value % 90 === 0) {
-      //   loopCounter.reset();
-      //   return;
-      // };
       if ((loopCounter.state === "active") && loopCounter.value % 300 === 0) {
         const currentGhost = model.ghosts.find(ghost => ghost.color === loopCounter.owner);
         currentGhost.innerStateMachine.setState(currentGhost.getNextState());
