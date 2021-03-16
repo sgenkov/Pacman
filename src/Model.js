@@ -12,39 +12,32 @@ export default class Model extends EventTarget {
         this.nodes = [];
         this.player = null;
         this.ghosts = [];
+        this.value = 666;
         // this.dots = null;
         this.loopCounter = [
             {
                 owner: "red",
                 value: 0,
                 state: "active",
-                reset: function() {
-                    this.value = 0;
-                }
+                reset: this.reset
             },
             {
                 owner: "blue",
                 value: 0,
                 state: "active",
-                reset: function() {
-                    this.value = 0;
-                }
+                reset: this.reset
             },
             {
                 owner: "pink",
                 value: 0,
                 state: "active",
-                reset: function() {
-                    this.value = 0;
-                }
+                reset: this.reset
             },
             {
                 owner: "orange",
                 value: 0,
                 state: "active",
-                reset: function() {
-                    this.value = 0;
-                }
+                reset: this.reset
             },
         ];
         this.defaultLocations = {
@@ -55,6 +48,10 @@ export default class Model extends EventTarget {
             redGhost: { node: this.calculatePosition('redGhost') }
         };
         this.createInfo();
+    };
+    reset = function () {
+        // console.log('reset');
+        this.value = 0;
     };
     loopUpdate = () => {
         this.loopCounter.forEach(loop => {

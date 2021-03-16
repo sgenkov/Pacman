@@ -11,10 +11,13 @@ export default class GhostEnragedStrategy {
     }
     calculateAction = (gameElement) => {
         const playerCurrentNodeId = model.player.currentNode.ID;
+        // const currentTimer = model.loopCounter.find(counter => counter.owner === gameElement.color);
+        // currentTimer.state = "inactive";
         if (playerCurrentNodeId && gameElement.currentNode.ID) {
                 const shortestPath = graphHandler.calculateShortestPath(gameElement.currentNode.ID, playerCurrentNodeId);
                 pathTinting && model.nodes.forEach(node => { //^path tracing
                     if (!shortestPath) { //TODO: STRANGE BEHAVIOUR? ASK Evgeni 
+                        // currentTimer.state = "active";
                         gameElement.innerStateMachine.setState("wandering");
                         return gameElement.nextAction; //TODO: Ask Evgeni why this return doesn't terminate the function
                     };

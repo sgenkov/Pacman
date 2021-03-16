@@ -11,26 +11,33 @@ export default class GhostEatenStrategy {
         ]);
     }
     calculateAction = (gameElement) => {
+        const currentTimer = model.loopCounter.find(counter => counter.owner === gameElement.color);
+        // console.log(currentTimer);
+        // currentTimer.state = "inactive";
         const destinationNode = ghostsEatenNodes[gameElement.color + "Ghost"]
         if (destinationNode && gameElement.currentNode.ID) {
-                const shortestPath = graphHandler.calculateShortestPath(gameElement.currentNode.ID, destinationNode);
-                pathTinting && model.nodes.forEach(node => { //^path tracing
-                    if (!shortestPath) { //TODO: STRANGE BEHAVIOUR? ASK Evgeni 
-                        gameElement.innerStateMachine.setState("wandering");
-                        return gameElement.nextAction; //TODO: Ask Evgeni why this return doesn't terminate the function
-                    };
+            const shortestPath = graphHandler.calculateShortestPath(gameElement.currentNode.ID, destinationNode);
+            model.nodes.forEach(node => { //^path tracing
+                if (!shortestPath) { 
+                    gameElement.innerStateMachine.setState("wandering");
+                    // currentTimer.state = "active";
+                    return gameElement.nextAction; 
+                };
+                if (pathTinting) {
                     if (shortestPath.includes(node.ID)) {
                         node.tint = this.colorMap.get(gameElement.color);
                     } else {
                         node.tint = 0x34612;
                     };
-                });
-                if (!shortestPath) return; //TODO: STRANGE BEHAVIOUR? ASK Evgeni
-                const destination = shortestPath[1];
-                for (let direction in gameElement.currentNode.EDGES) {
-                    if (gameElement.currentNode.EDGES[direction] === destination) {
-                        gameElement.nextAction = 'move' + direction.charAt(0).toUpperCase() + direction.slice(1);
-                    };
+                };
+
+            });
+            if (!shortestPath) return;
+            const destination = shortestPath[1];
+            for (let direction in gameElement.currentNode.EDGES) {
+                if (gameElement.currentNode.EDGES[direction] === destination) {
+                    gameElement.nextAction = 'move' + direction.charAt(0).toUpperCase() + direction.slice(1);
+                };
             };
 
         };

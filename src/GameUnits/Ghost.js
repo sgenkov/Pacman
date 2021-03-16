@@ -51,7 +51,7 @@ export default class Ghost extends GameUnit {
                     this.colides = {
                         "pacman": "backToBase"
                     };
-                    this.strategy = new GhostScaredStrategy();
+                    this.strategy = new GhostScaredStrategy(this.color);
                 },
                 deInit: () => {
                     this.state = null;

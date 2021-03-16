@@ -1,5 +1,6 @@
-import { map, bigFoodPositionsByNodeId, exceptionDots } from '../config/scene.json';
+import { map, bigFoodPositionsByNodeId, exceptionDots, additionalBigDotsDebug } from '../config/scene.json';
 import Dot from './Dot';
+import { additionalBigDots } from '../config/debugConfig.json';
 export default class DotManager {
     constructor() {
         this.dots = [];
@@ -20,6 +21,13 @@ export default class DotManager {
             const position = map.find(node => node.id === nodeId).position;
             bigDots.push(new Dot(position, "big"));
         });
+
+        additionalBigDots && additionalBigDotsDebug.forEach(nodeId => { //^ Faster testing
+            const position = map.find(node => node.id === nodeId).position;
+            bigDots.push(new Dot(position, "big"));
+        });
+
+
         return bigDots;
     };
 

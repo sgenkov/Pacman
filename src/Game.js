@@ -50,14 +50,13 @@ export default class Game extends EventTarget {
     // };
 
     model.loopCounter.forEach(loopCounter => {
-      console.log(loopCounter.owner, loopCounter.value);
-      if (loopCounter.value % 90 === 0) {
-        loopCounter.reset();
-        return;
-      };
-      if ((loopCounter.state === "active") && loopCounter.value % 400 === 0) {
+      // console.log(loopCounter.owner, loopCounter.value);
+      // if (loopCounter.value % 90 === 0) {
+      //   loopCounter.reset();
+      //   return;
+      // };
+      if ((loopCounter.state === "active") && loopCounter.value % 300 === 0) {
         const currentGhost = model.ghosts.find(ghost => ghost.color === loopCounter.owner);
-        // console.log(currentGhost.color);
         currentGhost.innerStateMachine.setState(currentGhost.getNextState());
       };
     });

@@ -1,4 +1,4 @@
-import DC from './config/debugConfig.json'; //^ FLOW
+import DC, { soundEnabled } from './config/debugConfig.json'; //^ FLOW
 import { possibleMove } from './Utils/utils';
 import { model, app } from './index';
 import { SoundProvider } from './SoundProvider';
@@ -68,7 +68,7 @@ export default class CommonBehaviours {
       },
       disappear: (el) => {
         DC.unitsCollisionTrace && console.log('Disappear behaviour triggered');
-        // this.soundProvider.eatDot.play();
+        // soundEnabled && this.soundProvider.eatDot.play();
         app.stage.removeChild(el.GRAPHIC);
         if (el.type === "small") {
           ++model.score;
@@ -84,7 +84,7 @@ export default class CommonBehaviours {
       },
       backToBase: (el) => {
         DC.unitsCollisionTrace && console.log('BackToBase behaviour triggered');
-        this.soundProvider.eatGhost.play();
+        soundEnabled && this.soundProvider.eatGhost.play();
         model.score += 15;
         el.innerStateMachine.setState("eaten");
         el.behaviours = el.behaviours.filter(e => e !== "backToBase");

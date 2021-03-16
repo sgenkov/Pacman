@@ -81,6 +81,14 @@
     11,
     10
   ],
+  "additionalBigDotsDebug": [
+    57,
+    7,
+    17,
+    18,
+    61,
+    14
+  ],
   "gameElementsConfig": [
     {
       "name": "pacman",
