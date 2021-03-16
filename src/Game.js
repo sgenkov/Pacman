@@ -6,8 +6,9 @@ import DC from './config/debugConfig.json'; // ^FLOW
 import * as PIXI from 'pixi.js';
 import { assetsLoader } from './index';
 import DotManager from './Dot/DotManager';
-import { colide } from './Utils/utils';
+import { colide, colideWithCircle } from './Utils/utils';
 import { Howl } from 'howler';
+
 
 export default class Game extends EventTarget {
   constructor(delegate) {
@@ -68,8 +69,10 @@ export default class Game extends EventTarget {
     model.gameElements.forEach(gameElement => {
 
       model.nodes.forEach(node => {
-        // if (colideWithCircle(node, model.player)) {
-        if (gameElement.name !== "dot" && node.vertexData && node.vertexData[0] === gameElement.rect.x && node.vertexData[1] === gameElement.rect.y) {
+        if (gameElement.name !== "dot" && node.vertexData && colideWithCircle(node, gameElement)) { //* ALT1
+        // if (gameElement.name !== "dot" && node.vertexData && node.vertexData[0] === gameElement.rect.x && node.vertexData[1] === gameElement.rect.y) { //*ALT2
+          gameElement.rect.x = node.vertexData[0]; //* ALT1
+          gameElement.rect.y = node.vertexData[1]; //* ALT1
           gameElement.currentNode = node;
           gameElement.allowedDirections.length = 0;
 
