@@ -43,7 +43,6 @@ export default class Game extends EventTarget {
 
   gameTicker = () => {
     model.loopUpdate();
-
     model.loopCounter.forEach(loopCounter => { //TODO: Move this in custom EventHandler
       if (loopCounter.owner === "pacman") {
         if (loopCounter.state === "active" && loopCounter.value % 300 === 0) {
@@ -123,9 +122,9 @@ export default class Game extends EventTarget {
     model.emplaceDots(this.dotManager.createDots());
     model.assignPlayer(this.factory.getUnit("player"));
     model.assignGhost(this.factory.getUnit("ghost", "pink"));
-    // model.assignGhost(this.factory.getUnit("ghost", "orange"));
-    // model.assignGhost(this.factory.getUnit("ghost", "blue"));
-    // model.assignGhost(this.factory.getUnit("ghost", "red"));
+    model.assignGhost(this.factory.getUnit("ghost", "orange"));
+    model.assignGhost(this.factory.getUnit("ghost", "blue"));
+    model.assignGhost(this.factory.getUnit("ghost", "red"));
   };
 
   updateGameInfo = () => {

@@ -16,7 +16,7 @@ export default class GhostEatenStrategy {
         currentTimer.state = "inactive";
         const destinationNode = ghostsEatenNodes[gameElement.color + "Ghost"]
         if (destinationNode && gameElement.currentNode.ID) {
-            const shortestPath = graphHandler.calculateShortestPath(gameElement.currentNode.ID, destinationNode);
+            const shortestPath = graphHandler.calculateShortestPath(gameElement.currentNode.ID, destinationNode)?.map(el => +el);
             model.nodes.forEach(node => { //^path tracing
                 if (!shortestPath) { 
                     gameElement.innerStateMachine.setState("wandering");
@@ -41,6 +41,7 @@ export default class GhostEatenStrategy {
             };
 
         };
+        // console.log(gameElement.nextAction);
 
         return gameElement.nextAction;
     };

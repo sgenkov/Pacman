@@ -20,6 +20,7 @@ export default class Ghost extends GameUnit {
                 allowedStates: ["wandering", "scared"],
                 init: () => {
                     this.state = "enraged";
+                    this.baseSpeed = 0.2;
                     this.colides = {
                         "pacman": "nullBehaviour"
                     };
@@ -34,6 +35,7 @@ export default class Ghost extends GameUnit {
                 allowedStates: ["enraged", "scared"],
                 init: () => {
                     this.state = "wandering";
+                    this.baseSpeed = 0.2;
                     this.colides = {
                         "pacman": "nullBehaviour"
                     };
@@ -48,6 +50,7 @@ export default class Ghost extends GameUnit {
                 allowedStates: ["enraged", "wandering", "eaten", "scared"],
                 init: () => {
                     this.state = "scared";
+                    this.baseSpeed = 0;
                     this.colides = {
                         "pacman": "backToBase"
                     };
@@ -62,6 +65,7 @@ export default class Ghost extends GameUnit {
                 allowedStates: ["wandering"],
                 init: () => {
                     this.state = "eaten";
+                    this.baseSpeed = 0.5;
                     this.colides = {
                         "pacman": "nullBehaviour"
                     };
@@ -73,7 +77,7 @@ export default class Ghost extends GameUnit {
                 },
             }
         },
-            "enraged"); // default "wandering"
+            "wandering"); // default "wandering"
 
         // this.addEventListener("testEvent", (event) => { console.log(event) });
         // setInterval(() => this.innerStateMachine.setState(this.getNextState()), 5000);

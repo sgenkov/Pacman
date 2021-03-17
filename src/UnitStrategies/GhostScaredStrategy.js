@@ -22,6 +22,7 @@ export default class GhostScaredStrategy {
         // };
         // return gameElement.nextAction;
 
+
         const playerCurrentNodeId = model.player.currentNode.ID;
         const possibleActions = [];
         for (const edge in gameElement.currentNode.EDGES) {
