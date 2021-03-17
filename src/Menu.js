@@ -1,10 +1,9 @@
 import { Text } from 'pixi.js';
-import { app, model } from './index';
+import { app, model, soundProvider } from './index';
 import gameStateModel from './GameStateModel';
 import * as PIXI from 'pixi.js';
 import { assetsLoader } from './index';
-import DC from './config/debugConfig.json'; // ^FLOW
-
+import { soundEnabled, mainFlow } from './config/debugConfig.json';
 export default class Menu {
     constructor() {
         this.name = "menu";
@@ -12,12 +11,13 @@ export default class Menu {
     };
 
     init = () => {
-        DC.mainFlow && console.log('Menu.js : MENU INIT'); //^ FLOW
+        mainFlow && console.log('Menu.js : MENU INIT'); //^ FLOW
+        soundEnabled && soundProvider.mainMenu.play();
         this.render();
     };
 
     deInit = () => {
-        DC.mainFlow && console.log("Menu.js : MENU DEINIT"); //^ FLOW
+        mainFlow && console.log("Menu.js : MENU DEINIT"); //^ FLOW
         // app.stage.removeChild(this.text);
         app.stage.removeChildren()
         this.text.removeListener("pointerdown", this.onClick);

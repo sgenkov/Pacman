@@ -9,6 +9,8 @@ import GameAssetsLoader from "./GameAssetsLoader";
 import DC from './config/debugConfig.json'; // ^FLOW
 import Model from './Model';
 import GraphHandler from "./GraphHandler";
+import { soundEnabled } from './config/debugConfig.json';
+import { SoundProvider } from "./SoundProvider";
 
 export const app = new Application({
   // width: window.innerWidth - 15,
@@ -25,6 +27,7 @@ export const app2 = new Application({ //^ For coordinates tracking
 export const assetsLoader = new GameAssetsLoader();
 assetsLoader.loadAssets();
 export const graphHandler = new GraphHandler();
+export const soundProvider = new SoundProvider();
 
 document.body.appendChild(app.view);
 document.body.appendChild(app2.view); //^ For coordinates tracking

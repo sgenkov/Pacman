@@ -6,7 +6,7 @@
     "pathTinting": 0,
     "nodesInteractive": 0,
     "unitsCollisionTrace": 0,
-    "soundEnabled": false,
+    "soundEnabled": 0,
     "additionalBigDots": true,
     "hero": "pacman" 
 }

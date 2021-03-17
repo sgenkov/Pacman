@@ -7,7 +7,6 @@ import * as PIXI from 'pixi.js';
 import { assetsLoader } from './index';
 import DotManager from './Dot/DotManager';
 import { colide, colideWithCircle } from './Utils/utils';
-import { Howl } from 'howler';
 
 
 export default class Game extends EventTarget {
@@ -43,14 +42,12 @@ export default class Game extends EventTarget {
   };
 
   gameTicker = () => {
-    console.log(model.player.baseSpeed);
     model.loopUpdate();
 
-    model.loopCounter.forEach(loopCounter => {
+    model.loopCounter.forEach(loopCounter => { //TODO: Move this in custom EventHandler
       if (loopCounter.owner === "pacman") {
         if (loopCounter.state === "active" && loopCounter.value % 300 === 0) {
           model.player.innerStateMachine.setState("normal");
-          console.log('test');
           loopCounter.reset();
           loopCounter.state = "inactive";
         }

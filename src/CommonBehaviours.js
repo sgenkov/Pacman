@@ -1,12 +1,11 @@
 import DC, { soundEnabled } from './config/debugConfig.json'; //^ FLOW
 import { possibleMove } from './Utils/utils';
-import { model, app } from './index';
-import { SoundProvider } from './SoundProvider';
+import { model, app, soundProvider } from './index';
 
 
 export default class CommonBehaviours {
   constructor() {
-    soundEnabled && (this.soundProvider = new SoundProvider());
+    // soundEnabled && (this.soundProvider = new SoundProvider());
     const complexSpeed = (el) => {
       const commonSpeed = 1;
       const resultSpeed = commonSpeed + el.baseSpeed;
@@ -68,7 +67,15 @@ export default class CommonBehaviours {
       },
       disappear: (el) => {
         DC.unitsCollisionTrace && console.log('Disappear behaviour triggered');
-        // soundEnabled && this.soundProvider.eatDot.play();
+        if (soundEnabled) {
+          const isPlaying = soundProvider.eatDot.playing(soundProvider.eatDot);
+          if (isPlaying) {
+            soundProvider.eatDot.stop();
+            soundProvider.eatDot.play();
+          } else {
+            soundProvider.eatDot.play();
+          };
+        };
         app.stage.removeChild(el.GRAPHIC);
         if (el.type === "small") {
           ++model.score;
@@ -77,8 +84,8 @@ export default class CommonBehaviours {
           // model.player.baseSpeed = 0.5;
           // model.loopCount = 0;
           const timer = model.loopCounter.find(counter => counter.owner === "pacman");
+          timer.reset();
           timer.state = "active";
-          console.log(timer);
           model.player.innerStateMachine.setState("fast");
         };
 
@@ -89,7 +96,7 @@ export default class CommonBehaviours {
       },
       backToBase: (el) => {
         DC.unitsCollisionTrace && console.log('BackToBase behaviour triggered');
-        soundEnabled && this.soundProvider.eatGhost.play();
+        soundEnabled && soundProvider.eatGhost.play();
         model.score += 15;
         el.innerStateMachine.setState("eaten");
         el.behaviours = el.behaviours.filter(e => e !== "backToBase");
