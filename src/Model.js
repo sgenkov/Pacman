@@ -101,6 +101,11 @@ export default class Model extends EventTarget {
             stroke: "#cccccc",
             strokeThickness: 0,
         });
+        this.info.style = new PIXI.TextStyle({
+            fill: 0xFCC000,
+            fontSize:40,
+            fontFamily: "Arcade"
+        });
         app2.stage.addChild(this.info);
     };
 };

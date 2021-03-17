@@ -17,13 +17,13 @@ export default class GhostEatenStrategy {
         const destinationNode = ghostsEatenNodes[gameElement.color + "Ghost"]
         if (destinationNode && gameElement.currentNode.ID) {
             const shortestPath = graphHandler.calculateShortestPath(gameElement.currentNode.ID, destinationNode)?.map(el => +el);
-            model.nodes.forEach(node => { //^path tracing
+            model.nodes.forEach(node => { 
                 if (!shortestPath) { 
                     gameElement.innerStateMachine.setState("wandering");
                     currentTimer.state = "active";
                     return gameElement.nextAction; 
                 };
-                if (pathTinting) {
+                if (pathTinting) { //^path tracing
                     if (shortestPath.includes(node.ID)) {
                         node.tint = this.colorMap.get(gameElement.color);
                     } else {

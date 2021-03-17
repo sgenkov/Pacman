@@ -98,6 +98,7 @@ export default class CommonBehaviours {
         DC.unitsCollisionTrace && console.log('BackToBase behaviour triggered');
         soundEnabled && soundProvider.eatGhost.play();
         model.score += 15;
+        model.updateScoreInfo()
         el.innerStateMachine.setState("eaten");
         el.behaviours = el.behaviours.filter(e => e !== "backToBase");
       },

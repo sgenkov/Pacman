@@ -25,12 +25,13 @@ export default class Menu {
     };
 
     render = () => {
-        this.text = new Text("New Game", {
+        this.text = new PIXI.Text("New Game", {
             fontSize: 35,
             fill: "#fcc000",
             align: "center",
             stroke: "#ff0d00",
-            strokeThickness: 2,
+            // fontFamily: "Arcade",
+            strokeThickness: 1,
         });
         this.text.anchor.set(0.5);
         // this.text.position.x = app.view.width / 2;
@@ -39,6 +40,13 @@ export default class Menu {
         this.text.position.y = app.view.height / 4;
         this.text.interactive = true;
         this.text.buttonMode = true;
+
+        this.text.style = new PIXI.TextStyle({
+            fill: 0xFCC000,
+            fontSize:40,
+            fontFamily: "Arcade"
+        });
+
         app.stage.addChild(this.text);
         this.text.on("pointerdown", this.onClick);
         app.ticker.add(this.ticker);
