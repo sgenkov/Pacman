@@ -11,15 +11,12 @@ export default class GhostEnragedStrategy {
     }
     calculateAction = (gameElement) => {
         const playerCurrentNodeId = model.player.currentNode.ID;
-        // const currentTimer = model.loopCounter.find(counter => counter.owner === gameElement.color);
-        // currentTimer.state = "inactive";
         if (playerCurrentNodeId && gameElement.currentNode.ID) {
-                const shortestPath = graphHandler.calculateShortestPath(gameElement.currentNode.ID, playerCurrentNodeId);
+                const shortestPath = graphHandler.calculateShortestPath(gameElement.currentNode.ID, playerCurrentNodeId)?.map(el => +el);
                 pathTinting && model.nodes.forEach(node => { //^path tracing
-                    if (!shortestPath) { //TODO: STRANGE BEHAVIOUR? ASK Evgeni 
-                        // currentTimer.state = "active";
+                    if (!shortestPath) { 
                         gameElement.innerStateMachine.setState("wandering");
-                        return gameElement.nextAction; //TODO: Ask Evgeni why this return doesn't terminate the function
+                        return gameElement.nextAction; 
                     };
                     if (shortestPath.includes(node.ID)) {
                         node.tint = this.colorMap.get(gameElement.color);
@@ -27,7 +24,7 @@ export default class GhostEnragedStrategy {
                         node.tint = 0x34612;
                     };
                 });
-                if (!shortestPath) return; //TODO: STRANGE BEHAVIOUR? ASK Evgeni
+                if (!shortestPath) return; 
                 const destination = shortestPath[1];
                 for (let direction in gameElement.currentNode.EDGES) {
                     if (gameElement.currentNode.EDGES[direction] === destination) {

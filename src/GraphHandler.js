@@ -24,16 +24,19 @@ export default class GraphHandler {
     return maze;
   };
 
-  calculateShortestPath = (from, to) => {
-    return this.maze.path(`${from}`, `${to}`)?.map(el => +el);
+  calculateShortestPath = (from, to, COST = false) => {
+    // return this.maze.path(`${from}`, `${to}`)?.map(el => +el); //*Original
+    // console.log(this.maze.path(`${from}`, `${to}`, {cost: COST}));
+    return this.maze.path(`${from}`, `${to}`, {cost: COST});
   };
 
   calculateLongestPath = (ghost, pacman) => {
     // console.log(ghost);
-    let longestPath = 0; //todo: try with null
+    let longestPath = 0; 
 
     for (let i = 0; i < this.maze.graph.size; ++i) {
-      const currentPath = this.maze.path(`${ghost}`, `${i}`, { cost: true });
+      // const currentPath = this.maze.path(`${ghost}`, `${i}`, { cost: true }); //*ALT1
+      const currentPath = this.maze.path(`${ghost}`, `${i}`, { cost: true }); //*ALT2
       if (currentPath.cost > longestPath) longestPath = currentPath.path.map(el => +el);
     };
     // console.log(longestPath);

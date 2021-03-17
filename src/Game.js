@@ -56,7 +56,7 @@ export default class Game extends EventTarget {
 
       if ((loopCounter.state === "active") && loopCounter.value % 300 === 0) {
         const currentGhost = model.ghosts.find(ghost => ghost.color === loopCounter.owner);
-        currentGhost.innerStateMachine.setState(currentGhost.getNextState());
+        currentGhost?.innerStateMachine.setState(currentGhost.getNextState());
       };
     });
 
@@ -123,9 +123,9 @@ export default class Game extends EventTarget {
     model.emplaceDots(this.dotManager.createDots());
     model.assignPlayer(this.factory.getUnit("player"));
     model.assignGhost(this.factory.getUnit("ghost", "pink"));
-    model.assignGhost(this.factory.getUnit("ghost", "orange"));
-    model.assignGhost(this.factory.getUnit("ghost", "blue"));
-    model.assignGhost(this.factory.getUnit("ghost", "red"));
+    // model.assignGhost(this.factory.getUnit("ghost", "orange"));
+    // model.assignGhost(this.factory.getUnit("ghost", "blue"));
+    // model.assignGhost(this.factory.getUnit("ghost", "red"));
   };
 
   updateGameInfo = () => {
