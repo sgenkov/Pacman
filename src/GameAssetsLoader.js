@@ -69,7 +69,7 @@ export default class GameAssetsLoader {
             const { x, y, w, h } = sheetSource5.frames[key].frame;
             this.SHEETS[key.split('.')[0]] = new PIXI.Texture(baseSheet, new PIXI.Rectangle(x, y, w, h));
         };
-        console.log(this.SHEETS);
+        // console.log(this.SHEETS);
         model.ASSETS_LOADED = true;
     };
 

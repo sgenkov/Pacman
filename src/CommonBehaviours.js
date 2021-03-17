@@ -27,7 +27,7 @@ export default class CommonBehaviours {
         el.lastMovementDirection = "up";
         el.speed.x = 0;
         el.speed.y = -complexSpeed(el);
-        el.prevSpeed.y = -complexSpeed(el);
+        // el.prevSpeed.y = -complexSpeed(el);
       },
       moveDown: (el) => {
         DC.traceBehaviours && console.log('moveDown behaviour'); //^ FLOW
@@ -35,7 +35,7 @@ export default class CommonBehaviours {
         el.lastMovementDirection = "down";
         el.speed.x = 0;
         el.speed.y = complexSpeed(el);
-        el.prevSpeed.y = complexSpeed(el);
+        // el.prevSpeed.y = complexSpeed(el);
       },
       moveLeft: (el) => {
         DC.traceBehaviours && console.log('moveLeft behaviour'); //^ FLOW
@@ -43,7 +43,7 @@ export default class CommonBehaviours {
         el.lastMovementDirection = "left";
         el.speed.y = 0;
         el.speed.x = -complexSpeed(el);
-        el.prevSpeed.x = -complexSpeed(el);
+        // el.prevSpeed.x = -complexSpeed(el);
       },
       moveRight: (el) => {
         DC.traceBehaviours && console.log('moveRight behaviour'); //^ FLOW
@@ -51,7 +51,7 @@ export default class CommonBehaviours {
         el.lastMovementDirection = "right";
         el.speed.y = 0;
         el.speed.x = complexSpeed(el);
-        el.prevSpeed.x = complexSpeed(el);
+        // el.prevSpeed.x = complexSpeed(el);
       },
       stop: (el) => {
         DC.traceBehaviours && console.log('stop behaviour'); //^ FLOW
@@ -74,9 +74,13 @@ export default class CommonBehaviours {
           ++model.score;
         } else {
           model.ghosts.forEach(ghost => ghost.innerStateMachine.setState("scared"));
-          model.player.baseSpeed = 0.5;
-          model.loopCount = 0;
-        }
+          // model.player.baseSpeed = 0.5;
+          // model.loopCount = 0;
+          const timer = model.loopCounter.find(counter => counter.owner === "pacman");
+          timer.state = "active";
+          console.log(timer);
+          model.player.innerStateMachine.setState("fast");
+        };
 
         model.updateScoreInfo();
         model.gameElements = model.gameElements.filter(ge => ge !== el);

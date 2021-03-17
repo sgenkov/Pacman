@@ -37,6 +37,17 @@ export default class Model extends EventTarget {
                 state: "active",
                 reset: this.reset
             },
+            {
+                owner: "pacman",
+                value: 0,
+                state: "inactive",
+                reset: this.reset,
+                actions: [
+                    () => {
+                        // console.log(`pacman action from looper: state : ${this.state}`);
+                    }
+                ]
+            },
         ];
         this.defaultLocations = {
             pacman: { node: this.calculatePosition('pacman') },
@@ -52,8 +63,9 @@ export default class Model extends EventTarget {
         this.value = 0;
     };
     loopUpdate = () => {
-        this.loopCounter.forEach(loop => {
-            (loop.state === "active") && (loop.value++);
+        this.loopCounter.forEach(currentCounter => {
+            (currentCounter.state === "active") && (currentCounter.value++);
+            currentCounter.actions && currentCounter.actions.forEach(action => action());
         });
     }
 

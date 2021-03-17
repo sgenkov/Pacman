@@ -43,9 +43,20 @@ export default class Game extends EventTarget {
   };
 
   gameTicker = () => {
+    console.log(model.player.baseSpeed);
     model.loopUpdate();
 
     model.loopCounter.forEach(loopCounter => {
+      if (loopCounter.owner === "pacman") {
+        if (loopCounter.state === "active" && loopCounter.value % 300 === 0) {
+          model.player.innerStateMachine.setState("normal");
+          console.log('test');
+          loopCounter.reset();
+          loopCounter.state = "inactive";
+        }
+        return;
+      };
+
       if ((loopCounter.state === "active") && loopCounter.value % 300 === 0) {
         const currentGhost = model.ghosts.find(ghost => ghost.color === loopCounter.owner);
         currentGhost.innerStateMachine.setState(currentGhost.getNextState());
@@ -71,7 +82,7 @@ export default class Game extends EventTarget {
 
       model.nodes.forEach(node => {
         if (gameElement.name !== "dot" && node.vertexData && colideWithCircle(node, gameElement)) { //* ALT1 // && gameElement.currentNode !== node
-        // if (gameElement.name !== "dot" && node.vertexData && node.vertexData[0] === gameElement.rect.x && node.vertexData[1] === gameElement.rect.y) { //*ALT2
+          // if (gameElement.name !== "dot" && node.vertexData && node.vertexData[0] === gameElement.rect.x && node.vertexData[1] === gameElement.rect.y) { //*ALT2
           gameElement.rect.x = node.vertexData[0]; //* ALT1
           gameElement.rect.y = node.vertexData[1]; //* ALT1
           gameElement.currentNode = node;

@@ -7,5 +7,6 @@
     "nodesInteractive": 0,
     "unitsCollisionTrace": 0,
     "soundEnabled": false,
-    "additionalBigDots": true
+    "additionalBigDots": true,
+    "hero": "pacman" 
 }

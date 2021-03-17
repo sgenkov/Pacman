@@ -16,7 +16,7 @@ export default class GameUnit {
         this.allowedDirections = [];
         this.baseSpeed = 0.2;
         this.speed = { x: 0, y: 0 };
-        this.prevSpeed = this.speed;
+        // this.prevSpeed = this.speed;
         this.rect = new Rectangle(this.currentNode.position.x, this.currentNode.position.y, 2, 2);
     };
     nextMove = () => {
