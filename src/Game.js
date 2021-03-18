@@ -16,6 +16,7 @@ export default class Game extends EventTarget {
     this.delegate = delegate;
     // this.score = 0;
     this.backGround = null;
+    this.info = model.info;
     // this.loopCount = 0;
   };
 
@@ -30,6 +31,7 @@ export default class Game extends EventTarget {
     document.addEventListener("keydown", (e) => onKeyDown(e, this.behaviours));
     document.addEventListener("keyup", (e) => onKeyUp(e));
     this.addBackground();
+    this.addInfo();
     // this.addEventListener("testEvent", (event) => {console.log(event)});
     app.ticker.add(this.gameTicker);
   };
@@ -65,7 +67,7 @@ export default class Game extends EventTarget {
     } = this;
 
     model.gameElements.forEach(el => {
-      el.behaviours.forEach(b => {
+      el.behaviours?.forEach(b => {
         let behaviour = behaviours[b];
         if (behaviour) {
           behaviour(el, model.gameElements);
@@ -73,7 +75,6 @@ export default class Game extends EventTarget {
       });
     });
 
-    // console.log(model.nodes[2]);
     model.gameElements.forEach(gameElement => {
 
       model.nodes.forEach(node => {
@@ -83,7 +84,6 @@ export default class Game extends EventTarget {
           gameElement.rect.y = node.vertexData[1]; //* ALT1
           gameElement.currentNode = node;
           gameElement.allowedDirections.length = 0;
-
           for (let allowedDirection in gameElement.currentNode.EDGES) {
             gameElement.allowedDirections.push(allowedDirection);
           };
@@ -140,10 +140,13 @@ export default class Game extends EventTarget {
     backGround = PIXI.Sprite.from(assetsLoader.SHEETS.background);
     backGround.anchor.set(0.5);
     backGround.position.x = app.view.width / 2;
-    backGround.position.y = app.view.height / 2;
+    backGround.position.y = app.view.height / 2 - 20;
     backGround.scale.x = 2.75;
     backGround.scale.y = 2.75;
     app.stage.addChild(backGround);
   };
+  addInfo = () => {
+    app.stage.addChild(this.info);
+  }
 
 };

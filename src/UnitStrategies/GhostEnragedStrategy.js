@@ -28,7 +28,7 @@ export default class GhostEnragedStrategy {
                 const destination = shortestPath[1];
                 for (let direction in gameElement.currentNode.EDGES) {
                     if (gameElement.currentNode.EDGES[direction] === destination) {
-                        gameElement.nextAction = 'move' + direction.charAt(0).toUpperCase() + direction.slice(1);
+                        gameElement.nextAction = 'move' + direction.charAt(0).toUpperCase() + direction.slice(1); //TODO: Use mapping here
                     };
             };
 

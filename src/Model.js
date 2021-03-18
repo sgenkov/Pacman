@@ -1,6 +1,6 @@
 import scene from './config/scene.json';
 import * as PIXI from 'pixi.js';
-import { app2 } from '.';
+import { app2, app, model } from '.';
 
 export default class Model extends EventTarget {
     constructor() {
@@ -106,6 +106,7 @@ export default class Model extends EventTarget {
             fontSize:40,
             fontFamily: "Arcade"
         });
-        app2.stage.addChild(this.info);
+        this.info.position.y = 690;
+        this.info.position.x = 15;
     };
 };

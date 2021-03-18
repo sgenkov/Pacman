@@ -16,7 +16,7 @@ export const app = new Application({
   // width: window.innerWidth - 15,
   // height: window.innerHeight - 25,
   width: 620,
-  height: 680,
+  height: 720, //680,
   backgroundColor: 0x000000,
 });
 export const app2 = new Application({ //^ For coordinates tracking
@@ -30,7 +30,7 @@ export const graphHandler = new GraphHandler();
 export const soundProvider = new SoundProvider();
 
 document.body.appendChild(app.view);
-document.body.appendChild(app2.view); //^ For coordinates tracking
+// document.body.appendChild(app2.view); //^ For coordinates tracking
 
 export const model = new Model();
 
