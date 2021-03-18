@@ -176,10 +176,3 @@
 // console.log(a);
 
 // 'use strict';
-
-function myFunc() {
-    console.log(this);
-}
-
-// myFunc();
-console.log(this);

@@ -3,17 +3,20 @@ import scene from './config/scene.json';
 
 const disabled = false; //^ Debug mode
 export const onKeyDown = ({ keyCode }, behaviours) => {
+  const { player } = model;
   // console.log('Key Down', keyCode);
   let { keyBindings } = scene;
-  if ( keyCode === 88 ) debugger;
+  if (keyCode === 88) debugger;
   if (isUndefinedKey(keyBindings, keyCode)) return; //* BEWARE THE KEY PROTECTION!
 
-  model.gameElements.forEach( gameElement => {
-    if (gameElement.name !== "pacman") return;
-    gameElement.nextAction = scene.keyBindings.player1[keyCode][0];
-    gameElement.allowedDirections.length = 0;
-    gameElement.allowedDirections.push(scene.keyBindings.player1[keyCode][1]);
-  });
+
+  console.log(player.allowedDirections);
+  player.nextAction = scene.keyBindings.player1[keyCode][0];
+  player.allowedDirections.length = 0;
+  player.allowedDirections.push(scene.keyBindings.player1[keyCode][1]);
+
+
+
 };
 
 export const onKeyUp = ({ keyCode }) => {
@@ -38,4 +41,4 @@ const isUndefinedKey = (keyBindings, keyCode) => {
     };
   };
   return escape;
-};  
+};

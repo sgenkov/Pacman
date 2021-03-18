@@ -103,7 +103,6 @@ export default class Game extends EventTarget {
 
         };
 
-        this.updateGameInfo();
       });
     });
 
@@ -127,15 +126,6 @@ export default class Game extends EventTarget {
     model.assignGhost(this.factory.getUnit("ghost", "blue"));
     model.assignGhost(this.factory.getUnit("ghost", "red"));
   };
-
-  updateGameInfo = () => {
-    // let nodeEdges = '';
-    // for (let edge in model.player.currentNode.EDGES) {
-    //   nodeEdges += edge + ' : ' + model.player.currentNode.EDGES[edge] + '\n';
-    // };
-    // model.player.updateInfo(model.player.rect.x, model.player.rect.y, `node Id: ${model.player.currentNode.ID}` + '\n' + nodeEdges);
-  };
-
   addBackground = () => {
     let { backGround } = this;
     backGround = PIXI.Sprite.from(assetsLoader.SHEETS.background);
