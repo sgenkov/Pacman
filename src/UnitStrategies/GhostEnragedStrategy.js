@@ -1,5 +1,6 @@
 import { model, graphHandler } from '../index';
 import { pathTinting } from '../config/debugConfig.json';
+import { directionsMapping } from '../Utils/utils';
 export default class GhostEnragedStrategy {
     constructor() {
         this.colorMap = new Map([
@@ -28,7 +29,9 @@ export default class GhostEnragedStrategy {
                 const destination = shortestPath[1];
                 for (let direction in gameElement.currentNode.EDGES) {
                     if (gameElement.currentNode.EDGES[direction] === destination) {
-                        gameElement.nextAction = 'move' + direction.charAt(0).toUpperCase() + direction.slice(1); //TODO: Use mapping here
+                        // gameElement.nextAction = 'move' + direction.charAt(0).toUpperCase() + direction.slice(1); //TODO: Use mapping here
+                        // console.log(direction);
+                        gameElement.nextAction = directionsMapping.get(direction);
                     };
             };
 

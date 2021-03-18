@@ -1,4 +1,5 @@
 import { model, graphHandler } from '../index';
+import { directionsMapping } from '../Utils/utils';
 export default class GhostScaredStrategy {
     constructor(color) {
         this.currentTimer = model.loopCounter.find(counter => counter.owner === color);
@@ -33,7 +34,8 @@ export default class GhostScaredStrategy {
             possibleActions.push(res);
         };
         possibleActions.sort((el1, el2) => el2.cost - el1.cost); 
-        gameElement.nextAction = 'move' + possibleActions[0].direction.charAt(0).toUpperCase() + possibleActions[0].direction.slice(1);
+        // gameElement.nextAction = 'move' + possibleActions[0].direction.charAt(0).toUpperCase() + possibleActions[0].direction.slice(1);
+        gameElement.nextAction = directionsMapping.get(possibleActions[0].direction);
 
         return gameElement.nextAction;
     };

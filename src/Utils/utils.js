@@ -55,3 +55,10 @@ export const possibleMove = (edges, direction) => {
     // console.log(edges);
     return Object.keys(edges).includes(direction);
 };
+
+export const directionsMapping = new Map([
+    ["up", "moveUp"],
+    ["down", "moveDown"],
+    ["left", "moveLeft"],
+    ["right", "moveRight"]
+]);

@@ -27,6 +27,7 @@ export default class CommonBehaviours {
         el.speed.x = 0;
         el.speed.y = -complexSpeed(el);
         // el.prevSpeed.y = -complexSpeed(el);
+        el.behaviours = el.behaviours.filter(e => e !== "moveUp");
       },
       moveDown: (el) => {
         DC.traceBehaviours && console.log('moveDown behaviour'); //^ FLOW
@@ -35,6 +36,7 @@ export default class CommonBehaviours {
         el.speed.x = 0;
         el.speed.y = complexSpeed(el);
         // el.prevSpeed.y = complexSpeed(el);
+        el.behaviours = el.behaviours.filter(e => e !== "moveDown");
       },
       moveLeft: (el) => {
         DC.traceBehaviours && console.log('moveLeft behaviour'); //^ FLOW
@@ -43,6 +45,7 @@ export default class CommonBehaviours {
         el.speed.y = 0;
         el.speed.x = -complexSpeed(el);
         // el.prevSpeed.x = -complexSpeed(el);
+        el.behaviours = el.behaviours.filter(e => e !== "moveLeft");
       },
       moveRight: (el) => {
         DC.traceBehaviours && console.log('moveRight behaviour'); //^ FLOW
@@ -51,6 +54,7 @@ export default class CommonBehaviours {
         el.speed.y = 0;
         el.speed.x = complexSpeed(el);
         // el.prevSpeed.x = complexSpeed(el);
+        el.behaviours = el.behaviours.filter(e => e !== "moveRight");
       },
       stop: (el) => {
         DC.traceBehaviours && console.log('stop behaviour'); //^ FLOW

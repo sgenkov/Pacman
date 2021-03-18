@@ -1,6 +1,7 @@
 import { model, graphHandler } from '../index';
 import { pathTinting } from '../config/debugConfig.json';
 import { ghostsEatenNodes } from '../config/scene.json';
+import { directionsMapping } from '../Utils/utils';
 export default class GhostEatenStrategy {
     constructor() {
         this.colorMap = new Map([
@@ -36,7 +37,8 @@ export default class GhostEatenStrategy {
             const destination = shortestPath[1];
             for (let direction in gameElement.currentNode.EDGES) {
                 if (gameElement.currentNode.EDGES[direction] === destination) {
-                    gameElement.nextAction = 'move' + direction.charAt(0).toUpperCase() + direction.slice(1);
+                    // gameElement.nextAction = 'move' + direction.charAt(0).toUpperCase() + direction.slice(1);
+                    gameElement.nextAction = directionsMapping.get(direction);
                 };
             };
 

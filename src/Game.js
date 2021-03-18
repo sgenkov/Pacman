@@ -44,6 +44,7 @@ export default class Game extends EventTarget {
   };
 
   gameTicker = () => {
+    // console.log(model.player.behaviours);
     model.loopUpdate();
     model.loopCounter.forEach(loopCounter => { //TODO: Move this in custom EventHandler
       if (loopCounter.owner === "pacman") {
