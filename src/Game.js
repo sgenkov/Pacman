@@ -77,14 +77,15 @@ export default class Game extends EventTarget {
     });
 
     model.gameElements.forEach(gameElement => {
-
+      // gameElement.name === "pacman" && console.log('All Dir from game.js', gameElement.behaviours);
       model.nodes.forEach(node => {
-        if (gameElement.name !== "dot" && node.vertexData && colideWithCircle(node, gameElement)) { //* ALT1 // && gameElement.currentNode !== node
+        if ((gameElement.overriddenByNodeId !== node.ID) && gameElement.name !== "dot" && node.vertexData && colideWithCircle(node, gameElement)) { //* ALT1 // && gameElement.currentNode !== node
           // if (gameElement.name !== "dot" && node.vertexData && node.vertexData[0] === gameElement.rect.x && node.vertexData[1] === gameElement.rect.y) { //*ALT2
           gameElement.rect.x = node.vertexData[0]; //* ALT1
           gameElement.rect.y = node.vertexData[1]; //* ALT1
           gameElement.currentNode = node;
           gameElement.allowedDirections.length = 0;
+
           for (let allowedDirection in gameElement.currentNode.EDGES) {
             gameElement.allowedDirections.push(allowedDirection);
           };
@@ -95,13 +96,16 @@ export default class Game extends EventTarget {
             gameElement.speed.y = 0; //* ~~NOT GOOD SOLUTION
             // gameElement.behaviours.unshift('stop');
           };
-
           const currentAction = behaviours[gameElement.nextMove()];
           if (currentAction && gameElement.allowedDirections.includes(gameElement.nextAction.replace('move', '').toLowerCase())) {
+            console.log('current action', currentAction(gameElement));
             currentAction(gameElement);
           };
 
-        };
+          gameElement.overriddenByNodeId = node.ID;
+        } else {
+          gameElement.overriddenByNodeId = -666;
+        }
 
       });
     });

@@ -51,9 +51,8 @@ export const getSpeed = (el, target) => {
     return speed;
 };
 
-export const possibleMove = (edges, direction) => {
-    // console.log(edges);
-    return Object.keys(edges).includes(direction);
+export const possibleMove = (el, direction) => {
+    return el.allowedDirections.includes(direction);
 };
 
 export const directionsMapping = new Map([

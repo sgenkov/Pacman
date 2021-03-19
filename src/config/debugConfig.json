@@ -1,7 +1,7 @@
 {
     "mainFlow": false,
     "objectsCreation": false,
-    "traceBehaviours": false,
+    "traceBehaviours": 0,
     "assetsLoading": false,
     "pathTinting": 0,
     "nodesInteractive": 0,

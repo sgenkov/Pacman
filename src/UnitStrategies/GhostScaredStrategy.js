@@ -5,25 +5,7 @@ export default class GhostScaredStrategy {
         this.currentTimer = model.loopCounter.find(counter => counter.owner === color);
         this.currentTimer.reset();
     };
-    calculateAction = (gameElement) => { //*Likely stupid ghosts V
-        // const playerCurrentNodeId = model.player.currentNode.ID;
-        // if (playerCurrentNodeId && gameElement.currentNode.ID) {
-        //     const longestPath = graphHandler.calculateLongestPath(gameElement.currentNode.ID, playerCurrentNodeId);
-        //     if (!longestPath) {
-        //         // currentTimer.state = "active";
-        //         return;
-        //     };
-        //     const destination = longestPath[1];
-        //     for (let direction in gameElement.currentNode.EDGES) {
-        //         if (gameElement.currentNode.EDGES[direction] === destination) {
-        //             gameElement.nextAction = 'move' + direction.charAt(0).toUpperCase() + direction.slice(1);
-        //         };
-        //     };
-
-        // };
-        // return gameElement.nextAction;
-
-
+    calculateAction = (gameElement) => {
         const playerCurrentNodeId = model.player.currentNode.ID;
         const possibleActions = [];
         for (const edge in gameElement.currentNode.EDGES) {
@@ -33,8 +15,7 @@ export default class GhostScaredStrategy {
             };
             possibleActions.push(res);
         };
-        possibleActions.sort((el1, el2) => el2.cost - el1.cost); 
-        // gameElement.nextAction = 'move' + possibleActions[0].direction.charAt(0).toUpperCase() + possibleActions[0].direction.slice(1);
+        possibleActions.sort((el1, el2) => el2.cost - el1.cost);
         gameElement.nextAction = directionsMapping.get(possibleActions[0].direction);
 
         return gameElement.nextAction;

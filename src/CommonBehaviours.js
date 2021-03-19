@@ -22,46 +22,68 @@ export default class CommonBehaviours {
       },
       moveUp: (el) => {
         DC.traceBehaviours && console.log('moveUp behaviour'); //^ FLOW
-        if (!possibleMove(el.currentNode.EDGES, "up")) return;
+        el.behaviours = el.behaviours.filter(e => e !== "moveUp");
+        if (!possibleMove(el, "up")) {
+          el.nextAction = "moveUp";
+          return;
+        };
+        el.nextAction = null;
+        el.allowedDirections.length = 0;
+        el.allowedDirections.push("down");
         el.lastMovementDirection = "up";
         el.speed.x = 0;
         el.speed.y = -complexSpeed(el);
-        // el.prevSpeed.y = -complexSpeed(el);
-        el.behaviours = el.behaviours.filter(e => e !== "moveUp");
+
+        el.behaviours.length = 2;
       },
       moveDown: (el) => {
         DC.traceBehaviours && console.log('moveDown behaviour'); //^ FLOW
-        if (!possibleMove(el.currentNode.EDGES, "down")) return;
+        el.behaviours = el.behaviours.filter(e => e !== "moveDown");
+        if (!possibleMove(el, "down"))  {
+          el.nextAction = "moveDown";
+          return;
+        };
+        el.nextAction = null;
+        el.allowedDirections.length = 0;
+        el.allowedDirections.push("up");
         el.lastMovementDirection = "down";
         el.speed.x = 0;
         el.speed.y = complexSpeed(el);
-        // el.prevSpeed.y = complexSpeed(el);
-        el.behaviours = el.behaviours.filter(e => e !== "moveDown");
       },
       moveLeft: (el) => {
         DC.traceBehaviours && console.log('moveLeft behaviour'); //^ FLOW
-        if (!possibleMove(el.currentNode.EDGES, "left")) return;
+        el.behaviours = el.behaviours.filter(e => e !== "moveLeft");
+        if (!possibleMove(el, "left"))  {
+          el.nextAction = "moveLeft";
+          return;
+        };
+        el.nextAction = null;
+        el.allowedDirections.length = 0;
+        el.allowedDirections.push("right");
         el.lastMovementDirection = "left";
         el.speed.y = 0;
         el.speed.x = -complexSpeed(el);
-        // el.prevSpeed.x = -complexSpeed(el);
-        el.behaviours = el.behaviours.filter(e => e !== "moveLeft");
       },
       moveRight: (el) => {
         DC.traceBehaviours && console.log('moveRight behaviour'); //^ FLOW
-        if (!possibleMove(el.currentNode.EDGES, "right")) return;
+        el.behaviours = el.behaviours.filter(e => e !== "moveRight");
+        if (!possibleMove(el, "right"))  {
+          el.nextAction = "moveRight";
+          return;
+        };
+        el.nextAction = null;
+        el.allowedDirections.length = 0;
+        el.allowedDirections.push("left");
         el.lastMovementDirection = "right";
         el.speed.y = 0;
         el.speed.x = complexSpeed(el);
-        // el.prevSpeed.x = complexSpeed(el);
-        el.behaviours = el.behaviours.filter(e => e !== "moveRight");
       },
       stop: (el) => {
         DC.traceBehaviours && console.log('stop behaviour'); //^ FLOW
+        el.behaviours = el.behaviours.filter(e => e !== "stop");
         console.log('stop');
         el.speed.x = 0;
         el.speed.y = 0;
-        el.behaviours = el.behaviours.filter(e => e !== "stop");
       },
       debugger: () => {
         debugger;
